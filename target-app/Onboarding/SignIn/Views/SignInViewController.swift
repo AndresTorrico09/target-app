@@ -9,96 +9,23 @@ import UIKit
 
 class SignInViewController: UIViewController {
     
+    private lazy var overlayImageView = UIImageView()
+    private lazy var titleLabel = UILabel()
+    private lazy var emailLabel = UILabel()
+    private lazy var emailField = UITextField()
+    private lazy var passwordLabel = UILabel()
+    private lazy var passwordField = UITextField()
+    private lazy var signInButton = UIButton()
+    private lazy var forgotPasswordButton = UIButton()
+    private lazy var connectFacebookButton = UIButton()
+    private lazy var lineView = UIView()
+    private lazy var signUpButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViews()
         
-        let overlayImage = UIImage(named: "sign-in-overlay")
-        let overlayImageView = UIImageView()
-        overlayImageView.contentMode = UIView.ContentMode.scaleAspectFill
-        overlayImageView.frame.size.width = view.bounds.width
-        overlayImageView.frame.size.height = 290
-        overlayImageView.image = overlayImage
-        
-        let titleLabel = UILabel()
-        titleLabel.textColor = UIColor.black
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textAlignment = .center
-        titleLabel.text = "TARGET MVD"
-        titleLabel.font = titleLabel.font.withSize(25)
-        
-        let emailLabel = UILabel()
-        emailLabel.textColor = UIColor.black
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailLabel.textAlignment = .center
-        emailLabel.text = "EMAIL"
-        
-        let emailField = UITextField()
-        emailField.translatesAutoresizingMaskIntoConstraints = false
-        emailField.borderStyle = .line
-        let emailFieldParagraphStyle = NSMutableParagraphStyle()
-        emailFieldParagraphStyle.alignment = .center
-        let emailFieldPlaceholder = NSAttributedString(
-            string: "target@mvd.com",
-            attributes: [NSAttributedString.Key.paragraphStyle: emailFieldParagraphStyle]
-        )
-        emailField.attributedPlaceholder = emailFieldPlaceholder
-        
-        let passwordLabel = UILabel()
-        passwordLabel.textColor = UIColor.black
-        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        passwordLabel.textAlignment = .center
-        passwordLabel.text = "PASSWORD"
-        
-        let passwordField = UITextField()
-        passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.borderStyle = .line
-        let passwordFieldParagraphStyle = NSMutableParagraphStyle()
-        passwordFieldParagraphStyle.alignment = .center
-        let passwordFieldPlaceholder = NSAttributedString(
-            string: "**********",
-            attributes: [NSAttributedString.Key.paragraphStyle: passwordFieldParagraphStyle]
-        )
-        passwordField.attributedPlaceholder = passwordFieldPlaceholder
-        
-        let signInButton = UIButton()
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.backgroundColor = UIColor.black
-        signInButton.setTitle("SIGN IN", for: .normal)
-        
-        let forgotPasswordButton = UIButton()
-        forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
-        forgotPasswordButton.setTitleColor(UIColor.black, for: .normal)
-        forgotPasswordButton.setTitle("Forgot your password?", for: .normal)
-        
-        let connectFacebookButton = UIButton()
-        connectFacebookButton.translatesAutoresizingMaskIntoConstraints = false
-        connectFacebookButton.setTitleColor(UIColor.black, for: .normal)
-        connectFacebookButton.setTitle("CONNECT WITH FACEBOOK", for: .normal)
-        
-        let lineView = UIView()
-        lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.layer.borderWidth = 1.0
-        lineView.layer.borderColor = UIColor.black.cgColor
-        
-        let signUpButton = UIButton()
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitleColor(UIColor.black, for: .normal)
-        signUpButton.setTitle("SIGN UP", for: .normal)
-        
-        view.addSubview(overlayImageView)
-        view.addSubview(titleLabel)
-        view.addSubview(emailLabel)
-        view.addSubview(emailField)
-        view.addSubview(passwordLabel)
-        view.addSubview(passwordField)
-        view.addSubview(signInButton)
-        view.addSubview(forgotPasswordButton)
-        view.addSubview(connectFacebookButton)
-        view.addSubview(lineView)
-        view.addSubview(signUpButton)
-
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
@@ -172,6 +99,83 @@ class SignInViewController: UIViewController {
 
 private extension SignInViewController {
     func configureViews() {
-      applyDefaultUIConfigs()
+        applyDefaultUIConfigs()
+        
+        let overlayImage = UIImage(named: "sign-in-overlay")
+        overlayImageView.contentMode = UIView.ContentMode.scaleAspectFill
+        overlayImageView.frame.size.width = view.bounds.width
+        overlayImageView.frame.size.height = 290
+        overlayImageView.image = overlayImage
+        
+        titleLabel.textColor = UIColor.black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+        titleLabel.text = "TARGET MVD"
+        titleLabel.font = titleLabel.font.withSize(25)
+        
+        emailLabel.textColor = UIColor.black
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
+        emailLabel.textAlignment = .center
+        emailLabel.text = "EMAIL"
+        
+        emailField.translatesAutoresizingMaskIntoConstraints = false
+        emailField.borderStyle = .line
+        let emailFieldParagraphStyle = NSMutableParagraphStyle()
+        emailFieldParagraphStyle.alignment = .center
+        let emailFieldPlaceholder = NSAttributedString(
+            string: "target@mvd.com",
+            attributes: [NSAttributedString.Key.paragraphStyle: emailFieldParagraphStyle]
+        )
+        emailField.attributedPlaceholder = emailFieldPlaceholder
+        
+        passwordLabel.textColor = UIColor.black
+        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
+        passwordLabel.textAlignment = .center
+        passwordLabel.text = "PASSWORD"
+        
+        passwordField.translatesAutoresizingMaskIntoConstraints = false
+        passwordField.borderStyle = .line
+        let passwordFieldParagraphStyle = NSMutableParagraphStyle()
+        passwordFieldParagraphStyle.alignment = .center
+        let passwordFieldPlaceholder = NSAttributedString(
+            string: "**********",
+            attributes: [NSAttributedString.Key.paragraphStyle: passwordFieldParagraphStyle]
+        )
+        passwordField.attributedPlaceholder = passwordFieldPlaceholder
+        
+        signInButton.translatesAutoresizingMaskIntoConstraints = false
+        signInButton.backgroundColor = UIColor.black
+        signInButton.setTitle("SIGN IN", for: .normal)
+        
+        forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+        forgotPasswordButton.setTitleColor(UIColor.black, for: .normal)
+        forgotPasswordButton.setTitle("Forgot your password?", for: .normal)
+        
+        connectFacebookButton.translatesAutoresizingMaskIntoConstraints = false
+        connectFacebookButton.setTitleColor(UIColor.black, for: .normal)
+        connectFacebookButton.setTitle("CONNECT WITH FACEBOOK", for: .normal)
+        
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        lineView.layer.borderWidth = 1.0
+        lineView.layer.borderColor = UIColor.black.cgColor
+        
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        signUpButton.setTitleColor(UIColor.black, for: .normal)
+        signUpButton.setTitle("SIGN UP", for: .normal)
+        
+        
+        view.addSubviews(subviews: [
+            overlayImageView,
+            titleLabel,
+            emailLabel,
+            emailField,
+            passwordLabel,
+            passwordField,
+            signInButton,
+            forgotPasswordButton,
+            connectFacebookButton,
+            lineView,
+            signUpButton
+        ])
     }
 }
