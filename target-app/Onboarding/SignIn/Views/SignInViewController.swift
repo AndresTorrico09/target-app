@@ -13,6 +13,13 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
+        let overlayImage = UIImage(named: "sign-in-overlay")
+        let overlayImageView = UIImageView()
+        overlayImageView.contentMode = UIView.ContentMode.scaleAspectFill
+        overlayImageView.frame.size.width = view.bounds.width
+        overlayImageView.frame.size.height = 290
+        overlayImageView.image = overlayImage
+        
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +85,7 @@ class SignInViewController: UIViewController {
         signUpButton.setTitleColor(UIColor.black, for: .normal)
         signUpButton.setTitle("SIGN UP", for: .normal)
         
+        view.addSubview(overlayImageView)
         view.addSubview(titleLabel)
         view.addSubview(emailLabel)
         view.addSubview(emailField)
@@ -88,7 +96,7 @@ class SignInViewController: UIViewController {
         view.addSubview(connectFacebookButton)
         view.addSubview(lineView)
         view.addSubview(signUpButton)
-        
+
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
