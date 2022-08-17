@@ -11,7 +11,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        
+        configureViews()
         
         let overlayImage = UIImage(named: "sign-in-overlay")
         let overlayImageView = UIImageView()
@@ -167,4 +168,10 @@ class SignInViewController: UIViewController {
         
     }
     
+}
+
+private extension SignInViewController {
+    func configureViews() {
+      applyDefaultUIConfigs()
+    }
 }
