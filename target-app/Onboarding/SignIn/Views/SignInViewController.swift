@@ -148,7 +148,7 @@ class SignInViewController: UIViewController {
             connectFacebookButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             connectFacebookButton.topAnchor.constraint(
                 equalTo: forgotPasswordButton.bottomAnchor,
-                constant: 40
+                constant: 35
             ),
             lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
             lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
