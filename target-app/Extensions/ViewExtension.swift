@@ -16,4 +16,18 @@ extension UIView {
             addSubview(subview)
         }
     }
+    
+    func attachHorizontally(
+      to view: UIView,
+      leadingMargin: CGFloat = UI.Defaults.margin,
+      trailingMargin: CGFloat = UI.Defaults.margin
+    ) {
+      NSLayoutConstraint.activate([
+        leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingMargin),
+        trailingAnchor.constraint(
+          equalTo: view.trailingAnchor,
+          constant: -trailingMargin
+        )
+      ])
+    }
 }

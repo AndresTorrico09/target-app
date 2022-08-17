@@ -25,74 +25,6 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         configureViews()
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            titleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 100
-            ),
-            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            emailLabel.topAnchor.constraint(
-                equalTo: titleLabel.bottomAnchor,
-                constant: 100
-            ),
-            emailField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            emailField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            emailField.heightAnchor.constraint(equalToConstant: 50),
-            emailField.topAnchor.constraint(
-                equalTo: emailLabel.bottomAnchor,
-                constant: 20
-            ),
-            passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            passwordLabel.topAnchor.constraint(
-                equalTo: emailField.bottomAnchor,
-                constant: 20
-            ),
-            passwordField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            passwordField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            passwordField.heightAnchor.constraint(equalToConstant: 50),
-            passwordField.topAnchor.constraint(
-                equalTo: passwordLabel.bottomAnchor,
-                constant: 20
-            ),
-            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
-            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
-            signInButton.topAnchor.constraint(
-                equalTo: passwordField.bottomAnchor,
-                constant: 40
-            ),
-            forgotPasswordButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            forgotPasswordButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            forgotPasswordButton.topAnchor.constraint(
-                equalTo: signInButton.bottomAnchor,
-                constant: 15
-            ),
-            connectFacebookButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            connectFacebookButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            connectFacebookButton.topAnchor.constraint(
-                equalTo: forgotPasswordButton.bottomAnchor,
-                constant: 35
-            ),
-            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
-            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
-            lineView.heightAnchor.constraint(equalToConstant: 1),
-            lineView.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -110
-            ),
-            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            signUpButton.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -60
-            )
-        ])
-        
     }
     
 }
@@ -176,6 +108,75 @@ private extension SignInViewController {
             connectFacebookButton,
             lineView,
             signUpButton
+        ])
+        
+        activateConstraints()
+    }
+    
+    func activateConstraints() {
+        [
+            titleLabel,
+            emailLabel,
+            emailField,
+            passwordLabel,
+            passwordField,
+            forgotPasswordButton,
+            connectFacebookButton
+        ].forEach {
+            $0.attachHorizontally(to: view)
+        }
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 100
+            ),
+            emailLabel.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor,
+                constant: 100
+            ),
+            emailField.heightAnchor.constraint(equalToConstant: 50),
+            emailField.topAnchor.constraint(
+                equalTo: emailLabel.bottomAnchor,
+                constant: 20
+            ),
+            passwordLabel.topAnchor.constraint(
+                equalTo: emailField.bottomAnchor,
+                constant: 20
+            ),
+            passwordField.heightAnchor.constraint(equalToConstant: 50),
+            passwordField.topAnchor.constraint(
+                equalTo: passwordLabel.bottomAnchor,
+                constant: 20
+            ),
+            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
+            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
+            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            signInButton.topAnchor.constraint(
+                equalTo: passwordField.bottomAnchor,
+                constant: 40
+            ),
+            forgotPasswordButton.topAnchor.constraint(
+                equalTo: signInButton.bottomAnchor,
+                constant: 15
+            ),
+            connectFacebookButton.topAnchor.constraint(
+                equalTo: forgotPasswordButton.bottomAnchor,
+                constant: 35
+            ),
+            lineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
+            lineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
+            lineView.heightAnchor.constraint(equalToConstant: 1),
+            lineView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -110
+            ),
+            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
+            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
+            signUpButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -60
+            )
         ])
     }
 }
