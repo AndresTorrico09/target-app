@@ -25,6 +25,7 @@ class SignInViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.text = "TARGET MVD"
+        titleLabel.font = titleLabel.font.withSize(25)
         
         let emailLabel = UILabel()
         emailLabel.textColor = UIColor.black
@@ -102,7 +103,7 @@ class SignInViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             titleLabel.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 120
+                constant: 100
             ),
             emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
