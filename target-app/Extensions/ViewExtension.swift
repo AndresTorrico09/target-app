@@ -30,4 +30,9 @@ extension UIView {
         )
       ])
     }
+    
+    func setRoundBorders(_ cornerRadius: CGFloat = 10.0) {
+      clipsToBounds = true
+      layer.cornerRadius = cornerRadius
+    }
 }

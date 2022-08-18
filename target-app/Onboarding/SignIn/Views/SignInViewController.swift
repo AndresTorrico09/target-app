@@ -17,13 +17,18 @@ class SignInViewController: UIViewController {
         selector: #selector(credentialsChanged),
         placeholder: "target@mvd.com"
     )
+    
     private lazy var passwordLabel = UILabel()
     private lazy var passwordField = UITextField(
         target: self,
         selector: #selector(credentialsChanged),
         placeholder: "**********"
     )
-    private lazy var signInButton = UIButton()
+    
+    private lazy var signInButton = UIButton.primaryButton(
+        title: "SIGN IN"
+    )
+    
     private lazy var forgotPasswordButton = UIButton()
     private lazy var connectFacebookButton = UIButton()
     private lazy var lineView = UIView()
@@ -39,7 +44,7 @@ class SignInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func credentialsChanged(_ sender: UITextField) {
-        //todo: add action
+        //TODO: add action
     }
     
 }
@@ -70,10 +75,6 @@ private extension SignInViewController {
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
         passwordLabel.textAlignment = .center
         passwordLabel.text = "PASSWORD"
-        
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.backgroundColor = UIColor.black
-        signInButton.setTitle("SIGN IN", for: .normal)
         
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgotPasswordButton.setTitleColor(UIColor.black, for: .normal)
