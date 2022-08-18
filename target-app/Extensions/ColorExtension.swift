@@ -10,4 +10,5 @@ import UIKit
 extension UIColor {
     static let screenBackground = UIColor(named: "screenBackground")!
     static let buttonBackground = UIColor(named: "buttonBackground")!
+    static let mainTitle = UIColor(named: "mainTitle")!
 }

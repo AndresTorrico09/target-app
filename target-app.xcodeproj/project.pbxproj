@@ -17,6 +17,7 @@
 		0760848128AD8936000A144B /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760848028AD8936000A144B /* UIConstants.swift */; };
 		0760848328AE47AE000A144B /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760848228AE47AE000A144B /* TextFieldExtension.swift */; };
 		0760848528AE4BAC000A144B /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760848428AE4BAC000A144B /* ButtonExtension.swift */; };
+		0760848928AE5545000A144B /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760848828AE5545000A144B /* UILabel.swift */; };
 		07D66A4E28A4638400308FF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A4D28A4638400308FF5 /* AppDelegate.swift */; };
 		07D66A5228A4638400308FF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A5128A4638400308FF5 /* ViewController.swift */; };
 		07D66A5728A4638500308FF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D66A5628A4638500308FF5 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		0760848028AD8936000A144B /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		0760848228AE47AE000A144B /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		0760848428AE4BAC000A144B /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		0760848828AE5545000A144B /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		07D66A4A28A4638400308FF5 /* target-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "target-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D66A4D28A4638400308FF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07D66A5128A4638400308FF5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				0760847D28AD8160000A144B /* ViewExtension.swift */,
 				0760848228AE47AE000A144B /* TextFieldExtension.swift */,
 				0760848428AE4BAC000A144B /* ButtonExtension.swift */,
+				0760848828AE5545000A144B /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0760847E28AD8160000A144B /* ViewExtension.swift in Sources */,
+				0760848928AE5545000A144B /* UILabel.swift in Sources */,
 				0760846828A69DA3000A144B /* SignInViewController.swift in Sources */,
 				0760847128ABFDDC000A144B /* Navigator.swift in Sources */,
 				0760847A28AD7EFB000A144B /* ViewControllerExtension.swift in Sources */,
