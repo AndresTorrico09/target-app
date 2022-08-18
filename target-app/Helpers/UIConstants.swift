@@ -9,7 +9,10 @@ import Foundation
 import UIKit
 
 struct UI {
-  enum Defaults {
-    static let margin: CGFloat = 32
-  }
+    enum Defaults {
+        static let margin: CGFloat = 32
+    }
+    enum TextField {
+      static let height: CGFloat = 40.0
+    }
 }

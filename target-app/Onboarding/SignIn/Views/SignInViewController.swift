@@ -12,9 +12,17 @@ class SignInViewController: UIViewController {
     private lazy var overlayImageView = UIImageView()
     private lazy var titleLabel = UILabel()
     private lazy var emailLabel = UILabel()
-    private lazy var emailField = UITextField()
+    private lazy var emailField = UITextField(
+        target: self,
+        selector: #selector(credentialsChanged),
+        placeholder: "target@mvd.com"
+    )
     private lazy var passwordLabel = UILabel()
-    private lazy var passwordField = UITextField()
+    private lazy var passwordField = UITextField(
+        target: self,
+        selector: #selector(credentialsChanged),
+        placeholder: "**********"
+    )
     private lazy var signInButton = UIButton()
     private lazy var forgotPasswordButton = UIButton()
     private lazy var connectFacebookButton = UIButton()
@@ -27,7 +35,15 @@ class SignInViewController: UIViewController {
         configureViews()
     }
     
+    
+    // MARK: - Actions
+    
+    @objc func credentialsChanged(_ sender: UITextField) {
+        //todo: add action
+    }
+    
 }
+
 
 private extension SignInViewController {
     func configureViews() {
@@ -50,30 +66,10 @@ private extension SignInViewController {
         emailLabel.textAlignment = .center
         emailLabel.text = "EMAIL"
         
-        emailField.translatesAutoresizingMaskIntoConstraints = false
-        emailField.borderStyle = .line
-        let emailFieldParagraphStyle = NSMutableParagraphStyle()
-        emailFieldParagraphStyle.alignment = .center
-        let emailFieldPlaceholder = NSAttributedString(
-            string: "target@mvd.com",
-            attributes: [NSAttributedString.Key.paragraphStyle: emailFieldParagraphStyle]
-        )
-        emailField.attributedPlaceholder = emailFieldPlaceholder
-        
         passwordLabel.textColor = UIColor.black
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
         passwordLabel.textAlignment = .center
         passwordLabel.text = "PASSWORD"
-        
-        passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.borderStyle = .line
-        let passwordFieldParagraphStyle = NSMutableParagraphStyle()
-        passwordFieldParagraphStyle.alignment = .center
-        let passwordFieldPlaceholder = NSAttributedString(
-            string: "**********",
-            attributes: [NSAttributedString.Key.paragraphStyle: passwordFieldParagraphStyle]
-        )
-        passwordField.attributedPlaceholder = passwordFieldPlaceholder
         
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.backgroundColor = UIColor.black
