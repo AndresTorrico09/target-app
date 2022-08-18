@@ -11,38 +11,38 @@ class SignInViewController: UIViewController {
     
     private lazy var overlayImageView = UIImageView()
     
-    private lazy var titleLabel = UILabel.titleLabel(text: "TARGET MVD")
+    private lazy var titleLabel = UILabel.titleLabel(text: "signin_title".localized)
     
-    private lazy var emailLabel = UILabel.textFieldLabel(text: "EMAIL")
+    private lazy var emailLabel = UILabel.textFieldLabel(text: "signin_email_label".localized)
     
     private lazy var emailField = UITextField(
         target: self,
-        placeholder: "target@mvd.com"
+        placeholder: "signin_email_placeholder".localized
     )
     
-    private lazy var passwordLabel = UILabel.textFieldLabel(text: "PASSWORD")
+    private lazy var passwordLabel = UILabel.textFieldLabel(text: "signin_password_label".localized)
     
     private lazy var passwordField = UITextField(
         target: self,
-        placeholder: "**********"
+        placeholder: "signin_password_placeholder".localized
     )
     
     private lazy var signInButton = UIButton.primaryButton(
-        title: "SIGN IN"
+        title: "signin_button_text".localized
     )
     
     private lazy var forgotPasswordButton = UIButton.secondaryButton(
-        title: "Forgot your password?"
+        title: "forgot_password_button_text".localized
     )
     
     private lazy var connectFacebookButton = UIButton.secondaryButton(
-        title: "CONNECT WITH FACEBOOK"
+        title: "connect_facebook_button_text".localized
     )
     
     private lazy var lineView = UIView()
     
     private lazy var signUpButton = UIButton.secondaryButton(
-        title: "SIGN UP"
+        title: "signup_button_text".localized
     )
     
     override func viewDidLoad() {
