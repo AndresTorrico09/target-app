@@ -30,9 +30,14 @@ class SignInViewController: UIViewController {
     )
     
     private lazy var forgotPasswordButton = UIButton()
-    private lazy var connectFacebookButton = UIButton()
+    private lazy var connectFacebookButton = UIButton.secondaryButton(
+        title: "CONNECT WITH FACEBOOK"
+    )
+    
     private lazy var lineView = UIView()
-    private lazy var signUpButton = UIButton()
+    private lazy var signUpButton = UIButton.secondaryButton(
+        title: "SIGN UP"
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,19 +84,10 @@ private extension SignInViewController {
         forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgotPasswordButton.setTitleColor(UIColor.black, for: .normal)
         forgotPasswordButton.setTitle("Forgot your password?", for: .normal)
-        
-        connectFacebookButton.translatesAutoresizingMaskIntoConstraints = false
-        connectFacebookButton.setTitleColor(UIColor.black, for: .normal)
-        connectFacebookButton.setTitle("CONNECT WITH FACEBOOK", for: .normal)
-        
+
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.layer.borderWidth = 1.0
         lineView.layer.borderColor = UIColor.black.cgColor
-        
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitleColor(UIColor.black, for: .normal)
-        signUpButton.setTitle("SIGN UP", for: .normal)
-        
         
         view.addSubviews(subviews: [
             overlayImageView,
@@ -166,7 +162,7 @@ private extension SignInViewController {
             lineView.heightAnchor.constraint(equalToConstant: 1),
             lineView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor,
-                constant: -110
+                constant: -120
             ),
             signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 128),
             signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -128),
