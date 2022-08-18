@@ -11,7 +11,7 @@ extension UITextField {
     
     convenience init(
         target: Any,
-        selector: Selector,
+        selector: Selector? = nil,
         placeholder: String,
         backgroundColor: UIColor = .white,
         height: CGFloat = UI.TextField.height,
@@ -21,7 +21,11 @@ extension UITextField {
         self.init()
         
         translatesAutoresizingMaskIntoConstraints = false
-        addTarget(target, action: selector, for: .editingChanged)
+        
+        if let selector = selector {
+            addTarget(target, action: selector, for: .editingChanged)
+        }
+        
         self.attributedPlaceholder = getPlaceholder(placeholder: placeholder)
         self.backgroundColor = backgroundColor
         self.borderStyle = borderStyle

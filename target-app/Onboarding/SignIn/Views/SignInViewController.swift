@@ -14,14 +14,12 @@ class SignInViewController: UIViewController {
     private lazy var emailLabel = UILabel()
     private lazy var emailField = UITextField(
         target: self,
-        selector: #selector(credentialsChanged),
         placeholder: "target@mvd.com"
     )
     
     private lazy var passwordLabel = UILabel()
     private lazy var passwordField = UITextField(
         target: self,
-        selector: #selector(credentialsChanged),
         placeholder: "**********"
     )
     
@@ -43,13 +41,6 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         configureViews()
-    }
-    
-    
-    // MARK: - Actions
-    
-    @objc func credentialsChanged(_ sender: UITextField) {
-        //TODO: add action
     }
     
 }
