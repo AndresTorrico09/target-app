@@ -27,7 +27,10 @@ class SignInViewController: UIViewController {
         title: "SIGN IN"
     )
     
-    private lazy var forgotPasswordButton = UIButton()
+    private lazy var forgotPasswordButton = UIButton.secondaryButton(
+        title: "Forgot your password?"
+    )
+    
     private lazy var connectFacebookButton = UIButton.secondaryButton(
         title: "CONNECT WITH FACEBOOK"
     )
@@ -72,10 +75,6 @@ private extension SignInViewController {
         passwordLabel.textAlignment = .center
         passwordLabel.text = "PASSWORD"
         
-        forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
-        forgotPasswordButton.setTitleColor(UIColor.black, for: .normal)
-        forgotPasswordButton.setTitle("Forgot your password?", for: .normal)
-
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.layer.borderWidth = 1.0
         lineView.layer.borderColor = UIColor.black.cgColor
