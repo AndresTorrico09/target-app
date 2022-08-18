@@ -13,14 +13,14 @@ class SignInViewController: UIViewController {
     
     private lazy var titleLabel = UILabel.titleLabel(text: "TARGET MVD")
     
-    private lazy var emailLabel = UILabel()
+    private lazy var emailLabel = UILabel.textFieldLabel(text: "EMAIL")
     
     private lazy var emailField = UITextField(
         target: self,
         placeholder: "target@mvd.com"
     )
     
-    private lazy var passwordLabel = UILabel()
+    private lazy var passwordLabel = UILabel.textFieldLabel(text: "PASSWORD")
     
     private lazy var passwordField = UITextField(
         target: self,
@@ -63,16 +63,6 @@ private extension SignInViewController {
         overlayImageView.frame.size.width = view.bounds.width
         overlayImageView.frame.size.height = 290
         overlayImageView.image = overlayImage
-        
-        emailLabel.textColor = UIColor.black
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailLabel.textAlignment = .center
-        emailLabel.text = "EMAIL"
-        
-        passwordLabel.textColor = UIColor.black
-        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        passwordLabel.textAlignment = .center
-        passwordLabel.text = "PASSWORD"
         
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.layer.borderWidth = 1.0
