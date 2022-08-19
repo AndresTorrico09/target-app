@@ -15,12 +15,13 @@ struct UI {
     
     enum TextField {
         static let height: CGFloat = 40.0
+        static let width: CGFloat = 80.0
     }
     
     enum Button {
         static let cornerRadius: CGFloat = 0.0
         static let height: CGFloat = 55.0
-        static let width: CGFloat = 200.0
+        static let width: CGFloat = 128.0
         static let spacing: CGFloat = 20.0
     }
 }
