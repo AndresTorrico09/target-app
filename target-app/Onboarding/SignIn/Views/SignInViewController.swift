@@ -121,21 +121,18 @@ private extension SignInViewController {
                 equalTo: titleLabel.bottomAnchor,
                 constant: 100
             ),
-            emailField.heightAnchor.constraint(equalToConstant: 50),
             emailField.topAnchor.constraint(
                 equalTo: emailLabel.bottomAnchor,
-                constant: 20
+                constant: UI.TextField.spacing
             ),
             passwordLabel.topAnchor.constraint(
                 equalTo: emailField.bottomAnchor,
                 constant: 20
             ),
-            passwordField.heightAnchor.constraint(equalToConstant: 50),
             passwordField.topAnchor.constraint(
                 equalTo: passwordLabel.bottomAnchor,
-                constant: 20
+                constant: UI.TextField.spacing
             ),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
             signInButton.topAnchor.constraint(
                 equalTo: passwordField.bottomAnchor,
                 constant: 40
