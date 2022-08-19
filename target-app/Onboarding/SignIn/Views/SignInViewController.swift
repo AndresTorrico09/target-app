@@ -53,7 +53,6 @@ class SignInViewController: UIViewController {
     
 }
 
-
 private extension SignInViewController {
     func configureViews() {
         applyDefaultUIConfigs()
