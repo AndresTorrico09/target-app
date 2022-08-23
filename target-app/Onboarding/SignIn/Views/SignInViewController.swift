@@ -40,10 +40,16 @@ class SignInViewController: UIViewController {
     )
     
     private lazy var lineView = UIView()
-    
+
     private lazy var signUpButton = UIButton.secondaryButton(
         title: "signup_button_text".localized
     )
+    
+    private lazy var stackView = UIStackView()
+    
+    //EMPTYs VIEWS
+    private lazy var topSpaceView = UIView()
+    private lazy var bottomSpaceView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +72,14 @@ private extension SignInViewController {
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.layer.borderWidth = 1.0
         lineView.layer.borderColor = UIColor.black.cgColor
-        
+                
         view.addSubviews(subviews: [
-            overlayImageView,
+            overlayImageView
+        ])
+        
+        stackView.addArrangedSubview(subviews: [
             titleLabel,
+            topSpaceView,
             emailLabel,
             emailField,
             passwordLabel,
@@ -77,11 +87,33 @@ private extension SignInViewController {
             signInButton,
             forgotPasswordButton,
             connectFacebookButton,
+            bottomSpaceView,
             lineView,
             signUpButton
         ])
         
+        view.addSubview(stackView)
+        
+        configureStackView()
+
         activateConstraints()
+        
+    }
+    
+    func configureStackView () {
+        stackView.axis = NSLayoutConstraint.Axis.vertical
+        stackView.distribution = UIStackView.Distribution.fill
+//        stackView.alignment = UIStackView.Alignment.fill
+        stackView.spacing = 20
+//        stackView.backgroundColor = .systemYellow
+        
+        // Constraints
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.centerVertically(with: view)
+//        stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -0).isActive = true
+//        stackView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -20).isActive = true
     }
     
     func activateConstraints() {
@@ -112,47 +144,21 @@ private extension SignInViewController {
         }
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 100
-            ),
-            emailLabel.topAnchor.constraint(
-                equalTo: titleLabel.bottomAnchor,
-                constant: 100
-            ),
-            emailField.topAnchor.constraint(
-                equalTo: emailLabel.bottomAnchor,
-                constant: UI.TextField.spacing
-            ),
-            passwordLabel.topAnchor.constraint(
-                equalTo: emailField.bottomAnchor,
-                constant: 20
-            ),
-            passwordField.topAnchor.constraint(
-                equalTo: passwordLabel.bottomAnchor,
-                constant: UI.TextField.spacing
-            ),
-            signInButton.topAnchor.constraint(
-                equalTo: passwordField.bottomAnchor,
-                constant: 40
-            ),
-            forgotPasswordButton.topAnchor.constraint(
-                equalTo: signInButton.bottomAnchor,
-                constant: 15
-            ),
-            connectFacebookButton.topAnchor.constraint(
-                equalTo: forgotPasswordButton.bottomAnchor,
-                constant: 35
-            ),
+            topSpaceView.heightAnchor.constraint(equalToConstant: 80),
+            bottomSpaceView.heightAnchor.constraint(equalToConstant: 80),
+//            titleLabel.topAnchor.constraint(
+//                equalTo: view.safeAreaLayoutGuide.topAnchor,
+//                constant: 80
+//            ),
             lineView.heightAnchor.constraint(equalToConstant: 1),
-            lineView.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -120
-            ),
-            signUpButton.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor,
-                constant: -60
-            )
+//            lineView.bottomAnchor.constraint(
+//                equalTo: signUpButton.topAnchor,
+//                constant: -10
+//            ),
+//            signUpButton.bottomAnchor.constraint(
+//                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+//                constant: -40
+//            )
         ])
     }
 }
