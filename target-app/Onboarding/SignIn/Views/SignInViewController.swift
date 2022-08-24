@@ -45,9 +45,28 @@ class SignInViewController: UIViewController {
         title: "signup_button_text".localized
     )
     
-    private lazy var stackView = UIStackView()
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
-    //EMPTYs VIEWS
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = UIStackView.Distribution.equalSpacing
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var contentView: UIView = {
+         let view = UIView()
+         view.translatesAutoresizingMaskIntoConstraints = false
+         return view
+     }()
+    
+    //EMPTY VIEWS
     private lazy var topSpaceView = UIView()
     private lazy var bottomSpaceView = UIView()
     
@@ -56,7 +75,6 @@ class SignInViewController: UIViewController {
         
         configureViews()
     }
-    
 }
 
 private extension SignInViewController {
@@ -77,6 +95,9 @@ private extension SignInViewController {
             overlayImageView
         ])
         
+        setupViews()
+        setupLayout()
+        
         stackView.addArrangedSubview(subviews: [
             titleLabel,
             topSpaceView,
@@ -91,31 +112,34 @@ private extension SignInViewController {
             lineView,
             signUpButton
         ])
-        
-        view.addSubview(stackView)
-        
-        configureStackView()
 
         activateConstraints()
-        
     }
     
-    func configureStackView () {
-        stackView.axis = NSLayoutConstraint.Axis.vertical
-        stackView.distribution = UIStackView.Distribution.fill
-//        stackView.alignment = UIStackView.Alignment.fill
-        stackView.spacing = 20
-//        stackView.backgroundColor = .systemYellow
-        
-        // Constraints
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerVertically(with: view)
-//        stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -0).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: lineView.topAnchor, constant: -20).isActive = true
+    private func setupViews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
     }
     
+    private func setupLayout() {
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+
     func activateConstraints() {
         [titleLabel,
          emailLabel,
