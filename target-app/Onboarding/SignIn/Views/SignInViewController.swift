@@ -40,7 +40,7 @@ class SignInViewController: UIViewController {
     )
     
     private lazy var lineView = UIView()
-
+    
     private lazy var signUpButton = UIButton.secondaryButton(
         title: "signup_button_text".localized
     )
@@ -54,17 +54,17 @@ class SignInViewController: UIViewController {
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = UIStackView.Distribution.equalSpacing
+        stackView.distribution = .equalSpacing
         stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     lazy var contentView: UIView = {
-         let view = UIView()
-         view.translatesAutoresizingMaskIntoConstraints = false
-         return view
-     }()
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     //EMPTY VIEWS
     private lazy var topSpaceView = UIView()
@@ -90,7 +90,7 @@ private extension SignInViewController {
         lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.layer.borderWidth = 1.0
         lineView.layer.borderColor = UIColor.black.cgColor
-                
+        
         view.addSubviews(subviews: [
             overlayImageView
         ])
@@ -112,7 +112,7 @@ private extension SignInViewController {
             lineView,
             signUpButton
         ])
-
+        
         activateConstraints()
     }
     
@@ -123,23 +123,25 @@ private extension SignInViewController {
     }
     
     private func setupLayout() {
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
-
+    
     func activateConstraints() {
         [titleLabel,
          emailLabel,
@@ -170,19 +172,19 @@ private extension SignInViewController {
         NSLayoutConstraint.activate([
             topSpaceView.heightAnchor.constraint(equalToConstant: 80),
             bottomSpaceView.heightAnchor.constraint(equalToConstant: 80),
-//            titleLabel.topAnchor.constraint(
-//                equalTo: view.safeAreaLayoutGuide.topAnchor,
-//                constant: 80
-//            ),
+            //            titleLabel.topAnchor.constraint(
+            //                equalTo: view.safeAreaLayoutGuide.topAnchor,
+            //                constant: 80
+            //            ),
             lineView.heightAnchor.constraint(equalToConstant: 1),
-//            lineView.bottomAnchor.constraint(
-//                equalTo: signUpButton.topAnchor,
-//                constant: -10
-//            ),
-//            signUpButton.bottomAnchor.constraint(
-//                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-//                constant: -40
-//            )
+            //            lineView.bottomAnchor.constraint(
+            //                equalTo: signUpButton.topAnchor,
+            //                constant: -10
+            //            ),
+            //            signUpButton.bottomAnchor.constraint(
+            //                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            //                constant: -40
+            //            )
         ])
     }
 }
