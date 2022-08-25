@@ -66,10 +66,6 @@ class SignInViewController: UIViewController {
         return view
     }()
     
-    //EMPTY VIEWS
-    private lazy var topSpaceView = UIView()
-    private lazy var bottomSpaceView = UIView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,7 +96,6 @@ private extension SignInViewController {
         
         stackView.addArrangedSubview(subviews: [
             titleLabel,
-            topSpaceView,
             emailLabel,
             emailField,
             passwordLabel,
@@ -108,7 +103,6 @@ private extension SignInViewController {
             signInButton,
             forgotPasswordButton,
             connectFacebookButton,
-            bottomSpaceView,
             lineView,
             signUpButton
         ])
@@ -145,7 +139,7 @@ private extension SignInViewController {
     func activateConstraints() {
         [titleLabel,
          emailLabel,
-         emailField,
+//         emailField,
          passwordLabel,
          passwordField,
          forgotPasswordButton,
@@ -170,21 +164,10 @@ private extension SignInViewController {
         }
         
         NSLayoutConstraint.activate([
-            topSpaceView.heightAnchor.constraint(equalToConstant: 80),
-            bottomSpaceView.heightAnchor.constraint(equalToConstant: 80),
-            //            titleLabel.topAnchor.constraint(
-            //                equalTo: view.safeAreaLayoutGuide.topAnchor,
-            //                constant: 80
-            //            ),
+            titleLabel.heightAnchor.constraint(
+                equalTo: view.heightAnchor, multiplier: 0.2
+            ),
             lineView.heightAnchor.constraint(equalToConstant: 1),
-            //            lineView.bottomAnchor.constraint(
-            //                equalTo: signUpButton.topAnchor,
-            //                constant: -10
-            //            ),
-            //            signUpButton.bottomAnchor.constraint(
-            //                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-            //                constant: -40
-            //            )
         ])
     }
 }
