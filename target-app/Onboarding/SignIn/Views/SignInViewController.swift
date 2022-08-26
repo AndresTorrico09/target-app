@@ -11,16 +11,16 @@ class SignInViewController: UIViewController {
     
     private lazy var overlayImageView = UIImageView()
     
-    private lazy var titleLabel = UILabel.titleLabel(text: "signin_title".localized)
+    private lazy var titleLabel = UILabel(style: .primary(text: "signin_title".localized))
     
-    private lazy var emailLabel = UILabel.textFieldLabel(text: "signin_email_label".localized)
+    private lazy var emailLabel = UILabel(style: .secondary(text: "signin_email_label".localized))
     
     private lazy var emailField = UITextField(
         target: self,
         placeholder: "signin_email_placeholder".localized
     )
     
-    private lazy var passwordLabel = UILabel.textFieldLabel(text: "signin_password_label".localized)
+    private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
     
     private lazy var passwordField = UITextField(
         target: self,
@@ -139,7 +139,7 @@ private extension SignInViewController {
     func activateConstraints() {
         [titleLabel,
          emailLabel,
-//         emailField,
+         emailField,
          passwordLabel,
          passwordField,
          forgotPasswordButton,

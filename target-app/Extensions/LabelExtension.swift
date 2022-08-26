@@ -8,45 +8,47 @@
 import Foundation
 import UIKit
 
-extension UILabel {
-    
-    static func titleLabel (
+enum LabelStyle {
+    case primary (
         text: String = "",
         textColor: UIColor = .mainTitle,
         backgroundColor: UIColor = .clear,
         numberOfLines: Int = 0,
         textAlignment: NSTextAlignment = .center,
         fontSize: CGFloat = 25
-    ) -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = text
-        label.textColor = textColor
-        label.backgroundColor = backgroundColor
-        label.numberOfLines = numberOfLines
-        label.textAlignment = textAlignment
-        label.font = UIFont.boldSystemFont(ofSize: fontSize)
-        
-        return label
-    }
-    
-    static func textFieldLabel (
+    )
+    case secondary (
         text: String = "",
         textColor: UIColor = .mainTitle,
         backgroundColor: UIColor = .clear,
         numberOfLines: Int = 0,
         textAlignment: NSTextAlignment = .center,
         fontSize: CGFloat = 17
-    ) -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = text
-        label.textColor = textColor
-        label.backgroundColor = backgroundColor
-        label.numberOfLines = numberOfLines
-        label.textAlignment = textAlignment
-        label.font = label.font.withSize(fontSize)
+    )
+}
+
+extension UILabel {
+    
+    convenience init(style: LabelStyle) {
+        self.init()
         
-        return label
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        switch style {
+        case .primary(let text, let textColor, let backgroundColor, let numberOfLines, let textAlignment, let fontSize):
+            self.text = text
+            self.textColor = textColor
+            self.backgroundColor = backgroundColor
+            self.numberOfLines = numberOfLines
+            self.textAlignment = textAlignment
+            self.font = UIFont.boldSystemFont(ofSize: fontSize)
+        case .secondary(let text, let textColor, let backgroundColor, let numberOfLines, let textAlignment, let fontSize):
+            self.text = text
+            self.textColor = textColor
+            self.backgroundColor = backgroundColor
+            self.numberOfLines = numberOfLines
+            self.textAlignment = textAlignment
+            self.font = self.font.withSize(fontSize)
+        }
     }
 }
