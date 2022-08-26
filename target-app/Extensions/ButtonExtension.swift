@@ -33,7 +33,7 @@ extension UIButton {
     
     convenience init(
         style: ButtonStyle,
-        tapHandler: (target: Any, action: Selector)?
+        tapHandler: (target: Any, action: Selector)? = nil
     ) {
         self.init()
         
