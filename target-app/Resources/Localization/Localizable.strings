@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  target-app
+
+  Created by Andres Leonel Torrico Cossio on 18/08/2022.
+  
+*/
+
+// MARK: SIGN IN SCREEN
+"signin_title" = "TARGET MVD";
+"signin_button_text" = "SIGN IN";
+"signin_email_label" = "EMAIL";
+"signin_email_placeholder" = "target@mvd.com";
+"signin_password_label" = "PASSWORD";
+"signin_password_placeholder" = "**********";
+"forgot_password_button_text" = "Forgot your password?";
+"connect_facebook_button_text" = "CONNECT WITH FACEBOOK";
+"signup_button_text" = "SIGN UP";
+
