@@ -14,18 +14,14 @@ enum ButtonStyle {
         title: String = "",
         titleColor: UIColor = .white,
         cornerRadius: CGFloat = UI.Button.cornerRadius,
-        height: CGFloat = UI.Button.height,
-        target: Any? = nil,
-        action: Selector? = nil
+        height: CGFloat = UI.Button.height
     )
     case secondary (
         color: UIColor = .white,
         title: String = "",
         titleColor: UIColor = .black,
         cornerRadius: CGFloat = UI.Button.cornerRadius,
-        height: CGFloat = UI.Button.height,
-        target: Any? = nil,
-        action: Selector? = nil
+        height: CGFloat = UI.Button.height
     )
 }
 
@@ -37,27 +33,25 @@ extension UIButton {
     ) {
         self.init()
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let action = tapHandler?.action {
+            addTarget(tapHandler?.target, action: action, for: .touchUpInside)
+        }
+        
         switch style {
-        case .primary(let color, let title, let titleColor, let cornerRadius, let height, let target, let action):
-            translatesAutoresizingMaskIntoConstraints = false
+        case .primary(let color, let title, let titleColor, let cornerRadius, let height):
             setTitle(title, for: .normal)
             setTitleColor(titleColor, for: .normal)
             backgroundColor = color
             setRoundBorders(cornerRadius)
             heightAnchor.constraint(equalToConstant: height).isActive = true
-            if let action = action {
-                addTarget(target, action: action, for: .touchUpInside)
-            }
-        case .secondary(let color, let title, let titleColor, let cornerRadius, let height, let target, let action):
-            translatesAutoresizingMaskIntoConstraints = false
+        case .secondary(let color, let title, let titleColor, let cornerRadius, let height):
             setTitle(title, for: .normal)
             setTitleColor(titleColor, for: .normal)
             backgroundColor = color
             setRoundBorders(cornerRadius)
             heightAnchor.constraint(equalToConstant: height).isActive = true
-            if let action = action {
-                addTarget(target, action: action, for: .touchUpInside)
-            }
         }
     }
 }
