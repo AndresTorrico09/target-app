@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 
-extension UIButton {
-    
-    static func primaryButton(
+enum ButtonStyle {
+    case primary (
         color: UIColor = .buttonBackground,
         title: String = "",
         titleColor: UIColor = .white,
@@ -18,22 +17,8 @@ extension UIButton {
         height: CGFloat = UI.Button.height,
         target: Any? = nil,
         action: Selector? = nil
-    ) -> UIButton {
-        let button = UIButton()
-        button.setup(
-            color: color,
-            title: title,
-            titleColor: titleColor,
-            cornerRadius: cornerRadius,
-            height: height
-        )
-        if let action = action {
-            button.addTarget(target, action: action, for: .touchUpInside)
-        }
-        return button
-    }
-    
-    static func secondaryButton(
+    )
+    case secondary (
         color: UIColor = .white,
         title: String = "",
         titleColor: UIColor = .black,
@@ -41,33 +26,38 @@ extension UIButton {
         height: CGFloat = UI.Button.height,
         target: Any? = nil,
         action: Selector? = nil
-    ) -> UIButton {
-        let button = UIButton()
-        button.setup(
-            color: color,
-            title: title,
-            titleColor: titleColor,
-            cornerRadius: cornerRadius,
-            height: height
-        )
-        if let action = action {
-            button.addTarget(target, action: action, for: .touchUpInside)
-        }
-        return button
-    }
+    )
+}
+
+extension UIButton {
     
-    private func setup(
-        color: UIColor = .buttonBackground,
-        title: String = "",
-        titleColor: UIColor = .white,
-        cornerRadius: CGFloat = UI.Button.cornerRadius,
-        height: CGFloat = UI.Button.height
+    convenience init(
+        style: ButtonStyle,
+        tapHandler: (target: Any, action: Selector)?
     ) {
-        translatesAutoresizingMaskIntoConstraints = false
-        setTitle(title, for: .normal)
-        setTitleColor(titleColor, for: .normal)
-        backgroundColor = color
-        setRoundBorders(cornerRadius)
-        heightAnchor.constraint(equalToConstant: height).isActive = true
+        self.init()
+        
+        switch style {
+        case .primary(let color, let title, let titleColor, let cornerRadius, let height, let target, let action):
+            translatesAutoresizingMaskIntoConstraints = false
+            setTitle(title, for: .normal)
+            setTitleColor(titleColor, for: .normal)
+            backgroundColor = color
+            setRoundBorders(cornerRadius)
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+            if let action = action {
+                addTarget(target, action: action, for: .touchUpInside)
+            }
+        case .secondary(let color, let title, let titleColor, let cornerRadius, let height, let target, let action):
+            translatesAutoresizingMaskIntoConstraints = false
+            setTitle(title, for: .normal)
+            setTitleColor(titleColor, for: .normal)
+            backgroundColor = color
+            setRoundBorders(cornerRadius)
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+            if let action = action {
+                addTarget(target, action: action, for: .touchUpInside)
+            }
+        }
     }
 }

@@ -27,22 +27,26 @@ class SignInViewController: UIViewController {
         placeholder: "signin_password_placeholder".localized
     )
     
-    private lazy var signInButton = UIButton.primaryButton(
-        title: "signin_button_text".localized
+    private lazy var signInButton = UIButton(
+        style: .primary(title: "signin_button_text".localized),
+        tapHandler: nil
     )
-    
-    private lazy var forgotPasswordButton = UIButton.secondaryButton(
-        title: "forgot_password_button_text".localized
+
+    private lazy var forgotPasswordButton = UIButton(
+        style: .secondary(title: "forgot_password_button_text".localized),
+        tapHandler: nil
     )
-    
-    private lazy var connectFacebookButton = UIButton.secondaryButton(
-        title: "connect_facebook_button_text".localized
+
+    private lazy var connectFacebookButton = UIButton(
+        style: .secondary(title: "connect_facebook_button_text".localized),
+        tapHandler: nil
     )
-    
+
     private lazy var lineView = UIView()
     
-    private lazy var signUpButton = UIButton.secondaryButton(
-        title: "signup_button_text".localized
+    private lazy var signUpButton = UIButton(
+        style: .secondary(title: "signup_button_text".localized),
+        tapHandler: nil
     )
     
     lazy var scrollView: UIScrollView = {
