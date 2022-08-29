@@ -11,16 +11,24 @@ import UIKit
 
 enum OnboardingRoutes: Route {
     case signIn
+    case signUp
     
     var screen: UIViewController {
         switch self {
         case .signIn:
             return buildSignInViewController()
+        case .signUp:
+            return buildSignUpViewController()
         }
     }
     
     private func buildSignInViewController() -> UIViewController {
         let signIn = SignInViewController()
         return signIn
+    }
+    
+    private func buildSignUpViewController() -> UIViewController {
+        let signUp = SignUpViewController()
+        return signUp
     }
 }
