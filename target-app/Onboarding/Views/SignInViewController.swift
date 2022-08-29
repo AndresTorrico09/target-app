@@ -24,7 +24,8 @@ class SignInViewController: UIViewController {
     
     private lazy var passwordField = UITextField(
         target: self,
-        placeholder: "signin_password_placeholder".localized
+        placeholder: "signin_password_placeholder".localized,
+        isPassword: true
     )
     
     private lazy var signInButton = UIButton(

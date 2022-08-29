@@ -17,3 +17,10 @@
 "connect_facebook_button_text" = "CONNECT WITH FACEBOOK";
 "signup_button_text" = "SIGN UP";
 
+// MARK: SIGN UP SCREEN
+"signup_name_label" = "NAME";
+"signup_gender_label" = "GENDER";
+"signup_confirm_password_label" = "CONFIRM PASSWORD";
+"signup_password_placeholder" = "MIN. 6 CHARACTERS LONG";
+"signup_gender_placeholder" = "SELECT YOUR GENDER";
+
