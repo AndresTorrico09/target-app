@@ -29,13 +29,15 @@ class SignUpViewController: UIViewController {
     
     private lazy var passwordField = UITextField(
         target: self,
-        placeholder: "MIN. 6 CHARACTERS LONG"
+        placeholder: "MIN. 6 CHARACTERS LONG",
+        isPassword: true
     )
     
     private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "CONFIRM PASSWORD"))
     
     private lazy var confirmPasswordField = UITextField(
-        target: self
+        target: self,
+        isPassword: true
     )
     
     private lazy var genderLabel = UILabel(style: .secondary(text: "GENDER"))
