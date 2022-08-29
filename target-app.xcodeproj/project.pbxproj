@@ -102,14 +102,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0760846528A69AF7000A144B /* SignIn */ = {
-			isa = PBXGroup;
-			children = (
-				0760846628A69B1A000A144B /* Views */,
-			);
-			path = SignIn;
-			sourceTree = "<group>";
-		};
 		0760846628A69B1A000A144B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,8 +132,8 @@
 		0760847728AC0652000A144B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				0760846628A69B1A000A144B /* Views */,
 				0760847428ABFEC3000A144B /* Routes */,
-				0760846528A69AF7000A144B /* SignIn */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
