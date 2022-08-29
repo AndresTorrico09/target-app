@@ -41,7 +41,8 @@ class SignUpViewController: UIViewController {
     private lazy var genderLabel = UILabel(style: .secondary(text: "GENDER"))
     
     private lazy var genderField = UITextField(
-        target: self
+        target: self,
+        placeholder: "SELECT YOUR GENDER"
     )
     
     private lazy var signInButton = UIButton(
@@ -75,14 +76,46 @@ class SignUpViewController: UIViewController {
         return view
     }()
     
+    lazy var picker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
+    lazy var genders: [String] = {
+      let genders = ["Male", "Female"]
+        return genders
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.picker.dataSource = self
+        self.picker.delegate = self
+        self.genderField.inputView = picker
         
         configureViews()
     }
 }
 
-private extension SignUpViewController {
+extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genders.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        genders[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        genderField.text = genders[row]
+        genderField.resignFirstResponder()
+    }
+    
     func configureViews() {
         applyDefaultUIConfigs()
         

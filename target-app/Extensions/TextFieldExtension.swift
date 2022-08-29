@@ -31,6 +31,7 @@ extension UITextField {
         self.borderStyle = borderStyle
         heightAnchor.constraint(equalToConstant: height).isActive = true
         isSecureTextEntry = isPassword
+        self.textAlignment = .center
     }
     
     func getPlaceholder(placeholder: String) -> NSAttributedString {
