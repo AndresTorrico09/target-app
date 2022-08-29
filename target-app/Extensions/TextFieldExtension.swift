@@ -12,7 +12,7 @@ extension UITextField {
     convenience init(
         target: Any,
         selector: Selector? = nil,
-        placeholder: String,
+        placeholder: String = "",
         backgroundColor: UIColor = .white,
         height: CGFloat = UI.TextField.height,
         borderStyle: BorderStyle = .line,
