@@ -21,7 +21,7 @@ class SignInViewController: UIViewController {
     )
     
     private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
-    `
+    
     private lazy var passwordField = UITextField(
         target: self,
         placeholder: "signin_password_placeholder".localized,

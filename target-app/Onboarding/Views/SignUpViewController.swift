@@ -13,7 +13,7 @@ class SignUpViewController: UIViewController {
     
     private lazy var titleLabel = UILabel(style: .primary(text: "signin_title".localized))
     
-    private lazy var nameLabel = UILabel(style: .secondary(text: "NAME"))
+    private lazy var nameLabel = UILabel(style: .secondary(text: "signup_name_label".localized))
     
     private lazy var nameField = UITextField(
         target: self
@@ -29,22 +29,22 @@ class SignUpViewController: UIViewController {
     
     private lazy var passwordField = UITextField(
         target: self,
-        placeholder: "MIN. 6 CHARACTERS LONG",
+        placeholder: "signup_password_placeholder".localized,
         isPassword: true
     )
     
-    private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "CONFIRM PASSWORD"))
+    private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "signup_confirm_password_label".localized))
     
     private lazy var confirmPasswordField = UITextField(
         target: self,
         isPassword: true
     )
     
-    private lazy var genderLabel = UILabel(style: .secondary(text: "GENDER"))
+    private lazy var genderLabel = UILabel(style: .secondary(text: "signup_gender_label".localized))
     
     private lazy var genderField = UITextField(
         target: self,
-        placeholder: "SELECT YOUR GENDER"
+        placeholder: "signup_gender_placeholder".localized
     )
     
     private lazy var signInButton = UIButton(
