@@ -42,7 +42,8 @@ class SignInViewController: UIViewController {
     private lazy var lineView = UIView()
     
     private lazy var signUpButton = UIButton(
-        style: .secondary(title: "signup_button_text".localized)
+        style: .secondary(title: "signup_button_text".localized),
+        tapHandler: (target: self, action: #selector(signUpTapped))
     )
     
     lazy var scrollView: UIScrollView = {
@@ -66,11 +67,30 @@ class SignInViewController: UIViewController {
         return view
     }()
     
+    // MARK: - Lifecycle Events
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViews()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    func signUpTapped() {
+      AppNavigator.shared.navigate(to: OnboardingRoutes.signUp, with: .push)
+    }
+    
+    @objc func tapOnSignUpButton(_ sender: Any) {
+        
+    }
+    
 }
 
 private extension SignInViewController {
