@@ -46,13 +46,13 @@ class SignUpViewController: UIViewController {
     )
     
     private lazy var signInButton = UIButton(
-        style: .primary(title: "signin_button_text".localized)
+        style: .secondary(title: "signin_button_text".localized)
     )
 
     private lazy var lineView = UIView()
     
     private lazy var signUpButton = UIButton(
-        style: .secondary(title: "signup_button_text".localized)
+        style: .primary(title: "signup_button_text".localized)
     )
     
     lazy var scrollView: UIScrollView = {
@@ -148,9 +148,9 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             confirmPasswordField,
             genderLabel,
             genderField,
-            signInButton,
+            signUpButton,
             lineView,
-            signUpButton
+            signInButton
         ])
         
         activateConstraints()
