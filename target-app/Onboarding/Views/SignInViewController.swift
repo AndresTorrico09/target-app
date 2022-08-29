@@ -75,8 +75,9 @@ class SignInViewController: UIViewController {
         configureViews()
     }
     
-    @objc func tapOnSignUpButton(_ sender: Any) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Actions
@@ -84,6 +85,10 @@ class SignInViewController: UIViewController {
     @objc
     func signUpTapped() {
       AppNavigator.shared.navigate(to: OnboardingRoutes.signUp, with: .push)
+    }
+    
+    @objc func tapOnSignUpButton(_ sender: Any) {
+        
     }
     
 }

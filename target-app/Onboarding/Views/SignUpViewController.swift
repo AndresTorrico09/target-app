@@ -87,6 +87,8 @@ class SignUpViewController: UIViewController {
         return genders
     }()
     
+    // MARK: - Lifecycle Events
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,6 +97,11 @@ class SignUpViewController: UIViewController {
         self.genderField.inputView = picker
         
         configureViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }
 
