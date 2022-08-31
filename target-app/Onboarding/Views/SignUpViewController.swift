@@ -22,27 +22,31 @@ class SignUpViewController: UIViewController {
     private lazy var nameLabel = UILabel(style: .secondary(text: "signup_name_label".localized))
     
     private lazy var nameField = UITextField(
-        target: self
+        target: self,
+        selector: #selector(formEditingChange)
     )
 
     private lazy var emailLabel = UILabel(style: .secondary(text: "signin_email_label".localized))
     
     private lazy var emailField = UITextField(
-        target: self
+        target: self,
+        selector: #selector(formEditingChange)
     )
     
     private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
     
     private lazy var passwordField = UITextField(
         target: self,
+        selector: #selector(formEditingChange),
         placeholder: "signup_password_placeholder".localized,
         isPassword: true
     )
     
     private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "signup_confirm_password_label".localized))
     
-    private lazy var confirmPasswordField = UITextField(
+    private lazy var passwordConfirmationField = UITextField(
         target: self,
+        selector: #selector(formEditingChange),
         isPassword: true
     )
     
@@ -50,6 +54,7 @@ class SignUpViewController: UIViewController {
     
     private lazy var genderField = UITextField(
         target: self,
+//        selector: #selector(formEditingChange),
         placeholder: "signup_gender_placeholder".localized
     )
     
@@ -60,7 +65,8 @@ class SignUpViewController: UIViewController {
     private lazy var lineView = UIView()
     
     private lazy var signUpButton = UIButton(
-        style: .primary(title: "signup_button_text".localized)
+        style: .primary(title: "signup_button_text".localized),
+        tapHandler: (target: self, action: #selector(tapOnSignUpButton))
     )
     
     lazy var scrollView: UIScrollView = {
@@ -127,6 +133,24 @@ class SignUpViewController: UIViewController {
     func tapOnSignUpButton(_ sender: Any) {
       viewModel.signUp()
     }
+    
+    @objc
+    func formEditingChange(_ sender: UITextField) {
+        let newValue = sender.text ?? ""
+        switch sender {
+        case nameField:
+            viewModel.name = newValue
+        case emailField:
+            viewModel.email = newValue
+        case passwordField:
+            viewModel.password = newValue
+        case passwordConfirmationField:
+            viewModel.passwordConfirmation = newValue
+        case genderField:
+            viewModel.gender = newValue
+        default: break
+        }
+    }
 }
 
 extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
@@ -176,7 +200,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             passwordLabel,
             passwordField,
             confirmPasswordLabel,
-            confirmPasswordField,
+            passwordConfirmationField,
             genderLabel,
             genderField,
             signUpButton,
@@ -222,7 +246,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
          passwordLabel,
          passwordField,
          confirmPasswordLabel,
-         confirmPasswordField,
+         passwordConfirmationField,
          genderLabel,
          genderField
         ].forEach {
