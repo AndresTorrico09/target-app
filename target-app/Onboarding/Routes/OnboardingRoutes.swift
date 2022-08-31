@@ -28,7 +28,7 @@ enum OnboardingRoutes: Route {
     }
     
     private func buildSignUpViewController() -> UIViewController {
-        let signUp = SignUpViewController()
+        let signUp = SignUpViewController(viewModel: SignUpViewModel())
         return signUp
     }
 }
