@@ -52,10 +52,17 @@ class SignUpViewController: UIViewController {
     
     private lazy var genderLabel = UILabel(style: .secondary(text: "signup_gender_label".localized))
     
+    lazy var picker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
     private lazy var genderField = UITextField(
         target: self,
-//        selector: #selector(formEditingChange),
-        placeholder: "signup_gender_placeholder".localized
+        selector: #selector(formEditingChange),
+        placeholder: "signup_gender_placeholder".localized,
+        pickerView: picker
     )
     
     private lazy var signInButton = UIButton(
@@ -90,12 +97,6 @@ class SignUpViewController: UIViewController {
         return view
     }()
     
-    lazy var picker: UIPickerView = {
-        let picker = UIPickerView()
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        return picker
-    }()
-    
     lazy var genders: [String] = {
       let genders = ["Male", "Female"]
         return genders
@@ -117,15 +118,15 @@ class SignUpViewController: UIViewController {
         
         self.picker.dataSource = self
         self.picker.delegate = self
-        self.genderField.inputView = picker
+//        self.genderField.inputView = picker
         
         configureViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+      }
     
     // MARK: - Actions
 
