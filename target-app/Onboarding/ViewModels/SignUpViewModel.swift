@@ -52,6 +52,7 @@ class SignUpViewModel {
     
     var gender = "" {
         didSet {
+            gender = gender.lowercased()
             delegate?.formDidChange()
         }
     }
