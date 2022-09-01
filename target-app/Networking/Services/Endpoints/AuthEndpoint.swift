@@ -9,14 +9,16 @@ import Foundation
 
 internal enum AuthEndpoint: RailsAPIEndpoint {
     case signUp(
-        name: String,
+        firstName: String,
+        lastName: String,
+        username: String,
         email: String,
+        gender: String,
         password: String,
-        passwordConfirmation: String,
-        gender: String
+        passwordConfirmation: String
     )
     
-    private static let usersURL = "/api/v1/users"
+    private static let usersURL = "/users"
     
     var path: String {
         switch self {

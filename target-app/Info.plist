@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>Base URL</key>
-	<string>https://target-api-induction-v2.herokuapp.com/</string>
+	<string>https://target-api-induction-v2.herokuapp.com/api/v1</string>
 </dict>
 </plist>

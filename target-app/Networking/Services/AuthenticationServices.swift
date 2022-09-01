@@ -18,12 +18,15 @@ class AuthenticationServices {
         completion: @escaping (Result<User, Error>) -> Void
     ) {
         BaseAPIClient.default.request(
+            //TODO: fix firstName, lastName, username
             endpoint: AuthEndpoint.signUp(
-                name: name,
+                firstName: name,
+                lastName: name,
+                username: name,
                 email: email,
+                gender: gender,
                 password: password,
-                passwordConfirmation: passwordConfirmation,
-                gender: gender
+                passwordConfirmation: passwordConfirmation
             )
         ) { (result: Result<User?, Error>, responseHeaders) in
             switch result {
@@ -31,26 +34,12 @@ class AuthenticationServices {
                 if let u = user {
                     completion(.success(u))
                 } else {
+                    //TODO: add error state
 //                    completion(.failure(AuthError.userSessionInvalid))
                 }
-//                if saveUserSession(user, headers: responseHeaders), let user = user {
-//                    completion(.success(user))
-//                } else {
-//                    completion(.failure(AuthError.userSessionInvalid))
-//                }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
-    
-//    fileprivate class func saveUserSession(
-//      _ user: User?,
-//      headers: [String: String]
-//    ) -> Bool {
-//      UserDataManager.currentUser = user
-//      SessionManager.currentSession = Session(headers: headers)
-//
-//      return UserDataManager.currentUser != nil && SessionManager.validSession
-//    }
 }
