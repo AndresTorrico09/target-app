@@ -21,6 +21,7 @@ internal final class AlamofireNetworkProvider: NetworkProvider {
       endpoint.requestURL,
       method: endpoint.method.alamofireMethod,
       parameters: endpoint.parameters,
+      encoding: URLEncoding(destination: .queryString),
       headers: headers
     )
     .validate()
