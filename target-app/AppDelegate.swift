@@ -24,16 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        //    // Override point for customization after application launch.
-        //    AnalyticsManager.shared.setup()
-        //    // -Facebook
-        //    Settings.appID = ConfigurationManager.getValue(for: "FacebookKey")
-        //    ApplicationDelegate.shared.application(
-        //      application, didFinishLaunchingWithOptions: launchOptions
-        //    )
-        //
-        //    IQKeyboardManager.shared.enable = true
-        
         let rootVC = AppNavigator.shared.rootViewController
         window?.rootViewController = rootVC
         
@@ -41,13 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func unexpectedLogout() {
-//        UserDataManager.deleteUser()
-//        SessionManager.deleteSession()
-        // Clear any local data if needed
-        // Take user to onboarding if needed, do NOT redirect the user
-        // if is already in the landing to avoid losing the current VC stack state.
-//        if window?.rootViewController is HomeViewController {
-//            AppNavigator.shared.navigate(to: OnboardingRoutes.firstScreen, with: .changeRoot)
-//        }
+        //TODO: add action
     }
 }
