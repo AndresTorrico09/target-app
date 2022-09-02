@@ -25,6 +25,8 @@ class SignUpViewController: UIViewController {
         target: self,
         selector: #selector(formEditingChange)
     )
+    
+    private lazy var nameErrorLabel = UILabel(style: .error(text: "signup_name_label_error".localized))
 
     private lazy var emailLabel = UILabel(style: .secondary(text: "signin_email_label".localized))
     
@@ -118,7 +120,6 @@ class SignUpViewController: UIViewController {
         
         self.picker.dataSource = self
         self.picker.delegate = self
-//        self.genderField.inputView = picker
         
         configureViews()
     }
@@ -132,7 +133,20 @@ class SignUpViewController: UIViewController {
 
     @objc
     func tapOnSignUpButton(_ sender: Any) {
-      viewModel.signUp()
+        if checkAndDisplayError() {
+            viewModel.signUp()
+        }
+    }
+    
+    func checkAndDisplayError() -> Bool {
+        if nameField.text?.count == 0 {
+            nameErrorLabel.isHidden = false
+            return false
+        } else {
+            nameErrorLabel.isHidden = true
+        }
+        
+        return true
     }
     
     @objc
@@ -196,6 +210,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             titleLabel,
             nameLabel,
             nameField,
+            nameErrorLabel,
             emailLabel,
             emailField,
             passwordLabel,
@@ -242,6 +257,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
         [titleLabel,
          nameLabel,
          nameField,
+         nameErrorLabel,
          emailLabel,
          emailField,
          passwordLabel,

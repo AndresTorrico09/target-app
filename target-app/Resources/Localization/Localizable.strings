@@ -24,3 +24,6 @@
 "signup_password_placeholder" = "MIN. 6 CHARACTERS LONG";
 "signup_gender_placeholder" = "SELECT YOUR GENDER";
 
+// MARK: SIGN UP ERROR
+"signup_name_label_error" = "You forgot to put your name!";
+
