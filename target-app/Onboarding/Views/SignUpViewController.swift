@@ -40,7 +40,7 @@ class SignUpViewController: UIViewController {
         placeholder: "signup_password_placeholder".localized,
         isPassword: true
     )
-    private lazy var passwordErrorLabel = UILabel(style: .error(text: "signup_email_password_error".localized))
+    private lazy var passwordErrorLabel = UILabel(style: .error(text: "signup_password_label_error".localized))
 
     private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "signup_confirm_password_label".localized))
     private lazy var passwordConfirmationField = UITextField(
@@ -48,7 +48,7 @@ class SignUpViewController: UIViewController {
         selector: #selector(formEditingChange),
         isPassword: true
     )
-    private lazy var passwordConfirmationErrorLabel = UILabel(style: .error(text: "signup_email_password_confirmation_error".localized))
+    private lazy var passwordConfirmationErrorLabel = UILabel(style: .error(text: "signup_password_confirmation_label_error".localized))
 
     lazy var picker: UIPickerView = {
         let picker = UIPickerView()
@@ -62,7 +62,8 @@ class SignUpViewController: UIViewController {
         placeholder: "signup_gender_placeholder".localized,
         pickerView: picker
     )
-    
+    private lazy var genderErrorLabel = UILabel(style: .error(text: "signup_gender_label_error".localized))
+
     private lazy var signInButton = UIButton(
         style: .secondary(title: "signin_button_text".localized)
     )
@@ -207,6 +208,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             passwordConfirmationErrorLabel,
             genderLabel,
             genderField,
+            genderErrorLabel,
             signUpButton,
             lineView,
             signInButton
@@ -309,6 +311,13 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             valid = false
         } else {
             passwordConfirmationErrorLabel.isHidden = true
+        }
+        
+        if genderField.text!.isEmpty {
+            genderErrorLabel.isHidden = false
+            valid = false
+        } else {
+            genderErrorLabel.isHidden = true
         }
         
         return valid

@@ -25,7 +25,8 @@
 "signup_gender_placeholder" = "SELECT YOUR GENDER";
 
 // MARK: SIGN UP ERROR
-"signup_name_label_error" = "you forgot to put your name!";
-"signup_email_label_error" = "oops! this email is not valid";
-"signup_email_password_error" = "the password must be 6 characters long";
-"signup_email_password_confirmation_error" = "passwords don’t match";
+"signup_name_label_error" = "You forgot to put your name!";
+"signup_email_label_error" = "Oops! this email is not valid";
+"signup_password_label_error" = "The password must be 6 characters long";
+"signup_password_confirmation_label_error" = "Passwords don’t match";
+"signup_gender_label_error" = "You forgot to select your gender!";
