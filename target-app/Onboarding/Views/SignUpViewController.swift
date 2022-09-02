@@ -34,6 +34,7 @@ class SignUpViewController: UIViewController {
         target: self,
         selector: #selector(formEditingChange)
     )
+    private lazy var emailErrorLabel = UILabel(style: .error(text: "signup_email_label_error".localized))
     
     private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
     
@@ -138,17 +139,6 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    func checkAndDisplayError() -> Bool {
-        if nameField.text?.count == 0 {
-            nameErrorLabel.isHidden = false
-            return false
-        } else {
-            nameErrorLabel.isHidden = true
-        }
-        
-        return true
-    }
-    
     @objc
     func formEditingChange(_ sender: UITextField) {
         let newValue = sender.text ?? ""
@@ -213,6 +203,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             nameErrorLabel,
             emailLabel,
             emailField,
+            emailErrorLabel,
             passwordLabel,
             passwordField,
             confirmPasswordLabel,
@@ -260,6 +251,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
          nameErrorLabel,
          emailLabel,
          emailField,
+         emailErrorLabel,
          passwordLabel,
          passwordField,
          confirmPasswordLabel,
@@ -291,6 +283,26 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             ),
             lineView.heightAnchor.constraint(equalToConstant: 1),
         ])
+    }
+    
+    func checkAndDisplayError() -> Bool {
+        var valid = true
+        
+        if nameField.text!.isEmpty {
+            nameErrorLabel.isHidden = false
+            valid = false
+        } else {
+            nameErrorLabel.isHidden = true
+        }
+        
+        if emailField.text!.isEmpty || !emailField.text!.isEmailFormatted() {
+            emailErrorLabel.isHidden = false
+            valid = false
+        } else {
+            emailErrorLabel.isHidden = true
+        }
+        
+        return valid
     }
 
 }
