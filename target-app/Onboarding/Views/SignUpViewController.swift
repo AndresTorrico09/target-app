@@ -48,7 +48,8 @@ class SignUpViewController: UIViewController {
         selector: #selector(formEditingChange),
         isPassword: true
     )
-    
+    private lazy var passwordConfirmationErrorLabel = UILabel(style: .error(text: "signup_email_password_confirmation_error".localized))
+
     lazy var picker: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
@@ -203,6 +204,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             passwordErrorLabel,
             confirmPasswordLabel,
             passwordConfirmationField,
+            passwordConfirmationErrorLabel,
             genderLabel,
             genderField,
             signUpButton,
@@ -300,6 +302,13 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             valid = false
         } else {
             passwordErrorLabel.isHidden = true
+        }
+        
+        if passwordConfirmationField.text != passwordField.text  {
+            passwordConfirmationErrorLabel.isHidden = false
+            valid = false
+        } else {
+            passwordConfirmationErrorLabel.isHidden = true
         }
         
         return valid
