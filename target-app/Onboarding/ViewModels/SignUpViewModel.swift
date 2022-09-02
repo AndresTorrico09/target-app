@@ -72,7 +72,7 @@ class SignUpViewModel {
             switch result {
             case .success:
                 self.state = .loggedIn
-//                AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
+                AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
             case .failure(let error):
                 self.state = .network(state: .error(error.localizedDescription))
             }
