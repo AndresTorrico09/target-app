@@ -25,6 +25,14 @@ enum LabelStyle {
         textAlignment: NSTextAlignment = .center,
         fontSize: CGFloat = 17
     )
+    case error (
+        text: String = "",
+        textColor: UIColor = .labelError,
+        backgroundColor: UIColor = .clear,
+        numberOfLines: Int = 0,
+        textAlignment: NSTextAlignment = .center,
+        fontSize: CGFloat = 14
+    )
 }
 
 extension UILabel {
@@ -49,6 +57,14 @@ extension UILabel {
             self.numberOfLines = numberOfLines
             self.textAlignment = textAlignment
             self.font = self.font.withSize(fontSize)
+        case .error(text: let text, textColor: let textColor, backgroundColor: let backgroundColor, numberOfLines: let numberOfLines, textAlignment: let textAlignment, fontSize: let fontSize):
+            self.text = text
+            self.textColor = textColor
+            self.backgroundColor = backgroundColor
+            self.numberOfLines = numberOfLines
+            self.textAlignment = textAlignment
+            self.font = self.font.withSize(fontSize)
+            self.isHidden = true
         }
     }
 }
