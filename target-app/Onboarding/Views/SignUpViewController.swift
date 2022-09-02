@@ -20,16 +20,13 @@ class SignUpViewController: UIViewController {
     private lazy var titleLabel = UILabel(style: .primary(text: "signin_title".localized))
     
     private lazy var nameLabel = UILabel(style: .secondary(text: "signup_name_label".localized))
-    
     private lazy var nameField = UITextField(
         target: self,
         selector: #selector(formEditingChange)
     )
-    
     private lazy var nameErrorLabel = UILabel(style: .error(text: "signup_name_label_error".localized))
 
     private lazy var emailLabel = UILabel(style: .secondary(text: "signin_email_label".localized))
-    
     private lazy var emailField = UITextField(
         target: self,
         selector: #selector(formEditingChange)
@@ -37,30 +34,27 @@ class SignUpViewController: UIViewController {
     private lazy var emailErrorLabel = UILabel(style: .error(text: "signup_email_label_error".localized))
     
     private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
-    
     private lazy var passwordField = UITextField(
         target: self,
         selector: #selector(formEditingChange),
         placeholder: "signup_password_placeholder".localized,
         isPassword: true
     )
-    
+    private lazy var passwordErrorLabel = UILabel(style: .error(text: "signup_email_password_error".localized))
+
     private lazy var confirmPasswordLabel = UILabel(style: .secondary(text: "signup_confirm_password_label".localized))
-    
     private lazy var passwordConfirmationField = UITextField(
         target: self,
         selector: #selector(formEditingChange),
         isPassword: true
     )
     
-    private lazy var genderLabel = UILabel(style: .secondary(text: "signup_gender_label".localized))
-    
     lazy var picker: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
     }()
-    
+    private lazy var genderLabel = UILabel(style: .secondary(text: "signup_gender_label".localized))
     private lazy var genderField = UITextField(
         target: self,
         selector: #selector(formEditingChange),
@@ -206,6 +200,7 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             emailErrorLabel,
             passwordLabel,
             passwordField,
+            passwordErrorLabel,
             confirmPasswordLabel,
             passwordConfirmationField,
             genderLabel,
@@ -248,10 +243,8 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
         [titleLabel,
          nameLabel,
          nameField,
-         nameErrorLabel,
          emailLabel,
          emailField,
-         emailErrorLabel,
          passwordLabel,
          passwordField,
          confirmPasswordLabel,
@@ -300,6 +293,13 @@ extension SignUpViewController:  UIPickerViewDelegate, UIPickerViewDataSource  {
             valid = false
         } else {
             emailErrorLabel.isHidden = true
+        }
+        
+        if passwordField.text!.count < 6  {
+            passwordErrorLabel.isHidden = false
+            valid = false
+        } else {
+            passwordErrorLabel.isHidden = true
         }
         
         return valid

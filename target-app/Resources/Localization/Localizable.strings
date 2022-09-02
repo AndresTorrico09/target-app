@@ -27,3 +27,4 @@
 // MARK: SIGN UP ERROR
 "signup_name_label_error" = "you forgot to put your name!";
 "signup_email_label_error" = "oops! this email is not valid";
+"signup_email_password_error" = "the password must be 6 characters long";
