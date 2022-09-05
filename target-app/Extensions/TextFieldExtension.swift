@@ -16,14 +16,22 @@ extension UITextField {
         backgroundColor: UIColor = .white,
         height: CGFloat = UI.TextField.height,
         borderStyle: BorderStyle = .line,
-        isPassword: Bool = false
+        isPassword: Bool = false,
+        pickerView: UIPickerView? = nil
     ) {
         self.init()
         
         translatesAutoresizingMaskIntoConstraints = false
         
+        var uiEvent: UIControl.Event = .editingChanged
+        
+        if let pickerView = pickerView {
+            self.inputView = pickerView
+            uiEvent = .editingDidEnd
+        }
+        
         if let selector = selector {
-            addTarget(target, action: selector, for: .editingChanged)
+            addTarget(target, action: selector, for: uiEvent)
         }
         
         self.attributedPlaceholder = getPlaceholder(placeholder: placeholder)
