@@ -28,11 +28,11 @@ class AuthenticationServices {
                 password: password,
                 passwordConfirmation: passwordConfirmation
             )
-        ) { (result: Result<User?, Error>, responseHeaders) in
+        ) { (result: Result<UserResponse?, Error>, responseHeaders) in
             switch result {
-            case .success(let user):
-                if let u = user {
-                    completion(.success(u))
+            case .success(let userResponse):
+                if let user = userResponse?.user {
+                    completion(.success(user))
                 } else {
                     //TODO: add error state
 //                    completion(.failure(AuthError.userSessionInvalid))
