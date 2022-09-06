@@ -9,6 +9,10 @@ import Foundation
 
 class AuthenticationServices {
     
+    enum AuthError: Error {
+      case userSessionInvalid
+    }
+    
     class func signUp(
         name: String,
         email: String,
@@ -34,8 +38,7 @@ class AuthenticationServices {
                 if let user = userResponse?.user {
                     completion(.success(user))
                 } else {
-                    //TODO: add error state
-                    //completion(.failure(AuthError.userSessionInvalid))
+                    completion(.failure(AuthError.userSessionInvalid))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -59,8 +62,7 @@ class AuthenticationServices {
                 if userResponse != nil {
                     completion(.success(()))
                 } else {
-                    //TODO: add error state
-                    //completion(.failure(AuthError.userSessionInvalid))
+                    completion(.failure(AuthError.userSessionInvalid))
                 }
             case .failure(let error):
                 completion(.failure(error))
