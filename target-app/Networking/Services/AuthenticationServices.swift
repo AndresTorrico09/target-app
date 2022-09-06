@@ -9,7 +9,11 @@ import Foundation
 
 class AuthenticationServices {
     
-    class func signup(
+    enum AuthError: Error {
+      case userSessionInvalid
+    }
+    
+    class func signUp(
         name: String,
         email: String,
         password: String,
@@ -34,8 +38,31 @@ class AuthenticationServices {
                 if let user = userResponse?.user {
                     completion(.success(user))
                 } else {
-                    //TODO: add error state
-//                    completion(.failure(AuthError.userSessionInvalid))
+                    completion(.failure(AuthError.userSessionInvalid))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    class func signIn(
+        email: String,
+        password: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        BaseAPIClient.default.request(
+            endpoint: AuthEndpoint.signIn(
+                email: email,
+                password: password
+            )
+        ) { (result: Result<UserResponse?, Error>, responseHeaders: [String: String]) in
+            switch result {
+            case .success(let userResponse):
+                if userResponse != nil {
+                    completion(.success(()))
+                } else {
+                    completion(.failure(AuthError.userSessionInvalid))
                 }
             case .failure(let error):
                 completion(.failure(error))
