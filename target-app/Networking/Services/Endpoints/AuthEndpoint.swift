@@ -8,6 +8,9 @@
 import Foundation
 
 internal enum AuthEndpoint: RailsAPIEndpoint {
+    
+    case signIn(email: String, password: String)
+    
     case signUp(
         firstName: String,
         lastName: String,
@@ -18,10 +21,12 @@ internal enum AuthEndpoint: RailsAPIEndpoint {
         passwordConfirmation: String
     )
     
-    private static let usersURL = "/users"
+    private static let usersURL = "/users/"
     
     var path: String {
         switch self {
+        case .signIn:
+          return AuthEndpoint.usersURL + "sign_in"
         case .signUp:
             return AuthEndpoint.usersURL
         }
@@ -29,13 +34,20 @@ internal enum AuthEndpoint: RailsAPIEndpoint {
     
     var method: Network.HTTPMethod {
         switch self {
-        case .signUp:
+        case .signUp, .signIn:
             return .post
         }
     }
     
     var parameters: [String: Any] {
         switch self {
+        case .signIn(let email, let password):
+          return [
+            "user": [
+              "email": email,
+              "password": password
+            ]
+          ]
         case .signUp(
             let firstName,
             let lastName,

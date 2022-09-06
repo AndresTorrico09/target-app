@@ -59,7 +59,7 @@ class SignUpViewModel {
     
     func signUp() {
         state = .network(state: .loading)
-        AuthenticationServices.signup(
+        AuthenticationServices.signUp(
             name: name,
             email: email,
             password: password,

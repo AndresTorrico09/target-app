@@ -9,6 +9,12 @@ import UIKit
 
 class SignInViewController: UIViewController {
     
+    // MARK: - ViewModels
+    
+    private let viewModel: SignInViewModel
+    
+    // MARK: - Outlets
+    
     private lazy var overlayImageView = UIImageView()
     
     private lazy var titleLabel = UILabel(style: .primary(text: "signin_title".localized))
@@ -17,6 +23,7 @@ class SignInViewController: UIViewController {
     
     private lazy var emailField = UITextField(
         target: self,
+        selector: #selector(credentialsChanged),
         placeholder: "signin_email_placeholder".localized
     )
     
@@ -24,12 +31,14 @@ class SignInViewController: UIViewController {
     
     private lazy var passwordField = UITextField(
         target: self,
+        selector: #selector(credentialsChanged),
         placeholder: "signin_password_placeholder".localized,
         isPassword: true
     )
     
     private lazy var signInButton = UIButton(
-        style: .primary(title: "signin_button_text".localized)
+        style: .primary(title: "signin_button_text".localized),
+        tapHandler: (target: self, action: #selector(tapOnSignInButton))
     )
 
     private lazy var forgotPasswordButton = UIButton(
@@ -81,6 +90,16 @@ class SignInViewController: UIViewController {
       navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    init(viewModel: SignInViewModel) {
+      self.viewModel = viewModel
+      super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Actions
     
     @objc
@@ -88,8 +107,19 @@ class SignInViewController: UIViewController {
       AppNavigator.shared.navigate(to: OnboardingRoutes.signUp, with: .push)
     }
     
-    @objc func tapOnSignUpButton(_ sender: Any) {
-        
+    @objc func tapOnSignInButton(_ sender: Any) {
+      viewModel.signIn()
+    }
+    
+    @objc func credentialsChanged(_ sender: UITextField) {
+      let newValue = sender.text ?? ""
+      switch sender {
+      case emailField:
+        viewModel.email = newValue
+      case passwordField:
+        viewModel.password = newValue
+      default: break
+      }
     }
     
 }
