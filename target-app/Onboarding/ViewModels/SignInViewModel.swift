@@ -54,7 +54,6 @@ class SignInViewModel {
                 self.state = .loggedIn
                 AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
             case .failure(let error):
-//                self.error = error.localizedDescription
                 self.state = .network(state: .error(error.localizedDescription))
             }
         }
