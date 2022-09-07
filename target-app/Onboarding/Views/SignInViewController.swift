@@ -109,12 +109,12 @@ class SignInViewController: UIViewController {
         viewModel.statePublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] state in
-                self?.renderState()
+                self?.renderState(state: state)
             }.store(in: &cancellables)
     }
     
-    private func renderState() {
-        switch viewModel.state {
+    private func renderState(state: AuthViewModelState) {
+        switch state {
         case .loggedIn: break
             // TODO: add render
         case .network(state: let state):
