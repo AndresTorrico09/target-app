@@ -13,6 +13,12 @@ protocol SignInViewModelDelegate: AuthViewModelStateDelegate {
 
 class SignInViewModel {
     
+    // MARK: - Observed Properties
+    @Published var error: String?
+    
+    // MARK: - Publishers
+    var errorPublisher: Published<String?>.Publisher { $error }
+    
     private var state: AuthViewModelState = .network(state: .idle) {
         didSet {
             delegate?.didUpdateState(to: state)
@@ -50,6 +56,7 @@ class SignInViewModel {
                 self.state = .loggedIn
                 AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
             case .failure(let error):
+                self.error = error.localizedDescription
                 self.state = .network(state: .error(error.localizedDescription))
             }
         }
