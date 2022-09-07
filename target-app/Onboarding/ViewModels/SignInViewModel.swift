@@ -14,7 +14,7 @@ protocol SignInViewModelDelegate: AuthViewModelStateDelegate {
 class SignInViewModel {
     
     // MARK: - Observed Properties
-    @Published var state: AuthViewModelState = .network(state: .idle) {
+    @Published private var state: AuthViewModelState = .network(state: .idle) {
         didSet {
             delegate?.didUpdateState(to: state)
         }
