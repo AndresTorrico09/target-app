@@ -14,16 +14,14 @@ protocol SignInViewModelDelegate: AuthViewModelStateDelegate {
 class SignInViewModel {
     
     // MARK: - Observed Properties
-    @Published var error: String?
-    
-    // MARK: - Publishers
-    var errorPublisher: Published<String?>.Publisher { $error }
-    
-    private var state: AuthViewModelState = .network(state: .idle) {
+    @Published var state: AuthViewModelState = .network(state: .idle) {
         didSet {
             delegate?.didUpdateState(to: state)
         }
     }
+    
+    // MARK: - Publishers
+    var statePublisher: Published<AuthViewModelState>.Publisher { $state }
     
     weak var delegate: SignInViewModelDelegate?
     
@@ -56,7 +54,7 @@ class SignInViewModel {
                 self.state = .loggedIn
                 AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
             case .failure(let error):
-                self.error = error.localizedDescription
+//                self.error = error.localizedDescription
                 self.state = .network(state: .error(error.localizedDescription))
             }
         }

@@ -106,13 +106,27 @@ class SignInViewController: UIViewController {
     private var cancellables: Set<AnyCancellable> = []
     
     private func setupBinders() {
-        viewModel.errorPublisher
+        viewModel.statePublisher
             .receive(on: RunLoop.main)
-            .sink { [weak self] error in
-                if error != nil {
-                    self?.signInErrorLabel.isHidden = false
-                }
+            .sink { [weak self] state in
+                self?.renderState()
             }.store(in: &cancellables)
+    }
+    
+    private func renderState() {
+        switch viewModel.state {
+        case .loggedIn: break
+            // TODO: add render
+        case .network(state: let state):
+            switch state {
+            case .idle: break
+                // TODO: add render
+            case .loading: break
+                // TODO: add render
+            case .error(_):
+                signInErrorLabel.isHidden = false
+            }
+        }
     }
     
     // MARK: - Actions
