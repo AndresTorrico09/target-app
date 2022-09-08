@@ -14,28 +14,13 @@ protocol SignInViewModelDelegate: AuthViewModelStateDelegate {
 class SignInViewModel {
     
     // MARK: - Observed Properties
-    @Published private var state: AuthViewModelState = .network(state: .idle) {
-        didSet {
-            delegate?.didUpdateState(to: state)
-        }
-    }
-    
+    @Published private var state: AuthViewModelState = .network(state: .idle)
+
     // MARK: - Publishers
     var statePublisher: Published<AuthViewModelState>.Publisher { $state }
     
-    weak var delegate: SignInViewModelDelegate?
-    
-    var email = "" {
-        didSet {
-            delegate?.didUpdateCredentials()
-        }
-    }
-    
-    var password = "" {
-        didSet {
-            delegate?.didUpdateCredentials()
-        }
-    }
+    private var email: String = ""
+    private var password: String = ""
     
     var hasValidCredentials: Bool {
         email.isEmailFormatted() && !password.isEmpty
@@ -57,5 +42,13 @@ class SignInViewModel {
                 self.state = .network(state: .error(error.localizedDescription))
             }
         }
+    }
+    
+    func setEmailValue(email: String) {
+        self.email = email
+    }
+    
+    func setPasswordValue(password: String) {
+        self.password = password
     }
 }

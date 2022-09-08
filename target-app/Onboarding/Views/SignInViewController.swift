@@ -9,7 +9,7 @@ import Combine
 import UIKit
 
 class SignInViewController: UIViewController {
-    
+
     // MARK: - ViewModels
     
     private let viewModel: SignInViewModel
@@ -141,14 +141,15 @@ class SignInViewController: UIViewController {
     }
     
     @objc func credentialsChanged(_ sender: UITextField) {
-      let newValue = sender.text ?? ""
-      switch sender {
-      case emailField:
-        viewModel.email = newValue
-      case passwordField:
-        viewModel.password = newValue
-      default: break
-      }
+        let newValue = sender.text ?? ""
+        
+        switch sender {
+        case emailField:
+            viewModel.setEmailValue(email: newValue)
+        case passwordField:
+            viewModel.setPasswordValue(password: newValue)
+        default: break
+        }
     }
     
 }
