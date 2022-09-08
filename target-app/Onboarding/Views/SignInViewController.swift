@@ -5,10 +5,11 @@
 //  Created by Andres Leonel Torrico Cossio on 12/08/2022.
 //
 
+import Combine
 import UIKit
 
 class SignInViewController: UIViewController {
-    
+
     // MARK: - ViewModels
     
     private let viewModel: SignInViewModel
@@ -20,7 +21,6 @@ class SignInViewController: UIViewController {
     private lazy var titleLabel = UILabel(style: .primary(text: "signin_title".localized))
     
     private lazy var emailLabel = UILabel(style: .secondary(text: "signin_email_label".localized))
-    
     private lazy var emailField = UITextField(
         target: self,
         selector: #selector(credentialsChanged),
@@ -28,13 +28,13 @@ class SignInViewController: UIViewController {
     )
     
     private lazy var passwordLabel = UILabel(style: .secondary(text: "signin_password_label".localized))
-    
     private lazy var passwordField = UITextField(
         target: self,
         selector: #selector(credentialsChanged),
         placeholder: "signin_password_placeholder".localized,
         isPassword: true
     )
+    private lazy var signInErrorLabel = UILabel(style: .error(text: "signin_error".localized))
     
     private lazy var signInButton = UIButton(
         style: .primary(title: "signin_button_text".localized),
@@ -91,13 +91,42 @@ class SignInViewController: UIViewController {
     }
     
     init(viewModel: SignInViewModel) {
-      self.viewModel = viewModel
-      super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+        setupBinders()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Binders
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private func setupBinders() {
+        viewModel.statePublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] state in
+                self?.renderState(state: state)
+            }.store(in: &cancellables)
+    }
+    
+    private func renderState(state: AuthViewModelState) {
+        switch state {
+        case .loggedIn: break
+            // TODO: add render
+        case .network(state: let state):
+            switch state {
+            case .idle: break
+                // TODO: add render
+            case .loading: break
+                // TODO: add render
+            case .error(_):
+                signInErrorLabel.isHidden = false
+            }
+        }
     }
     
     // MARK: - Actions
@@ -108,18 +137,19 @@ class SignInViewController: UIViewController {
     }
     
     @objc func tapOnSignInButton(_ sender: Any) {
-      viewModel.signIn()
+        viewModel.signIn()
     }
     
     @objc func credentialsChanged(_ sender: UITextField) {
-      let newValue = sender.text ?? ""
-      switch sender {
-      case emailField:
-        viewModel.email = newValue
-      case passwordField:
-        viewModel.password = newValue
-      default: break
-      }
+        let newValue = sender.text ?? ""
+        
+        switch sender {
+        case emailField:
+            viewModel.setEmailValue(email: newValue)
+        case passwordField:
+            viewModel.setPasswordValue(password: newValue)
+        default: break
+        }
     }
     
 }
@@ -151,6 +181,7 @@ private extension SignInViewController {
             emailField,
             passwordLabel,
             passwordField,
+            signInErrorLabel,
             signInButton,
             forgotPasswordButton,
             connectFacebookButton,

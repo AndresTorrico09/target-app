@@ -30,3 +30,7 @@
 "signup_password_label_error" = "The password must be 6 characters long";
 "signup_password_confirmation_label_error" = "Passwords don’t match";
 "signup_gender_label_error" = "You forgot to select your gender!";
+
+// MARK: SIGN IN ERROR
+"signin_error" = "This email and password don’t match";
+
