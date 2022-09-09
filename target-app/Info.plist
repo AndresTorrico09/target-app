@@ -4,5 +4,11 @@
 <dict>
 	<key>Base URL</key>
 	<string>https://target-api-induction-v2.herokuapp.com/api/v1</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Used to present offers based on your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used to present offers based on your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Target App would like to use your location to ensure we can provide the best experience possible</string>
 </dict>
 </plist>

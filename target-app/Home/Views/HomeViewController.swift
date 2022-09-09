@@ -24,6 +24,10 @@ class HomeViewController: UIViewController {
         setupMapConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        LocationManager.shared.requestLocationAuthorization()
+    }
+    
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
