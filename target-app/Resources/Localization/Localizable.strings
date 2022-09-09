@@ -34,3 +34,5 @@
 // MARK: SIGN IN ERROR
 "signin_error" = "This email and password don’t match";
 
+// MARK: HOME SCREEN
+"home_title" = "Target Points";
