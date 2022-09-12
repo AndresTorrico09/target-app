@@ -8,13 +8,31 @@
 import UIKit
 import MapKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
         return map
     }()
+    
+    let locationManager = CLLocationManager()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations
+                         locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        
+        mapView.mapType = MKMapType.standard
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: locValue, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locValue
+        annotation.title = "You are Here"
+        mapView.addAnnotation(annotation)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +44,20 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         LocationManager.shared.requestLocationAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        mapView.delegate = self
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        
+        if let coor = mapView.userLocation.location?.coordinate{
+            mapView.setCenter(coor, animated: true)
+        }
     }
     
     func setupNavigationBar() {
@@ -34,16 +66,16 @@ class HomeViewController: UIViewController {
         navigationItem.title = "home_title".localized
         
         let barLeftButtonItem = UIBarButtonItem(image: UIImage(named: "ic_home_profile"),
-                                            style: .plain,
-                                            target: self,
-                                            action: nil)
+                                                style: .plain,
+                                                target: self,
+                                                action: nil)
         navigationItem.leftBarButtonItem = barLeftButtonItem
         navigationItem.leftBarButtonItem?.tintColor = .black
         
         let barRightButtonItem = UIBarButtonItem(image: UIImage(named: "ic_home_chat"),
-                                            style: .plain,
-                                            target: self,
-                                            action: nil)
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: nil)
         navigationItem.rightBarButtonItem = barRightButtonItem
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
