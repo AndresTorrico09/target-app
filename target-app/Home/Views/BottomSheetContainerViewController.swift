@@ -7,7 +7,12 @@
 
 import UIKit
 
-open class BottomSheetContainerViewController<Content: UIViewController, BottomSheet: UIViewController> : UIViewController, UIGestureRecognizerDelegate {
+enum BottomSheetState {
+    case initial
+    case full
+}
+
+class BottomSheetContainerViewController<Content: UIViewController, BottomSheet: UIViewController> : UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Initialization
     public init(contentViewController: Content,
@@ -129,12 +134,6 @@ open class BottomSheetContainerViewController<Content: UIViewController, BottomS
     }
     
     private let configuration: BottomSheetConfiguration
-    
-    // MARK: - State
-    public enum BottomSheetState {
-        case initial
-        case full
-    }
     
     var state: BottomSheetState = .initial
     
