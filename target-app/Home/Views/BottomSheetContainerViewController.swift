@@ -148,7 +148,6 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
     lazy var panGesture: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer()
         pan.delegate = self
-//        pan.addTarget(self, action: #selector(handlePan))
         return pan
     }()
     
