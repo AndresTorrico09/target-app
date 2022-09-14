@@ -17,7 +17,7 @@ class TargetBottomSheetViewController: UIViewController {
     }()
     
     private lazy var createButton = UIButton(
-        style: .secondary(title: "create_target_label".localized),
+        style: .secondary(title: "home_create_target_label".localized),
         tapHandler: (target: self, action: #selector(tapOnCreateNewTarget))
     )
     
@@ -52,7 +52,14 @@ class TargetBottomSheetViewController: UIViewController {
     // MARK: - Actions
     
     @objc func tapOnCreateNewTarget(_ sender: Any) {
-        //TODO: add action
+        let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
+        let nav = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
+        nav.modalPresentationStyle = .pageSheet
+
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        present(nav, animated: true, completion: nil)
     }
     
 }
