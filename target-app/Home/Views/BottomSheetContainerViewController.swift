@@ -21,11 +21,11 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
         
         self.contentViewController = contentViewController
         self.bottomSheetViewController = bottomSheetViewController
-        self.configuration = bottomSheetConfiguration
+        configuration = bottomSheetConfiguration
         
         super.init(nibName: nil, bundle: nil)
         
-        self.setupUI()
+        setupUI()
     }
     
     required public init?(coder: NSCoder) {
@@ -34,7 +34,7 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
     
     // MARK: - Bottom Sheet Actions
     public func showBottomSheet(animated: Bool = true) {
-        self.topConstraint.constant = -configuration.height
+        topConstraint.constant = -configuration.height
         
         if animated {
             UIView.animate(withDuration: 0.2, animations: {
@@ -43,13 +43,13 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
                 self.state = .full
             })
         } else {
-            self.view.layoutIfNeeded()
-            self.state = .full
+            view.layoutIfNeeded()
+            state = .full
         }
     }
     
     public func hideBottomSheet(animated: Bool = true) {
-        self.topConstraint.constant = -configuration.initialOffset
+        topConstraint.constant = -configuration.initialOffset
         
         if animated {
             UIView.animate(withDuration: 0.3,
@@ -63,8 +63,8 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
                 self.state = .initial
             })
         } else {
-            self.view.layoutIfNeeded()
-            self.state = .initial
+            view.layoutIfNeeded()
+            state = .initial
         }
     }
     
@@ -77,51 +77,51 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
         
         switch sender.state {
         case .began, .changed:
-            if self.state == .full {
+            if state == .full {
                 guard translation.y > 0 else { return }
                 
                 topConstraint.constant = -(configuration.height - yTranslationMagnitude)
                 
-                self.view.layoutIfNeeded()
+                view.layoutIfNeeded()
             } else {
                 let newConstant = -(configuration.initialOffset + yTranslationMagnitude)
                 
                 guard translation.y < 0 else { return }
                 guard newConstant.magnitude < configuration.height else {
-                    self.showBottomSheet()
+                    showBottomSheet()
                     return
                 }
                 
                 topConstraint.constant = newConstant
                 
-                self.view.layoutIfNeeded()
+                view.layoutIfNeeded()
             }
         case .ended:
-            if self.state == .full {
+            if state == .full {
                 
                 if velocity.y < 0 {
                     // Bottom Sheet was full initially and the user tried to move it to the top
-                    self.showBottomSheet()
+                    showBottomSheet()
                 } else if yTranslationMagnitude >= configuration.height / 2 || velocity.y > 1000 {
-                    self.hideBottomSheet()
+                    hideBottomSheet()
                 } else {
-                    self.showBottomSheet()
+                    showBottomSheet()
                 }
             } else {
                 
                 if yTranslationMagnitude >= configuration.height / 2 || velocity.y < -1000 {
                     
-                    self.showBottomSheet()
+                    showBottomSheet()
                     
                 } else {
-                    self.hideBottomSheet()
+                    hideBottomSheet()
                 }
             }
         case .failed:
-            if self.state == .full {
-                self.showBottomSheet()
+            if state == .full {
+                showBottomSheet()
             } else {
-                self.hideBottomSheet()
+                hideBottomSheet()
             }
         default: break
         }
@@ -153,34 +153,34 @@ class BottomSheetContainerViewController<Content: UIViewController, BottomSheet:
     
     // MARK: - UI Setup
     private func setupUI() {
-        self.addChild(contentViewController)
-        self.addChild(bottomSheetViewController)
+        addChild(contentViewController)
+        addChild(bottomSheetViewController)
         
-        self.view.addSubview(contentViewController.view)
-        self.view.addSubview(bottomSheetViewController.view)
+        view.addSubview(contentViewController.view)
+        view.addSubview(bottomSheetViewController.view)
         bottomSheetViewController.view.addGestureRecognizer(panGesture)
         
         contentViewController.view.translatesAutoresizingMaskIntoConstraints = false
         bottomSheetViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            contentViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            contentViewController.view.topAnchor.constraint(equalTo: self.view.topAnchor),
-            contentViewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            contentViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+            contentViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
+            contentViewController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            contentViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         contentViewController.didMove(toParent: self)
         
         topConstraint = bottomSheetViewController.view.topAnchor.constraint(
-            equalTo: self.view.bottomAnchor,
+            equalTo: view.bottomAnchor,
             constant: -configuration.initialOffset
         )
         
         NSLayoutConstraint.activate([
             bottomSheetViewController.view.heightAnchor.constraint(equalToConstant: configuration.height),
-            bottomSheetViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            bottomSheetViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            bottomSheetViewController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+            bottomSheetViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
             topConstraint
         ])
         
