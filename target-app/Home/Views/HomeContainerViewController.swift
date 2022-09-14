@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeContainerViewController: BottomSheetContainerViewController <HomeViewController, TargetBottomSheetViewController> {
+final class HomeContainerViewController: BottomSheetContainerViewController <UIViewController, UIViewController> {
     
     override func viewDidAppear(_ animated: Bool) {
         setupNavigationBar()
