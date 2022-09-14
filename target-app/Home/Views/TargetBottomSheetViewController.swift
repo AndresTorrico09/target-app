@@ -16,7 +16,12 @@ class TargetBottomSheetViewController: UIViewController {
         return imageView
     }()
     
-    private var titleLabel = UILabel(style: .secondary(text: "create_target_label".localized))
+    private lazy var createButton = UIButton(
+        style: .secondary(title: "create_target_label".localized),
+        tapHandler: (target: self, action: #selector(tapOnCreateNewTarget))
+    )
+    
+    // MARK: - Lifecycle Events
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +30,12 @@ class TargetBottomSheetViewController: UIViewController {
         
         view.addSubviews(subviews: [
             targetImage,
-            titleLabel
+            createButton
         ])
         
         targetImage.centerHorizontally(with: view)
 
-        titleLabel.attachHorizontally(
+        createButton.attachHorizontally(
             to: view,
             leadingMargin: UI.Defaults.margin,
             trailingMargin: UI.Defaults.margin
@@ -38,12 +43,16 @@ class TargetBottomSheetViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             targetImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
-            titleLabel.topAnchor.constraint(
-                equalTo: targetImage.bottomAnchor,
-                constant: 20
+            createButton.topAnchor.constraint(
+                equalTo: targetImage.bottomAnchor
             )
         ])
-
+    }
+    
+    // MARK: - Actions
+    
+    @objc func tapOnCreateNewTarget(_ sender: Any) {
+        //TODO: add action
     }
     
 }
