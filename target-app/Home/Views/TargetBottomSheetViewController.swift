@@ -53,13 +53,13 @@ class TargetBottomSheetViewController: UIViewController {
     
     @objc func tapOnCreateNewTarget(_ sender: Any) {
         let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
-        let nav = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
-        nav.modalPresentationStyle = .pageSheet
+        let navigationController = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
+        navigationController.modalPresentationStyle = .pageSheet
 
-        if let sheet = nav.sheetPresentationController {
+        if let sheet = navigationController.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        present(nav, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
     
 }
