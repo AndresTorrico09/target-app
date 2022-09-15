@@ -14,21 +14,21 @@ protocol BottomSheetPresenter: AnyObject {
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    let mapView: MKMapView = {
+    private let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
         map.overrideUserInterfaceStyle = .dark
         return map
     }()
     
-    lazy var targetBottomSheet: UIView = {
+    private lazy var targetBottomSheet: UIView = {
         let target = TargetBottomSheetView()
         target.translatesAutoresizingMaskIntoConstraints = false
         target.delegate = self
         return target
     }()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations
                          locations: [CLLocation]) {
