@@ -59,7 +59,7 @@ final class TargetBottomSheetView: UIView {
     // MARK: - Actions
     
     @objc func tapOnCreateNewTarget(_ sender: Any) {
-        delegate?.presentBottomSheet()
+        delegate?.createTargetButtonTapped()
     }
     
 }

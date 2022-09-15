@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 protocol BottomSheetPresenter: AnyObject {
-    func presentBottomSheet()
+    func createTargetButtonTapped()
 }
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -117,7 +117,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
 // MARK: BottomSheetPresenter
 
 extension HomeViewController: BottomSheetPresenter {
-    func presentBottomSheet() {
+    func createTargetButtonTapped() {
         let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
         let navigationController = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
         navigationController.modalPresentationStyle = .pageSheet
