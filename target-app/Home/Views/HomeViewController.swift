@@ -8,12 +8,24 @@
 import UIKit
 import MapKit
 
+protocol BottomSheetPresenter: AnyObject {
+    func presentBottomSheet()
+}
+
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     let mapView: MKMapView = {
         let map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
         map.overrideUserInterfaceStyle = .dark
         return map
+    }()
+    
+    lazy var targetBottomSheet: UIView = {
+        let target = TargetBottomSheetView()
+        target.translatesAutoresizingMaskIntoConstraints = false
+        target.delegate = self
+        return target
     }()
     
     let locationManager = CLLocationManager()
@@ -37,6 +49,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationBar()
         applyDefaultUIConfigs()
         setupMapConstraints()
     }
@@ -61,15 +74,57 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     func setupMapConstraints() {
         view.addSubview(mapView)
+        view.addSubview(targetBottomSheet)
         
-        mapView.translatesAutoresizingMaskIntoConstraints = false
+        targetBottomSheet.attachHorizontally(to: view, leadingMargin: 0, trailingMargin: 0)
         
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            targetBottomSheet.heightAnchor.constraint(equalToConstant: 100),
+            targetBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
+    func setupNavigationBar() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        navigationItem.titleView = UILabel(style: .secondary(text: "home_title".localized))
+        
+        let barLeftButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_home_profile"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        navigationItem.leftBarButtonItem = barLeftButtonItem
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        
+        let barRightButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_home_chat"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        navigationItem.rightBarButtonItem = barRightButtonItem
+        navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+}
+
+// MARK: BottomSheetPresenter
+
+extension HomeViewController: BottomSheetPresenter {
+    func presentBottomSheet() {
+        let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
+        let navigationController = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
+        navigationController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        present(navigationController, animated: true, completion: nil)
+    }
 }

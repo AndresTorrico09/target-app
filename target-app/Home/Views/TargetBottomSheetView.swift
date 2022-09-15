@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TargetBottomSheetViewController: UIViewController {
+final class TargetBottomSheetView: UIView {
     
     private var targetImage: UIImageView = {
         let imageView = UIImageView()
@@ -21,45 +21,45 @@ class TargetBottomSheetViewController: UIViewController {
         tapHandler: (target: self, action: #selector(tapOnCreateNewTarget))
     )
     
-    // MARK: - Lifecycle Events
+    weak var delegate: BottomSheetPresenter?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        applyBottomSheetUIConfigs()
-        
-        view.addSubviews(subviews: [
+    init () {
+        super.init(frame: .zero)
+
+        backgroundColor = .white
+        layer.cornerRadius = 20
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        layer.shadowRadius = 20
+
+        addSubviews(subviews: [
             targetImage,
             createButton
         ])
         
-        targetImage.centerHorizontally(with: view)
+        targetImage.centerHorizontally(with: self)
 
         createButton.attachHorizontally(
-            to: view,
+            to: self,
             leadingMargin: UI.Defaults.margin,
             trailingMargin: UI.Defaults.margin
         )
         
         NSLayoutConstraint.activate([
-            targetImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+            targetImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             createButton.topAnchor.constraint(
                 equalTo: targetImage.bottomAnchor
             )
         ])
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Actions
     
     @objc func tapOnCreateNewTarget(_ sender: Any) {
-        let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
-        let navigationController = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
-        navigationController.modalPresentationStyle = .pageSheet
-
-        if let sheet = navigationController.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        present(navigationController, animated: true, completion: nil)
+        delegate?.presentBottomSheet()
     }
     
 }
