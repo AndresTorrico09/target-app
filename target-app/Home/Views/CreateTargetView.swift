@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TargetBottomSheetView: UIView {
+final class CreateTargetView: UIView {
     
     private var targetImage: UIImageView = {
         let imageView = UIImageView()

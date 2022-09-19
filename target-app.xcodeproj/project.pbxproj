@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		072DA03E28CBCC7200936C06 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DA03D28CBCC7200936C06 /* LocationManager.swift */; };
-		072DA04428CFC71000936C06 /* TargetBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */; };
+		072DA04428CFC71000936C06 /* CreateTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DA04328CFC71000936C06 /* CreateTargetView.swift */; };
 		0755414A28D5060100A4C4FF /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414928D5060100A4C4FF /* UserResponse.swift */; };
 		0755414D28D5068E00A4C4FF /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414C28D5068E00A4C4FF /* Target.swift */; };
 		0755414F28D506A100A4C4FF /* TargetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414E28D506A100A4C4FF /* TargetResponse.swift */; };
@@ -94,7 +94,7 @@
 
 /* Begin PBXFileReference section */
 		072DA03D28CBCC7200936C06 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetBottomSheetView.swift; sourceTree = "<group>"; };
+		072DA04328CFC71000936C06 /* CreateTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTargetView.swift; sourceTree = "<group>"; };
 		0755414928D5060100A4C4FF /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		0755414C28D5068E00A4C4FF /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		0755414E28D506A100A4C4FF /* TargetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetResponse.swift; sourceTree = "<group>"; };
@@ -440,7 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				076084E328C25A5A000A144B /* HomeViewController.swift */,
-				072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */,
+				072DA04328CFC71000936C06 /* CreateTargetView.swift */,
 				077DED6C28D233D80074DC24 /* SaveTargetViewController.swift */,
 			);
 			path = Views;
@@ -773,7 +773,7 @@
 				0760848B28AE5A47000A144B /* StringExtension.swift in Sources */,
 				0755414D28D5068E00A4C4FF /* Target.swift in Sources */,
 				076084C328BFC73A000A144B /* Cancellable.swift in Sources */,
-				072DA04428CFC71000936C06 /* TargetBottomSheetView.swift in Sources */,
+				072DA04428CFC71000936C06 /* CreateTargetView.swift in Sources */,
 				07D66A4E28A4638400308FF5 /* AppDelegate.swift in Sources */,
 				076084B428BFA6F8000A144B /* Endpoint.swift in Sources */,
 				076084E428C25A5A000A144B /* HomeViewController.swift in Sources */,
