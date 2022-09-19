@@ -10,8 +10,8 @@ import Foundation
 // MARK: - Welcome
 struct TargetResponse: Codable {
     let target: Target
-    let matchConversation: MatchConversation
-    let matchedUser: MatchedUser
+    let matchConversation: MatchConversation?
+    let matchedUser: MatchedUser?
 
     enum CodingKeys: String, CodingKey {
         case target

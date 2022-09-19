@@ -15,11 +15,12 @@ class SaveTargetViewModel {
     // MARK: - Publishers
     var statePublisher: Published<AuthViewModelState>.Publisher { $state }
     
-    private var title: String = ""
-    private var latitude: Float = 0.0
-    private var longitude: Float = 0.0
-    private var radius: Float = 0.0
-    private var topicId: Int = 0
+    //TODO: remove mock data
+    private var title: String = "new target"
+    private var latitude: Double = -94.5566
+    private var longitude: Double = -94.5566
+    private var radius: Double = 27384.4
+    private var topicId: Int = 2
     
     func saveTarget() {
         state = .network(state: .loading)

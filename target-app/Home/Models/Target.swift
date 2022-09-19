@@ -15,7 +15,10 @@ struct Target: Codable {
     let topicID: Int
     
     private enum CodingKeys: String, CodingKey {
-        case id, title, latitude, longitude, radius, topicID
+        case id
+        case title
+        case latitude, longitude, radius
+        case topicID = "topic_id"
     }
 }
 

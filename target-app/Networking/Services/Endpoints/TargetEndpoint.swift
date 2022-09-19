@@ -11,9 +11,9 @@ internal enum TargetEndpoint: RailsAPIEndpoint {
     
     case save(
         title: String,
-        latitude: Float,
-        longitude: Float,
-        radius: Float,
+        latitude: Double,
+        longitude: Double,
+        radius: Double,
         topicId: Int
     )
     

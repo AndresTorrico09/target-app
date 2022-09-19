@@ -15,9 +15,9 @@ class TargetServices {
     
     class func save(
         title: String,
-        latitude: Float,
-        longitude: Float,
-        radius: Float,
+        latitude: Double,
+        longitude: Double,
+        radius: Double,
         topicId: Int,
         completion: @escaping (Result<Target, Error>) -> Void
     ) {
@@ -29,10 +29,10 @@ class TargetServices {
                 radius: radius,
                 topicId: topicId
             )
-        ) { (result: Result<Target?, Error>, responseHeaders) in
+        ) { (result: Result<TargetResponse?, Error>, responseHeaders) in
             switch result {
             case .success(let targetResponse):
-                if let target = targetResponse {
+                if let target = targetResponse?.target {
                     completion(.success(target))
                 } else {
                     completion(.failure(AuthError.userSessionInvalid))
