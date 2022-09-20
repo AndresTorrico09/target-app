@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class HomeViewController: UIViewController {
     
     let mapView: MKMapView = {
         let map = MKMapView()
@@ -20,26 +20,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     }()
     
     private let locationManager = CLLocationManager()
-    
-    func locationManager(
-        _ manager: CLLocationManager, didUpdateLocations
-        locations: [CLLocation]
-    ) {
-        guard let locationCoordinates: CLLocationCoordinate2D = locations.last?.coordinate else {
-            return
-        }
-        
-        mapView.mapType = MKMapType.standard
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: locationCoordinates, span: span)
-        mapView.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = locationCoordinates
-        annotation.title = "You are Here"
-        mapView.addAnnotation(annotation)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,4 +82,27 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         ])
     }
     
+}
+
+extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+    
+    func locationManager(
+        _ manager: CLLocationManager, didUpdateLocations
+        locations: [CLLocation]
+    ) {
+        guard let locationCoordinates: CLLocationCoordinate2D = locations.last?.coordinate else {
+            return
+        }
+        
+        mapView.mapType = MKMapType.standard
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: locationCoordinates, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationCoordinates
+        annotation.title = "You are Here"
+        mapView.addAnnotation(annotation)
+    }
 }
