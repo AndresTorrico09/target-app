@@ -32,11 +32,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.mapType = MKMapType.standard
         
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: locValue, span: span)
+        let region = MKCoordinateRegion(center: locationCoordinates, span: span)
         mapView.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
-        annotation.coordinate = locValue
+        annotation.coordinate = locationCoordinates
         annotation.title = "You are Here"
         mapView.addAnnotation(annotation)
     }
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.delegate = self
         
         if let coordinates = mapView.userLocation.location?.coordinate {
-            mapView.setCenter(coor, animated: true)
+            mapView.setCenter(coordinates, animated: true)
         }
     }
     
