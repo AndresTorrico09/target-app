@@ -21,19 +21,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         // Only ask authorization if it was never asked before
         guard currentStatus == .notDetermined else { return }
 
-        // Starting on iOS 13.4.0, to get .authorizedAlways permission, you need to
-        // first ask for WhenInUse permission, then ask for Always permission to
-        // get to a second system alert
-        if #available(iOS 13.4, *) {
-            self.requestLocationAuthorizationCallback = { status in
-                if status == .authorizedWhenInUse {
-                    self.locationManager.requestAlwaysAuthorization()
-                }
-            }
-            self.locationManager.requestWhenInUseAuthorization()
-        } else {
-            self.locationManager.requestAlwaysAuthorization()
-        }
+        self.locationManager.requestAlwaysAuthorization()
     }
     // MARK: - CLLocationManagerDelegate
     public func locationManager(
