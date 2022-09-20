@@ -25,7 +25,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         _ manager: CLLocationManager, didUpdateLocations
         locations: [CLLocation]
     ) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        guard let locationCoordinates: CLLocationCoordinate2D = locations.last?.coordinate else {
+            return
+        }
         
         mapView.mapType = MKMapType.standard
         
