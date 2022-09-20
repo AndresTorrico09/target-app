@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         return map
     }()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations
                          locations: [CLLocation]) {
