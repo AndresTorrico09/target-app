@@ -21,8 +21,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     private let locationManager = CLLocationManager()
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations
-                         locations: [CLLocation]) {
+    func locationManager(
+        _ manager: CLLocationManager, didUpdateLocations
+        locations: [CLLocation]
+    ) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         
         mapView.mapType = MKMapType.standard
