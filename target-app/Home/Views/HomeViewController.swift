@@ -60,7 +60,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         
         mapView.delegate = self
         
-        if let coor = mapView.userLocation.location?.coordinate{
+        if let coordinates = mapView.userLocation.location?.coordinate {
             mapView.setCenter(coor, animated: true)
         }
     }
