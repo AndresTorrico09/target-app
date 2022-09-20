@@ -15,7 +15,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     private var requestLocationAuthorizationCallback: ((CLAuthorizationStatus) -> Void)?
 
     public func requestLocationAuthorization() {
-        self.locationManager.delegate = self
+        locationManager.delegate = self
         let currentStatus = locationManager.authorizationStatus
 
         // Only ask authorization if it was never asked before
