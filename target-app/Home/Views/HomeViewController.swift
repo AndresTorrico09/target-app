@@ -13,6 +13,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
+        map.mapType = .standard
+        map.isZoomEnabled = true
+        map.isScrollEnabled = true
         return map
     }()
     
@@ -50,10 +53,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
+        
         mapView.delegate = self
-        mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isScrollEnabled = true
         
         if let coor = mapView.userLocation.location?.coordinate{
             mapView.setCenter(coor, animated: true)
