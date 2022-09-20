@@ -36,8 +36,10 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     // MARK: - CLLocationManagerDelegate
-    public func locationManager(_ manager: CLLocationManager,
-                                didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(
+        _ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus
+    ) {
         self.requestLocationAuthorizationCallback?(status)
     }
 }
