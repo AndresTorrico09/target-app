@@ -94,8 +94,6 @@ extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             return
         }
         
-        mapView.mapType = MKMapType.standard
-        
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: locationCoordinates, span: span)
         mapView.setRegion(region, animated: true)
