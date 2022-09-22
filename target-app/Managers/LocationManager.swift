@@ -9,25 +9,37 @@ import UIKit
 import CoreLocation
 
 final class LocationManager: NSObject, CLLocationManagerDelegate {
-
+    
     static let shared = LocationManager()
     private var locationManager: CLLocationManager = CLLocationManager()
-    private var requestLocationAuthorizationCallback: ((CLAuthorizationStatus) -> Void)?
-
-    public func requestLocationAuthorization() {
+    
+    @Published var locationWasUpdated: CLLocation?
+    
+    override init() {
+        super.init()
         locationManager.delegate = self
-        let currentStatus = locationManager.authorizationStatus
-
-        // Only ask authorization if it was never asked before
-        guard currentStatus == .notDetermined else { return }
-
-        self.locationManager.requestAlwaysAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
     }
-    // MARK: - CLLocationManagerDelegate
-    public func locationManager(
-        _ manager: CLLocationManager,
-        didChangeAuthorization status: CLAuthorizationStatus
-    ) {
-        self.requestLocationAuthorizationCallback?(status)
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse: // Location services are available.
+            locationManager.startUpdatingLocation()
+            break
+        case .restricted, .denied: // Location services currently unavailable.
+            break
+        case .notDetermined: // Authorization not determined yet.
+            manager.requestWhenInUseAuthorization()
+            break
+        default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            locationWasUpdated = location
+        }
     }
 }

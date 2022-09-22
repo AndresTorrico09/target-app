@@ -7,8 +7,9 @@
 
 import UIKit
 import MapKit
+import Combine
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, MKMapViewDelegate {
     
     let mapView: MKMapView = {
         let map = MKMapView()
@@ -19,7 +20,20 @@ class HomeViewController: UIViewController {
         return map
     }()
     
-    private let locationManager = CLLocationManager()
+    private let locationManager: LocationManager
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(locationManager: LocationManager) {
+        self.locationManager = locationManager
+        super.init(nibName: .none, bundle: .none)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle Events
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +41,10 @@ class HomeViewController: UIViewController {
         applyDefaultUIConfigs()
         setupNavigationBar()
         setupMapConstraints()
+        setupBinders()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        LocationManager.shared.requestLocationAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
-        
         mapView.delegate = self
         
         if let coordinates = mapView.userLocation.location?.coordinate {
@@ -45,6 +52,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: - BINDERS
+    
+    func setupBinders() {
+        locationManager
+            .$locationWasUpdated
+            .compactMap { $0 }
+            .sink { [weak self] location in
+                self?.createAnotation(withLocation: location)
+            }.store(in: &cancellables)
+    }
+
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -84,23 +102,17 @@ class HomeViewController: UIViewController {
     
 }
 
-extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+extension HomeViewController {
     
-    func locationManager(
-        _ manager: CLLocationManager, didUpdateLocations
-        locations: [CLLocation]
-    ) {
-        guard let locationCoordinates: CLLocationCoordinate2D = locations.last?.coordinate else {
-            return
-        }
-        
+    func createAnotation(withLocation location: CLLocation) {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: locationCoordinates, span: span)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
         mapView.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
-        annotation.coordinate = locationCoordinates
+        annotation.coordinate = location.coordinate
         annotation.title = "You are Here"
         mapView.addAnnotation(annotation)
     }
+    
 }
