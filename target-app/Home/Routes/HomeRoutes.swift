@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 enum HomeRoutes: Route {
-  case home
-
-  var screen: UIViewController {
-    switch self {
-    case .home:
-      let home = HomeViewController()
-      return home
+    case home
+    
+    var screen: UIViewController {
+        switch self {
+        case .home:
+            let home = HomeViewController(locationManager: LocationManager.shared)
+            return home
+        }
     }
-  }
 }

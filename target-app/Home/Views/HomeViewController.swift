@@ -7,17 +7,21 @@
 
 import UIKit
 import MapKit
+import Combine
 
 protocol BottomSheetPresenter: AnyObject {
     func createTargetButtonTapped()
 }
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class HomeViewController: UIViewController, MKMapViewDelegate {
     
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
         map.overrideUserInterfaceStyle = .dark
+        map.mapType = .standard
+        map.isZoomEnabled = true
+        map.isScrollEnabled = true
         return map
     }()
     
@@ -28,23 +32,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         return target
     }()
     
-    private let locationManager = CLLocationManager()
+    private let locationManager: LocationManager
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations
-                         locations: [CLLocation]) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        
-        mapView.mapType = MKMapType.standard
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: locValue, span: span)
-        mapView.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = locValue
-        annotation.title = "You are Here"
-        mapView.addAnnotation(annotation)
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(locationManager: LocationManager) {
+        self.locationManager = locationManager
+        super.init(nibName: .none, bundle: .none)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle Events
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,23 +53,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         setupNavigationBar()
         applyDefaultUIConfigs()
         setupMapConstraints()
+        setupBinders()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        LocationManager.shared.requestLocationAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
         mapView.delegate = self
-        mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isScrollEnabled = true
         
-        if let coor = mapView.userLocation.location?.coordinate{
-            mapView.setCenter(coor, animated: true)
+        if let coordinates = mapView.userLocation.location?.coordinate {
+            mapView.setCenter(coordinates, animated: true)
         }
     }
     
@@ -88,6 +80,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         ])
     }
     
+    // MARK: - BINDERS
+    
+    func setupBinders() {
+        locationManager
+            .$locationWasUpdated
+            .compactMap { $0 }
+            .sink { [weak self] location in
+                self?.createAnotation(withLocation: location)
+            }.store(in: &cancellables)
+    }
+
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -127,4 +130,19 @@ extension HomeViewController: BottomSheetPresenter {
         }
         present(navigationController, animated: true, completion: nil)
     }
+}
+
+extension HomeViewController {
+    
+    func createAnotation(withLocation location: CLLocation) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotation.title = "You are Here"
+        mapView.addAnnotation(annotation)
+    }
+    
 }
