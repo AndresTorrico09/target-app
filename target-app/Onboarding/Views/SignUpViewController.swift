@@ -50,7 +50,7 @@ class SignUpViewController: UIViewController {
     )
     private lazy var passwordConfirmationErrorLabel = UILabel(style: .error(text: "signup_password_confirmation_label_error".localized))
 
-    lazy var picker: UIPickerView = {
+    private lazy var picker: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
@@ -62,6 +62,10 @@ class SignUpViewController: UIViewController {
         placeholder: "signup_gender_placeholder".localized,
         pickerView: picker
     )
+    private lazy var genders: [String] = {
+      let genders = ["Male", "Female"]
+        return genders
+    }()
     private lazy var genderErrorLabel = UILabel(style: .error(text: "signup_gender_label_error".localized))
 
     private lazy var signInButton = UIButton(
@@ -94,11 +98,6 @@ class SignUpViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    lazy var genders: [String] = {
-      let genders = ["Male", "Female"]
-        return genders
     }()
     
     init(viewModel: SignUpViewModel) {

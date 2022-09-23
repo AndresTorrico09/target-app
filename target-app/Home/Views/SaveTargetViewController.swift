@@ -28,10 +28,22 @@ class SaveTargetViewController: UIViewController {
     )
     
     private lazy var topicLabel = UILabel(style: .secondary(text: "home_topic_label".localized))
-    private lazy var topicField = UITextField(
+    private lazy var picker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    private lazy var topicsField = UITextField(
         target: self,
-        placeholder: "home_topic_field_placeholder".localized
+        selector: #selector(formEditingChange),
+        placeholder: "home_topic_field_placeholder".localized,
+        pickerView: picker
     )
+    //TODO: remove mock values
+    private lazy var topics: [String] = {
+      let topics = ["Footbal", "Pizza", "Dogs"]
+        return topics
+    }()
     
     private lazy var saveButton = UIButton(
         style: .primary(title: "home_save_button".localized),
@@ -42,6 +54,9 @@ class SaveTargetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.picker.dataSource = self
+        self.picker.delegate = self
         
         applyBottomSheetUIConfigs()
         configureViews()
@@ -63,9 +78,31 @@ class SaveTargetViewController: UIViewController {
     func saveTargetTapped() {
         viewModel.saveTarget()
     }
+    
+    @objc
+    func formEditingChange(_ sender: UITextField) {
+        //TODO: add action
+    }
 }
 
-private extension SaveTargetViewController {
+extension SaveTargetViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return topics.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        topics[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        topicsField.text = topics[row]
+        topicsField.resignFirstResponder()
+    }
+    
     func configureViews() {
         view.addSubviews(subviews: [
             areaLabel,
@@ -73,7 +110,7 @@ private extension SaveTargetViewController {
             titleLabel,
             titleField,
             topicLabel,
-            topicField,
+            topicsField,
             saveButton
         ])
         
@@ -82,7 +119,7 @@ private extension SaveTargetViewController {
          titleLabel,
          titleField,
          topicLabel,
-         topicField
+         topicsField
         ].forEach {
             $0.attachHorizontally(
                 to: view,
@@ -103,8 +140,8 @@ private extension SaveTargetViewController {
             titleLabel.topAnchor.constraint(equalTo: areaField.bottomAnchor, constant: UI.Label.spacing),
             titleField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UI.TextField.spacing),
             topicLabel.topAnchor.constraint(equalTo: titleField.bottomAnchor, constant: UI.Label.spacing),
-            topicField.topAnchor.constraint(equalTo: topicLabel.bottomAnchor, constant: UI.TextField.spacing),
-            saveButton.topAnchor.constraint(equalTo: topicField.bottomAnchor, constant: UI.Defaults.margin),
+            topicsField.topAnchor.constraint(equalTo: topicLabel.bottomAnchor, constant: UI.TextField.spacing),
+            saveButton.topAnchor.constraint(equalTo: topicsField.bottomAnchor, constant: UI.Defaults.margin),
         ])
     }
 }

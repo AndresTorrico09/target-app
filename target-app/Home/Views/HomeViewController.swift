@@ -25,8 +25,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         return map
     }()
     
-    private lazy var targetBottomSheet: UIView = {
-        let target = TargetBottomSheetView()
+    private lazy var createTargetView: UIView = {
+        let target = CreateTargetView()
         target.translatesAutoresizingMaskIntoConstraints = false
         target.delegate = self
         return target
@@ -66,17 +66,17 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     
     func setupMapConstraints() {
         view.addSubview(mapView)
-        view.addSubview(targetBottomSheet)
+        view.addSubview(createTargetView)
         
-        targetBottomSheet.attachHorizontally(to: view, leadingMargin: 0, trailingMargin: 0)
+        createTargetView.attachHorizontally(to: view, leadingMargin: 0, trailingMargin: 0)
         
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            targetBottomSheet.heightAnchor.constraint(equalToConstant: 100),
-            targetBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            createTargetView.heightAnchor.constraint(equalToConstant: 100),
+            createTargetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
