@@ -36,3 +36,11 @@
 
 // MARK: HOME SCREEN
 "home_title" = "Target Points";
+"home_create_target_label" = "CREATE NEW TARGET";
+"home_area_label" = "SPECIFY AREA LENGHT";
+"home_area_field_placeholder" = "200 m";
+"home_title_label" = "TARGET TITLE";
+"home_title_field_placeholder" = "Choose a title for your target";
+"home_topic_label" = "SELECT A TOPIC";
+"home_topic_field_placeholder" = "What do you want to talk about?";
+"home_save_button" = "SAVE TARGET";

@@ -14,4 +14,14 @@ extension UIViewController {
         view.backgroundColor = .screenBackground
     }
     
+    func applyBottomSheetUIConfigs() {
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 20
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = .init(width: 0, height: -2)
+        view.layer.shadowRadius = 20
+        view.layer.shadowOpacity = 0.5
+    }
+    
 }

@@ -13,6 +13,10 @@ struct UI {
         static let margin: CGFloat = 32
     }
     
+    enum Label {
+        static let spacing: CGFloat = 20.0
+    }
+    
     enum TextField {
         static let height: CGFloat = 55.0
         static let width: CGFloat = 80.0

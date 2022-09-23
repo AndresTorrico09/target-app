@@ -9,15 +9,27 @@ import UIKit
 import MapKit
 import Combine
 
+protocol BottomSheetPresenter: AnyObject {
+    func createTargetButtonTapped()
+}
+
 class HomeViewController: UIViewController, MKMapViewDelegate {
     
-    let mapView: MKMapView = {
+    private let mapView: MKMapView = {
         let map = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
         map.overrideUserInterfaceStyle = .dark
         map.mapType = .standard
         map.isZoomEnabled = true
         map.isScrollEnabled = true
         return map
+    }()
+    
+    private lazy var targetBottomSheet: UIView = {
+        let target = TargetBottomSheetView()
+        target.translatesAutoresizingMaskIntoConstraints = false
+        target.delegate = self
+        return target
     }()
     
     private let locationManager: LocationManager
@@ -38,8 +50,8 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        applyDefaultUIConfigs()
         setupNavigationBar()
+        applyDefaultUIConfigs()
         setupMapConstraints()
         setupBinders()
     }
@@ -50,6 +62,22 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         if let coordinates = mapView.userLocation.location?.coordinate {
             mapView.setCenter(coordinates, animated: true)
         }
+    }
+    
+    func setupMapConstraints() {
+        view.addSubview(mapView)
+        view.addSubview(targetBottomSheet)
+        
+        targetBottomSheet.attachHorizontally(to: view, leadingMargin: 0, trailingMargin: 0)
+        
+        NSLayoutConstraint.activate([
+            mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            targetBottomSheet.heightAnchor.constraint(equalToConstant: 100),
+            targetBottomSheet.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     // MARK: - BINDERS
@@ -66,7 +94,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        navigationItem.title = "home_title".localized
+        navigationItem.titleView = UILabel(style: .secondary(text: "home_title".localized))
         
         let barLeftButtonItem = UIBarButtonItem(
             image: UIImage(named: "ic_home_profile"),
@@ -87,19 +115,21 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    func setupMapConstraints() {
-        view.addSubview(mapView)
+}
+
+// MARK: BottomSheetPresenter
+
+extension HomeViewController: BottomSheetPresenter {
+    func createTargetButtonTapped() {
+        let saveTargetBottomSheetViewController = SaveTargetBottomSheetViewController()
+        let navigationController = UINavigationController(rootViewController: saveTargetBottomSheetViewController)
+        navigationController.modalPresentationStyle = .pageSheet
         
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        present(navigationController, animated: true, completion: nil)
     }
-    
 }
 
 extension HomeViewController {

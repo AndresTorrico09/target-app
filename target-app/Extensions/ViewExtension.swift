@@ -54,6 +54,16 @@ extension UIView {
             constant: offset
         ).isActive = true
     }
+    
+    func centerHorizontally(
+      with view: UIView,
+      withOffset offset: CGFloat = 0
+    ) {
+      centerXAnchor.constraint(
+        equalTo: view.centerXAnchor,
+        constant: offset
+      ).isActive = true
+    }
 }
 
 extension UIStackView {
