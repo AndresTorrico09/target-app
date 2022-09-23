@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		072DA03E28CBCC7200936C06 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DA03D28CBCC7200936C06 /* LocationManager.swift */; };
 		072DA04428CFC71000936C06 /* TargetBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */; };
+		0755414A28D5060100A4C4FF /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414928D5060100A4C4FF /* UserResponse.swift */; };
+		0755414D28D5068E00A4C4FF /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414C28D5068E00A4C4FF /* Target.swift */; };
+		0755414F28D506A100A4C4FF /* TargetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414E28D506A100A4C4FF /* TargetResponse.swift */; };
+		0755415128D8BBD700A4C4FF /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755415028D8BBD700A4C4FF /* UserManager.swift */; };
 		0760846828A69DA3000A144B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760846728A69DA3000A144B /* SignInViewController.swift */; };
 		0760847128ABFDDC000A144B /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760847028ABFDDC000A144B /* Navigator.swift */; };
 		0760847328ABFDF2000A144B /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760847228ABFDF2000A144B /* AppNavigator.swift */; };
@@ -54,7 +58,10 @@
 		076084DD28BFD6C7000A144B /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076084DC28BFD6C7000A144B /* JSONDecoder.swift */; };
 		076084E128C25795000A144B /* HomeRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076084E028C25795000A144B /* HomeRoutes.swift */; };
 		076084E428C25A5A000A144B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076084E328C25A5A000A144B /* HomeViewController.swift */; };
-		077DED6D28D233D80074DC24 /* SaveTargetBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED6C28D233D80074DC24 /* SaveTargetBottomSheetViewController.swift */; };
+		077DED6D28D233D80074DC24 /* SaveTargetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED6C28D233D80074DC24 /* SaveTargetViewController.swift */; };
+		077DED7028D4D9AD0074DC24 /* SaveTargetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */; };
+		077DED7228D4DFE30074DC24 /* TargetEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */; };
+		077DED7428D4E65F0074DC24 /* TargetServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7328D4E65F0074DC24 /* TargetServices.swift */; };
 		07D0F70528C7A2ED00E014D1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0F70428C7A2ED00E014D1 /* SignInViewModel.swift */; };
 		07D66A4E28A4638400308FF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A4D28A4638400308FF5 /* AppDelegate.swift */; };
 		07D66A5228A4638400308FF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A5128A4638400308FF5 /* ViewController.swift */; };
@@ -88,6 +95,10 @@
 /* Begin PBXFileReference section */
 		072DA03D28CBCC7200936C06 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetBottomSheetView.swift; sourceTree = "<group>"; };
+		0755414928D5060100A4C4FF /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		0755414C28D5068E00A4C4FF /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		0755414E28D506A100A4C4FF /* TargetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetResponse.swift; sourceTree = "<group>"; };
+		0755415028D8BBD700A4C4FF /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		0760846728A69DA3000A144B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0760847028ABFDDC000A144B /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		0760847228ABFDF2000A144B /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
@@ -133,7 +144,10 @@
 		076084DC28BFD6C7000A144B /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		076084E028C25795000A144B /* HomeRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRoutes.swift; sourceTree = "<group>"; };
 		076084E328C25A5A000A144B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		077DED6C28D233D80074DC24 /* SaveTargetBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTargetBottomSheetViewController.swift; sourceTree = "<group>"; };
+		077DED6C28D233D80074DC24 /* SaveTargetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTargetViewController.swift; sourceTree = "<group>"; };
+		077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTargetViewModel.swift; sourceTree = "<group>"; };
+		077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetEndpoint.swift; sourceTree = "<group>"; };
+		077DED7328D4E65F0074DC24 /* TargetServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetServices.swift; sourceTree = "<group>"; };
 		07D0F70428C7A2ED00E014D1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		07D66A4A28A4638400308FF5 /* target-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "target-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D66A4D28A4638400308FF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +199,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0755414B28D5067A00A4C4FF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0755414C28D5068E00A4C4FF /* Target.swift */,
+				0755414E28D506A100A4C4FF /* TargetResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0760846628A69B1A000A144B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +308,7 @@
 				0760849D28BE6B11000A144B /* NetworkState.swift */,
 				0760849F28BE6C42000A144B /* AuthViewModelStateDelegate.swift */,
 				076084AE28BF82AF000A144B /* User.swift */,
+				0755414928D5060100A4C4FF /* UserResponse.swift */,
 				076084CB28BFD294000A144B /* Session.swift */,
 			);
 			path = Models;
@@ -308,6 +332,7 @@
 				076084B028BFA685000A144B /* Endpoints */,
 				076084A328BF8013000A144B /* AuthenticationServices.swift */,
 				076084A528BF80AE000A144B /* BaseAPIClient.swift */,
+				077DED7328D4E65F0074DC24 /* TargetServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -351,6 +376,7 @@
 			children = (
 				076084B128BFA6A2000A144B /* AuthEndpoint.swift */,
 				076084B528BFA734000A144B /* RailsAPIEndpoint.swift */,
+				077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -378,6 +404,7 @@
 			children = (
 				076084C928BFD26B000A144B /* SessionManager.swift */,
 				072DA03D28CBCC7200936C06 /* LocationManager.swift */,
+				0755415028D8BBD700A4C4FF /* UserManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -393,6 +420,8 @@
 		076084DE28C256DD000A144B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0755414B28D5067A00A4C4FF /* Models */,
+				077DED6E28D4D9530074DC24 /* ViewModels */,
 				076084E228C257A4000A144B /* Views */,
 				076084DF28C256EA000A144B /* Routes */,
 			);
@@ -412,9 +441,17 @@
 			children = (
 				076084E328C25A5A000A144B /* HomeViewController.swift */,
 				072DA04328CFC71000936C06 /* TargetBottomSheetView.swift */,
-				077DED6C28D233D80074DC24 /* SaveTargetBottomSheetViewController.swift */,
+				077DED6C28D233D80074DC24 /* SaveTargetViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		077DED6E28D4D9530074DC24 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		07D66A4128A4638400308FF5 = {
@@ -716,11 +753,15 @@
 				076084C128BFC657000A144B /* Network.swift in Sources */,
 				076084D828BFD4E2000A144B /* Constants.swift in Sources */,
 				076084C528BFD0EF000A144B /* DecodingConfiguration.swift in Sources */,
+				0755414F28D506A100A4C4FF /* TargetResponse.swift in Sources */,
 				0760847A28AD7EFB000A144B /* ViewControllerExtension.swift in Sources */,
 				076084D428BFD3B4000A144B /* RailsAPIHeadersProvider.swift in Sources */,
+				077DED7228D4DFE30074DC24 /* TargetEndpoint.swift in Sources */,
 				076084A028BE6C42000A144B /* AuthViewModelStateDelegate.swift in Sources */,
+				0755414A28D5060100A4C4FF /* UserResponse.swift in Sources */,
 				076084DD28BFD6C7000A144B /* JSONDecoder.swift in Sources */,
 				0760849E28BE6B11000A144B /* NetworkState.swift in Sources */,
+				0755415128D8BBD700A4C4FF /* UserManager.swift in Sources */,
 				076084CA28BFD26B000A144B /* SessionManager.swift in Sources */,
 				076084D228BFD387000A144B /* HeadersProvider.swift in Sources */,
 				072DA03E28CBCC7200936C06 /* LocationManager.swift in Sources */,
@@ -730,6 +771,7 @@
 				07D66A5228A4638400308FF5 /* ViewController.swift in Sources */,
 				0760848328AE47AE000A144B /* TextFieldExtension.swift in Sources */,
 				0760848B28AE5A47000A144B /* StringExtension.swift in Sources */,
+				0755414D28D5068E00A4C4FF /* Target.swift in Sources */,
 				076084C328BFC73A000A144B /* Cancellable.swift in Sources */,
 				072DA04428CFC71000936C06 /* TargetBottomSheetView.swift in Sources */,
 				07D66A4E28A4638400308FF5 /* AppDelegate.swift in Sources */,
@@ -737,13 +779,15 @@
 				076084E428C25A5A000A144B /* HomeViewController.swift in Sources */,
 				076084AD28BF81F6000A144B /* EncodingConfiguration.swift in Sources */,
 				076084DB28BFD576000A144B /* APIError.swift in Sources */,
-				077DED6D28D233D80074DC24 /* SaveTargetBottomSheetViewController.swift in Sources */,
+				077DED6D28D233D80074DC24 /* SaveTargetViewController.swift in Sources */,
 				0760849728B925DD000A144B /* SignUpViewController.swift in Sources */,
 				0760849528B54769000A144B /* TestViewController.swift in Sources */,
 				076084CE28BFD2DF000A144B /* DictionaryExtension.swift in Sources */,
 				076084E128C25795000A144B /* HomeRoutes.swift in Sources */,
 				076084A428BF8013000A144B /* AuthenticationServices.swift in Sources */,
 				0760848128AD8936000A144B /* UIConstants.swift in Sources */,
+				077DED7428D4E65F0074DC24 /* TargetServices.swift in Sources */,
+				077DED7028D4D9AD0074DC24 /* SaveTargetViewModel.swift in Sources */,
 				076084AF28BF82AF000A144B /* User.swift in Sources */,
 				0760848528AE4BAC000A144B /* ButtonExtension.swift in Sources */,
 				0760847628ABFED2000A144B /* OnboardingRoutes.swift in Sources */,

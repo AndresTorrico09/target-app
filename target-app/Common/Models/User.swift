@@ -44,7 +44,3 @@ struct User: Codable {
         }
     }
 }
-
-struct UserResponse: Codable {
-    let user: User
-}

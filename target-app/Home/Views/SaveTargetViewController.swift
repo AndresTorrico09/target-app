@@ -7,7 +7,11 @@
 
 import UIKit
 
-class SaveTargetBottomSheetViewController: UIViewController {
+class SaveTargetViewController: UIViewController {
+    
+    // MARK: - ViewModels
+    
+    private let viewModel: SaveTargetViewModel
     
     // MARK: - Outlets
     
@@ -30,7 +34,8 @@ class SaveTargetBottomSheetViewController: UIViewController {
     )
     
     private lazy var saveButton = UIButton(
-        style: .primary(title: "home_save_button".localized)
+        style: .primary(title: "home_save_button".localized),
+        tapHandler: (target: self, action: #selector(saveTargetTapped))
     )
     
     // MARK: - Lifecycle Events
@@ -41,9 +46,26 @@ class SaveTargetBottomSheetViewController: UIViewController {
         applyBottomSheetUIConfigs()
         configureViews()
     }
+    
+    init(viewModel: SaveTargetViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    func saveTargetTapped() {
+        viewModel.saveTarget()
+    }
 }
 
-private extension SaveTargetBottomSheetViewController {
+private extension SaveTargetViewController {
     func configureViews() {
         view.addSubviews(subviews: [
             areaLabel,

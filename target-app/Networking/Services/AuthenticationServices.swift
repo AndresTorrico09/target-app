@@ -35,10 +35,10 @@ class AuthenticationServices {
         ) { (result: Result<UserResponse?, Error>, responseHeaders) in
             switch result {
             case .success(let userResponse):
-                if let user = userResponse?.user {
-                    completion(.success(user))
+                if saveUserSession(userResponse?.user, headers: responseHeaders), let user = userResponse?.user {
+                  completion(.success(user))
                 } else {
-                    completion(.failure(AuthError.userSessionInvalid))
+                  completion(.failure(AuthError.userSessionInvalid))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -59,14 +59,24 @@ class AuthenticationServices {
         ) { (result: Result<UserResponse?, Error>, responseHeaders: [String: String]) in
             switch result {
             case .success(let userResponse):
-                if userResponse != nil {
-                    completion(.success(()))
+                if saveUserSession(userResponse?.user, headers: responseHeaders) {
+                  completion(.success(()))
                 } else {
-                    completion(.failure(AuthError.userSessionInvalid))
+                  completion(.failure(AuthError.userSessionInvalid))
                 }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+    
+    fileprivate class func saveUserSession(
+      _ user: User?,
+      headers: [String: String]
+    ) -> Bool {
+      UserDataManager.currentUser = user
+      SessionManager.currentSession = Session(headers: headers)
+
+      return UserDataManager.currentUser != nil && SessionManager.validSession
     }
 }
