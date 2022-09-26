@@ -15,6 +15,12 @@ protocol BottomSheetPresenter: AnyObject {
 
 class HomeViewController: UIViewController {
     
+    // MARK: - VIEWMODELS
+    
+    private let viewModel: HomeViewModel
+
+    // MARK: - Outlets
+
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -36,8 +42,9 @@ class HomeViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(locationManager: LocationManager) {
+    init(locationManager: LocationManager, viewModel: HomeViewModel) {
         self.locationManager = locationManager
+        self.viewModel = viewModel
         super.init(nibName: .none, bundle: .none)
     }
     
@@ -70,11 +77,11 @@ class HomeViewController: UIViewController {
     // MARK: - ACTIONS
     
     @objc func longTap(sender: UIGestureRecognizer){
-        print("long tap")
         if sender.state == .began {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
             let location = CLLocation(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+            viewModel.setLocationTapped(withLocation: location)
             createAnotation(withLocation: location)
         }
     }
@@ -137,10 +144,9 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
-        //TODO: send location picked by the user
         let saveTargetViewController = SaveTargetViewController(
             viewModel: SaveTargetViewModel(
-                location: locationManager.locationWasUpdated!
+                location: viewModel.locationTapped!
             )
         )
         let navigationController = UINavigationController(rootViewController: saveTargetViewController)
