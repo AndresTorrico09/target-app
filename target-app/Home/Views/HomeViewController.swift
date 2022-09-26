@@ -81,11 +81,12 @@ class HomeViewController: UIViewController {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
             let location = CLLocation(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+            
+            mapView.removeAnnotations([mapView.annotations].last!)
             viewModel.setLocationTapped(withLocation: location)
             createAnotation(withLocation: location)
         }
     }
-    
     
     func setupMapConstraints() {
         view.addSubview(mapView)
