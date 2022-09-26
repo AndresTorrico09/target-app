@@ -181,13 +181,13 @@ extension HomeViewController: MKMapViewDelegate{
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("tapped on pin")
+        //TODO: tapped on pin
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let doSomething = view.annotation?.title! {
-                print("do something")
+            if (view.annotation?.title!) != nil {
+                //TODO: add tap action
             }
         }
     }
