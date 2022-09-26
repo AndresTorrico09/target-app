@@ -13,7 +13,7 @@ protocol BottomSheetPresenter: AnyObject {
     func createTargetButtonTapped()
 }
 
-class HomeViewController: UIViewController, MKMapViewDelegate {
+class HomeViewController: UIViewController {
     
     private let mapView: MKMapView = {
         let map = MKMapView()
@@ -62,7 +62,23 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         if let coordinates = mapView.userLocation.location?.coordinate {
             mapView.setCenter(coordinates, animated: true)
         }
+        
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
+        mapView.addGestureRecognizer(longTapGesture)
     }
+    
+    // MARK: - ACTIONS
+    
+    @objc func longTap(sender: UIGestureRecognizer){
+        print("long tap")
+        if sender.state == .began {
+            let locationInView = sender.location(in: mapView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            let location = CLLocation(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+            createAnotation(withLocation: location)
+        }
+    }
+    
     
     func setupMapConstraints() {
         view.addSubview(mapView)
@@ -90,7 +106,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
                 self?.createAnotation(withLocation: location)
             }.store(in: &cancellables)
     }
-
+    
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -137,7 +153,37 @@ extension HomeViewController: BottomSheetPresenter {
     }
 }
 
-extension HomeViewController {
+extension HomeViewController: MKMapViewDelegate{
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
+            pinView!.pinTintColor = UIColor.black
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("tapped on pin")
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            if let doSomething = view.annotation?.title! {
+                print("do something")
+            }
+        }
+    }
     
     func createAnotation(withLocation location: CLLocation) {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -149,5 +195,4 @@ extension HomeViewController {
         annotation.title = "You are Here"
         mapView.addAnnotation(annotation)
     }
-    
 }
