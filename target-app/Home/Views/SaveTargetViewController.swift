@@ -18,12 +18,14 @@ class SaveTargetViewController: UIViewController {
     private lazy var areaLabel = UILabel(style: .secondary(text: "home_area_label".localized))
     private lazy var areaField = UITextField(
         target: self,
+        selector: #selector(formEditingChange),
         placeholder: "home_area_field_placeholder".localized
     )
     
     private lazy var titleLabel = UILabel(style: .secondary(text: "home_title_label".localized))
     private lazy var titleField = UITextField(
         target: self,
+        selector: #selector(formEditingChange),
         placeholder: "home_title_field_placeholder".localized
     )
     
@@ -39,9 +41,9 @@ class SaveTargetViewController: UIViewController {
         placeholder: "home_topic_field_placeholder".localized,
         pickerView: picker
     )
-    //TODO: remove mock values
+    //TODO: get topic values from API
     private lazy var topics: [String] = {
-      let topics = ["Footbal", "Pizza", "Dogs"]
+      let topics = ["Football", "Pizza", "Dogs"]
         return topics
     }()
     
@@ -58,6 +60,7 @@ class SaveTargetViewController: UIViewController {
         self.picker.dataSource = self
         self.picker.delegate = self
         
+        viewModel.setLocationSelected()
         applyBottomSheetUIConfigs()
         configureViews()
     }
@@ -81,7 +84,17 @@ class SaveTargetViewController: UIViewController {
     
     @objc
     func formEditingChange(_ sender: UITextField) {
-        //TODO: add action
+        let newValue = sender.text ?? ""
+        
+        switch sender {
+        case areaField:
+            viewModel.setArea(radius: newValue)
+        case titleField:
+            viewModel.setTitle(title: newValue)
+        case topicsField:
+            viewModel.setTopicId(topicId: newValue)
+        default: break
+        }
     }
 }
 

@@ -121,7 +121,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
 
 extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
-        let saveTargetViewController = SaveTargetViewController(viewModel: SaveTargetViewModel())
+        //TODO: send location picked by the user
+        let saveTargetViewController = SaveTargetViewController(
+            viewModel: SaveTargetViewModel(
+                location: locationManager.locationWasUpdated!
+            )
+        )
         let navigationController = UINavigationController(rootViewController: saveTargetViewController)
         navigationController.modalPresentationStyle = .pageSheet
         
