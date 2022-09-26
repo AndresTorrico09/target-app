@@ -16,7 +16,6 @@ class SaveTargetViewModel {
     // MARK: - Publishers
     var statePublisher: Published<AuthViewModelState>.Publisher { $state }
     
-    //TODO: remove mock data
     private var title: String = ""
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
