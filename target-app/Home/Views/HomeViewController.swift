@@ -163,7 +163,11 @@ extension HomeViewController: BottomSheetPresenter {
 extension HomeViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
+        guard let annotation = annotation as? MKPointAnnotation 
+        else { 
+          print("no mkpointannotaions") // if no needed pls delete it
+          return nil 
+        }
         
         let reuseId = "pin"
         if var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView {
