@@ -166,16 +166,14 @@ extension HomeViewController: MKMapViewDelegate {
         guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
         
         let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
+        if var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView {
+           pinView!.annotation = annotation
+        }
+        else {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
             pinView!.pinTintColor = UIColor.black
-        }
-        else {
-            pinView!.annotation = annotation
         }
         return pinView
     }
