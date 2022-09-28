@@ -160,7 +160,7 @@ extension HomeViewController: BottomSheetPresenter {
     }
 }
 
-extension HomeViewController: MKMapViewDelegate{
+extension HomeViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is MKPointAnnotation else { print("no mkpointannotaions"); return nil }
