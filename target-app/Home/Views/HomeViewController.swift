@@ -13,8 +13,14 @@ protocol BottomSheetPresenter: AnyObject {
     func createTargetButtonTapped()
 }
 
-class HomeViewController: UIViewController, MKMapViewDelegate {
+class HomeViewController: UIViewController {
     
+    // MARK: - VIEWMODELS
+    
+    private let viewModel: HomeViewModel
+
+    // MARK: - Outlets
+
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -36,8 +42,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(locationManager: LocationManager) {
+    init(locationManager: LocationManager, viewModel: HomeViewModel) {
         self.locationManager = locationManager
+        self.viewModel = viewModel
         super.init(nibName: .none, bundle: .none)
     }
     
@@ -61,6 +68,23 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         
         if let coordinates = mapView.userLocation.location?.coordinate {
             mapView.setCenter(coordinates, animated: true)
+        }
+        
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
+        mapView.addGestureRecognizer(longTapGesture)
+    }
+    
+    // MARK: - ACTIONS
+    
+    @objc func longTap(sender: UIGestureRecognizer){
+        if sender.state == .began {
+            let locationInView = sender.location(in: mapView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            let location = CLLocation(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
+            
+            mapView.removeAnnotations([mapView.annotations].last!)
+            viewModel.setLocationTapped(withLocation: location)
+            createAnotation(withLocation: location)
         }
     }
     
@@ -90,7 +114,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
                 self?.createAnotation(withLocation: location)
             }.store(in: &cancellables)
     }
-
+    
     func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -121,10 +145,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
 
 extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
-        //TODO: send location picked by the user
         let saveTargetViewController = SaveTargetViewController(
             viewModel: SaveTargetViewModel(
-                location: locationManager.locationWasUpdated!
+                location: viewModel.locationTapped!
             )
         )
         let navigationController = UINavigationController(rootViewController: saveTargetViewController)
@@ -137,7 +160,37 @@ extension HomeViewController: BottomSheetPresenter {
     }
 }
 
-extension HomeViewController {
+extension HomeViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? MKPointAnnotation 
+        else { 
+          print("no mkpointannotaions") // if no needed pls delete it
+          return nil 
+        }
+        
+        let reuseId = "pin"
+        if var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView {
+           pinView!.annotation = annotation
+        }
+        else {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.rightCalloutAccessoryView = UIButton(type: .infoDark)
+            pinView!.pinTintColor = UIColor.black
+        }
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        //TODO: tapped on pin
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView && view.annotation?.title != nil {
+          //TODO: add tap action
+        }
+    }
     
     func createAnotation(withLocation location: CLLocation) {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -149,5 +202,4 @@ extension HomeViewController {
         annotation.title = "You are Here"
         mapView.addAnnotation(annotation)
     }
-    
 }

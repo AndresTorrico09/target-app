@@ -14,7 +14,10 @@ enum HomeRoutes: Route {
     var screen: UIViewController {
         switch self {
         case .home:
-            let home = HomeViewController(locationManager: LocationManager.shared)
+            let home = HomeViewController(
+                locationManager: LocationManager.shared,
+                viewModel: HomeViewModel()
+            )
             return home
         }
     }
