@@ -36,5 +36,9 @@ internal struct APIEndpoint: Endpoint {
   var decodingConfiguration: DecodingConfiguration? {
     endpoint.decodingConfiguration
   }
+    
+  var encodingDestination: EncodingDestination {
+    endpoint.encodingDestination
+  }
 
 }

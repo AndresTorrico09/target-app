@@ -21,7 +21,7 @@ internal final class AlamofireNetworkProvider: NetworkProvider {
       endpoint.requestURL,
       method: endpoint.method.alamofireMethod,
       parameters: endpoint.parameters,
-      encoding: JSONEncoding.default,
+      encoding: getEncodingType(endpoint.encodingDestination),
       headers: headers
     )
     .validate()
@@ -50,6 +50,21 @@ internal final class AlamofireNetworkProvider: NetworkProvider {
       headers: response.headers.dictionary
     )))
   }
+    
+   private func getEncodingType(
+    _ encodingDestination: EncodingDestination
+   ) -> ParameterEncoding {
+       switch encodingDestination {
+       case .queryString:
+           return URLEncoding(destination: .queryString)
+       case .methodDependent:
+           return URLEncoding(destination: .methodDependent)
+       case .httpBody:
+           return URLEncoding(destination: .httpBody)
+       case .jsonBody:
+           return JSONEncoding.default
+       }
+   }
     
 }
 

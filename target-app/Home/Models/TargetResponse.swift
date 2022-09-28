@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Welcome
 struct TargetResponse: Codable {
     let target: Target
     let matchConversation: MatchConversation?

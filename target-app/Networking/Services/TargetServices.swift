@@ -43,4 +43,23 @@ class TargetServices {
         }
     }
     
+    class func get(
+        completion: @escaping (Result<[TargetElement], Error>) -> Void
+    ) {
+        BaseAPIClient.default.request(
+            endpoint: TargetEndpoint.get
+        ) { (result: Result<GetTargetResponse?, Error>, responseHeaders) in
+            switch result {
+            case .success(let getTargetResponse):
+                if let targets = getTargetResponse?.targets {
+                    completion(.success(targets))
+                } else {
+                    completion(.failure(AuthError.userSessionInvalid))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }

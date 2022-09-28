@@ -39,6 +39,13 @@ internal enum AuthEndpoint: RailsAPIEndpoint {
         }
     }
     
+    var encodingDestination: EncodingDestination {
+        switch self {
+        case .signUp, .signIn:
+            return .jsonBody
+        }
+    }
+    
     var parameters: [String: Any] {
         switch self {
         case .signIn(let email, let password):
