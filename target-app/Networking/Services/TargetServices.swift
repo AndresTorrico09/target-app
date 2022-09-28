@@ -43,7 +43,7 @@ class TargetServices {
         }
     }
     
-    class func get(
+    class func getAll(
         completion: @escaping (Result<[TargetElement], Error>) -> Void
     ) {
         BaseAPIClient.default.request(

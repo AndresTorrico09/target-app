@@ -21,7 +21,7 @@ class HomeViewModel {
     
     func getTargets() {
         state = .network(state: .loading)
-        TargetServices.get() { [weak self] result in
+        TargetServices.getAll() { [weak self] result in
             guard let self = self else { return }
             
             switch result {
