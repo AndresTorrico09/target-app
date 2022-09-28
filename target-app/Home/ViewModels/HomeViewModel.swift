@@ -26,7 +26,6 @@ class HomeViewModel {
             
             switch result {
             case .success(let targets):
-                self.state = .loggedIn
                 self.targets = targets
             case .failure(let error):
                 self.state = .network(state: .error(error.localizedDescription))
