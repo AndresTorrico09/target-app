@@ -44,15 +44,15 @@ class TargetServices {
     }
     
     class func getAll(
-        completion: @escaping (Result<[TargetElement], Error>) -> Void
+        completion: @escaping (Result<[Target], Error>) -> Void
     ) {
         BaseAPIClient.default.request(
             endpoint: TargetEndpoint.get
         ) { (result: Result<GetTargetResponse?, Error>, responseHeaders) in
             switch result {
             case .success(let getTargetResponse):
-                if let targets = getTargetResponse?.targets {
-                    completion(.success(targets))
+                if let targetsResponse = getTargetResponse?.targets {
+                    completion(.success(GetTargetResponse.toDomain(targetsResponse)))
                 } else {
                     completion(.failure(AuthError.userSessionInvalid))
                 }

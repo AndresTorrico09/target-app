@@ -118,11 +118,9 @@ class HomeViewController: UIViewController {
         
         viewModel.$targets
             .sink{ [weak self] targets in
-                if let targets = targets {
-                    targets.forEach { target in
-                        let location = CLLocation(latitude: target.target.latitude, longitude: target.target.longitude)
-                        self?.createAnotation(withLocation: location)
-                    }
+                targets.forEach { target in
+                    let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
+                    self?.createAnotation(withLocation: location)
                 }
             }.store(in: &cancellables)
     }

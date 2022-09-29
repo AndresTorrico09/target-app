@@ -13,7 +13,7 @@ class HomeViewModel {
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
     @Published var locationTapped: CLLocation?
-    @Published var targets: [TargetElement]?
+    @Published var targets: [Target] = []
     
     func setLocationTapped(withLocation location: CLLocation) {
         self.locationTapped = location
