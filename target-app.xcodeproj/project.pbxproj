@@ -14,6 +14,7 @@
 		0755414F28D506A100A4C4FF /* TargetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755414E28D506A100A4C4FF /* TargetResponse.swift */; };
 		0755415128D8BBD700A4C4FF /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755415028D8BBD700A4C4FF /* UserManager.swift */; };
 		0755415928E21BC200A4C4FF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755415828E21BC200A4C4FF /* HomeViewModel.swift */; };
+		0755415B28E25D7000A4C4FF /* TargetsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0755415A28E25D7000A4C4FF /* TargetsResponse.swift */; };
 		0760846828A69DA3000A144B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760846728A69DA3000A144B /* SignInViewController.swift */; };
 		0760847128ABFDDC000A144B /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760847028ABFDDC000A144B /* Navigator.swift */; };
 		0760847328ABFDF2000A144B /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760847228ABFDF2000A144B /* AppNavigator.swift */; };
@@ -63,6 +64,7 @@
 		077DED7028D4D9AD0074DC24 /* SaveTargetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */; };
 		077DED7228D4DFE30074DC24 /* TargetEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */; };
 		077DED7428D4E65F0074DC24 /* TargetServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7328D4E65F0074DC24 /* TargetServices.swift */; };
+		07CC1E5A28E395AC00172EEA /* EncodingDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC1E5928E395AC00172EEA /* EncodingDestination.swift */; };
 		07D0F70528C7A2ED00E014D1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0F70428C7A2ED00E014D1 /* SignInViewModel.swift */; };
 		07D66A4E28A4638400308FF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A4D28A4638400308FF5 /* AppDelegate.swift */; };
 		07D66A5228A4638400308FF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D66A5128A4638400308FF5 /* ViewController.swift */; };
@@ -101,6 +103,7 @@
 		0755414E28D506A100A4C4FF /* TargetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetResponse.swift; sourceTree = "<group>"; };
 		0755415028D8BBD700A4C4FF /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		0755415828E21BC200A4C4FF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0755415A28E25D7000A4C4FF /* TargetsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetsResponse.swift; sourceTree = "<group>"; };
 		0760846728A69DA3000A144B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0760847028ABFDDC000A144B /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		0760847228ABFDF2000A144B /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 		077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTargetViewModel.swift; sourceTree = "<group>"; };
 		077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetEndpoint.swift; sourceTree = "<group>"; };
 		077DED7328D4E65F0074DC24 /* TargetServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetServices.swift; sourceTree = "<group>"; };
+		07CC1E5928E395AC00172EEA /* EncodingDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingDestination.swift; sourceTree = "<group>"; };
 		07D0F70428C7A2ED00E014D1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		07D66A4A28A4638400308FF5 /* target-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "target-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D66A4D28A4638400308FF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 			children = (
 				0755414C28D5068E00A4C4FF /* Target.swift */,
 				0755414E28D506A100A4C4FF /* TargetResponse.swift */,
+				0755415A28E25D7000A4C4FF /* TargetsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 				076084CF28BFD30B000A144B /* HTTPHeader.swift */,
 				076084D328BFD3B4000A144B /* RailsAPIHeadersProvider.swift */,
 				076084D528BFD4A5000A144B /* APIEndpoint.swift */,
+				07CC1E5928E395AC00172EEA /* EncodingDestination.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -770,6 +776,7 @@
 				076084D228BFD387000A144B /* HeadersProvider.swift in Sources */,
 				072DA03E28CBCC7200936C06 /* LocationManager.swift in Sources */,
 				076084B928BFB8BB000A144B /* APIClient+Product.swift in Sources */,
+				0755415B28E25D7000A4C4FF /* TargetsResponse.swift in Sources */,
 				0760847C28AD7F19000A144B /* ColorExtension.swift in Sources */,
 				076084B628BFA734000A144B /* RailsAPIEndpoint.swift in Sources */,
 				07D66A5228A4638400308FF5 /* ViewController.swift in Sources */,
@@ -783,6 +790,7 @@
 				076084E428C25A5A000A144B /* HomeViewController.swift in Sources */,
 				076084AD28BF81F6000A144B /* EncodingConfiguration.swift in Sources */,
 				076084DB28BFD576000A144B /* APIError.swift in Sources */,
+				07CC1E5A28E395AC00172EEA /* EncodingDestination.swift in Sources */,
 				077DED6D28D233D80074DC24 /* SaveTargetViewController.swift in Sources */,
 				0760849728B925DD000A144B /* SignUpViewController.swift in Sources */,
 				0760849528B54769000A144B /* TestViewController.swift in Sources */,

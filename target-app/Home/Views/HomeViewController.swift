@@ -18,9 +18,9 @@ class HomeViewController: UIViewController {
     // MARK: - VIEWMODELS
     
     private let viewModel: HomeViewModel
-
+    
     // MARK: - Outlets
-
+    
     private let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +61,8 @@ class HomeViewController: UIViewController {
         applyDefaultUIConfigs()
         setupMapConstraints()
         setupBinders()
+        
+        viewModel.getTargets()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +114,14 @@ class HomeViewController: UIViewController {
             .compactMap { $0 }
             .sink { [weak self] location in
                 self?.createAnotation(withLocation: location)
+            }.store(in: &cancellables)
+        
+        viewModel.$targets
+            .sink{ [weak self] targets in
+                targets.forEach { target in
+                    let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
+                    self?.createAnotation(withLocation: location)
+                }
             }.store(in: &cancellables)
     }
     

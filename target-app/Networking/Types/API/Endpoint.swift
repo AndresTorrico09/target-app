@@ -20,7 +20,7 @@ internal protocol Endpoint {
   var headers: [String: String] { get }
   var parameters: [String: Any] { get }
   var decodingConfiguration: DecodingConfiguration? { get }
-
+  var encodingDestination: EncodingDestination { get }
 }
 
 extension Endpoint {

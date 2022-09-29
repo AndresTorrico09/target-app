@@ -9,8 +9,8 @@ import Foundation
 
 class TargetServices {
     
-    enum AuthError: Error {
-      case userSessionInvalid
+    enum ValidationError: Error {
+      case nullResponse
     }
     
     class func save(
@@ -35,7 +35,26 @@ class TargetServices {
                 if let target = targetResponse?.target {
                     completion(.success(target))
                 } else {
-                    completion(.failure(AuthError.userSessionInvalid))
+                    completion(.failure(ValidationError.nullResponse))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    class func getAll(
+        completion: @escaping (Result<[Target], Error>) -> Void
+    ) {
+        BaseAPIClient.default.request(
+            endpoint: TargetEndpoint.get
+        ) { (result: Result<TargetsResponse?, Error>, responseHeaders) in
+            switch result {
+            case .success(let targetsResponse):
+                if let targetsResponse = targetsResponse {
+                    completion(.success(targetsResponse.toDomain()))
+                } else {
+                    completion(.failure(ValidationError.nullResponse))
                 }
             case .failure(let error):
                 completion(.failure(error))
