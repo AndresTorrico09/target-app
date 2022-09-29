@@ -1,5 +1,5 @@
 //
-//  GetTargetResponse.swift
+//  TargetsResponse.swift
 //  target-app
 //
 //  Created by Andres Leonel Torrico Cossio on 26/09/2022.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct GetTargetResponse: Codable {
+struct TargetsResponse: Codable {
     let targets: [TargetElement]
     
-    static func toDomain(_ list: [TargetElement]) -> [Target] {
-        return list.map { $0.target as Target }
+    func toDomain() -> [Target] {
+        return targets.map { $0.target }
     }
 }
 
