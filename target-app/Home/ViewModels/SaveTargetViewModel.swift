@@ -10,6 +10,8 @@ import CoreLocation
 
 class SaveTargetViewModel {
     
+    private let targetServices: TargetServicesProtocol
+
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
 
@@ -24,13 +26,14 @@ class SaveTargetViewModel {
     
     private var location: CLLocation
     
-    init(location: CLLocation) {
+    init(location: CLLocation, targetServices: TargetServicesProtocol) {
         self.location = location
+        self.targetServices = targetServices
     }
     
     func saveTarget() {
         state = .network(state: .loading)
-        TargetServices.save(
+        targetServices.save(
             title: title,
             latitude: latitude,
             longitude: longitude,

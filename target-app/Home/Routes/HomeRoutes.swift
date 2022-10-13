@@ -16,7 +16,7 @@ enum HomeRoutes: Route {
         case .home:
             let home = HomeViewController(
                 locationManager: LocationManager.shared,
-                viewModel: HomeViewModel()
+                viewModel: HomeViewModel(targetServices: TargetServices())
             )
             return home
         }

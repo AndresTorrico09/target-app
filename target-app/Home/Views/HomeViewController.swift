@@ -157,7 +157,8 @@ extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
         let saveTargetViewController = SaveTargetViewController(
             viewModel: SaveTargetViewModel(
-                location: viewModel.locationTapped!
+                location: viewModel.locationTapped!,
+                targetServices: TargetServices()
             )
         )
         let navigationController = UINavigationController(rootViewController: saveTargetViewController)
