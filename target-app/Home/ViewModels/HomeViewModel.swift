@@ -10,6 +10,8 @@ import CoreLocation
 
 class HomeViewModel {
     
+    private let targetServices: TargetServicesProtocol
+    
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
     @Published var locationTapped: CLLocation?
@@ -19,9 +21,13 @@ class HomeViewModel {
         self.locationTapped = location
     }
     
+    init(targetServices: TargetServicesProtocol) {
+        self.targetServices = targetServices
+    }
+    
     func getTargets() {
         state = .network(state: .loading)
-        TargetServices.getAll() { [weak self] result in
+        targetServices.getAll() { [weak self] result in
             guard let self = self else { return }
             
             switch result {

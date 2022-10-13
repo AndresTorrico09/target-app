@@ -7,13 +7,28 @@
 
 import Foundation
 
-class TargetServices {
+protocol TargetServicesProtocol {
+    func save(
+        title: String,
+        latitude: Double,
+        longitude: Double,
+        radius: Double,
+        topicId: Int,
+        completion: @escaping (Result<Target, Error>) -> Void
+    )
+    
+    func getAll(
+        completion: @escaping (Result<[Target], Error>) -> Void
+    )
+}
+
+final class TargetServices: TargetServicesProtocol {
     
     enum ValidationError: Error {
       case nullResponse
     }
     
-    class func save(
+    func save(
         title: String,
         latitude: Double,
         longitude: Double,
@@ -43,7 +58,7 @@ class TargetServices {
         }
     }
     
-    class func getAll(
+    func getAll(
         completion: @escaping (Result<[Target], Error>) -> Void
     ) {
         BaseAPIClient.default.request(
