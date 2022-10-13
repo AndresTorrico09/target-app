@@ -12,13 +12,13 @@ struct Target: Codable {
     let id: Int
     let title: String
     let latitude, longitude, radius: Double
-    let topicID: Int
+    let topic: Topic
     
     private enum CodingKeys: String, CodingKey {
         case id
         case title
         case latitude, longitude, radius
-        case topicID = "topic_id"
+        case topic
     }
 }
 
@@ -56,5 +56,16 @@ struct Avatar: Codable {
         case originalURL = "original_url"
         case normalURL = "normal_url"
         case smallThumbURL = "small_thumb_url"
+    }
+}
+
+// MARK: - Topic
+struct Topic: Codable {
+    let id: Int
+    let icon, label: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case icon, label
     }
 }
