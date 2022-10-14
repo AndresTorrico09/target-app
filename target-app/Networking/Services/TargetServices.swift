@@ -24,6 +24,12 @@ protocol TargetServicesProtocol {
 
 final class TargetServices: TargetServicesProtocol {
     
+    let apiClient: APIClient
+    
+    init(apiClient: APIClient) {
+        self.apiClient = apiClient
+    }
+    
     enum ValidationError: Error {
       case nullResponse
     }
@@ -36,7 +42,7 @@ final class TargetServices: TargetServicesProtocol {
         topicId: Int,
         completion: @escaping (Result<Target, Error>) -> Void
     ) {
-        BaseAPIClient.default.request(
+        apiClient.request(
             endpoint: TargetEndpoint.save(
                 title: title,
                 latitude: latitude,
@@ -61,7 +67,7 @@ final class TargetServices: TargetServicesProtocol {
     func getAll(
         completion: @escaping (Result<[Target], Error>) -> Void
     ) {
-        BaseAPIClient.default.request(
+        apiClient.request(
             endpoint: TargetEndpoint.get
         ) { (result: Result<TargetsResponse?, Error>, responseHeaders) in
             switch result {
