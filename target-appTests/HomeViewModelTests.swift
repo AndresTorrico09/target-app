@@ -16,9 +16,7 @@ class HomeViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        viewModel = HomeViewModel(
-            targetServices: TargetServicesMock()
-        )
+        viewModel = HomeViewModel(targetServices: TargetServicesMock())
         cancellables = []
     }
 
