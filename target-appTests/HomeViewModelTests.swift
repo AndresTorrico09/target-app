@@ -22,8 +22,8 @@ class HomeViewModelTests: XCTestCase {
         cancellables = []
     }
 
-    func testGetTargets() {
-        let expect = expectation(description: "get targets")
+    func testGetTargetsSuccessfull() {
+        let expect = expectation(description: "get targets successfull")
         
         viewModel.$targets
             .dropFirst()
