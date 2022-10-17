@@ -38,7 +38,14 @@ final class TargetServicesMock: TargetServicesProtocol {
         completion(.success(targetsResponse))
     }
     
-    func save(title: String, latitude: Double, longitude: Double, radius: Double, topicId: Int, completion: @escaping (Result<target_app.Target, Error>) -> Void) {
-        
+    func save(
+        title: String,
+        latitude: Double,
+        longitude: Double,
+        radius: Double,
+        topicId: Int,
+        completion: @escaping (Result<target_app.Target, Error>) -> Void
+    ) {
+        //TODO: add mock
     }
 }
