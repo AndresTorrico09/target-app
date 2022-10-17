@@ -26,7 +26,7 @@ final class TargetServices: TargetServicesProtocol {
     
     let apiClient: APIClient
     
-    init(apiClient: APIClient) {
+    init(apiClient: APIClient = BaseAPIClient.default) {
         self.apiClient = apiClient
     }
     
