@@ -17,7 +17,7 @@ enum HomeRoutes: Route {
             let home = HomeViewController(
                 locationManager: LocationManager.shared,
                 viewModel: HomeViewModel(
-                    targetServices: TargetServices(apiClient: BaseAPIClient.default)
+                    targetServices: TargetServices()
                 )
             )
             return home
