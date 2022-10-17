@@ -24,7 +24,7 @@ class HomeViewModelTests: XCTestCase {
         let expect = expectation(description: "get targets successfull")
         
         viewModel.$targets
-            .dropFirst()
+            .filter { $0 != [] }
             .sink { targets in
                 XCTAssertNotNil(targets)
                 XCTAssertEqual(targets.count, 2)
