@@ -158,7 +158,7 @@ extension HomeViewController: BottomSheetPresenter {
         let saveTargetViewController = SaveTargetViewController(
             viewModel: SaveTargetViewModel(
                 location: viewModel.locationTapped!,
-                targetServices: TargetServices(apiClient: BaseAPIClient.default)
+                targetServices: TargetServices()
             )
         )
         let navigationController = UINavigationController(rootViewController: saveTargetViewController)
