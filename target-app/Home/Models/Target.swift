@@ -25,9 +25,7 @@ struct Target: Codable {
 extension Target: Equatable {}
 
 func ==(lhs: Target, rhs: Target) -> Bool {
-    let areEqual = lhs.id == rhs.id
-
-    return areEqual
+    lhs.id == rhs.id
 }
 
 // MARK: - MatchConversation
