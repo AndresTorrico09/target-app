@@ -98,7 +98,6 @@ class SaveTargetViewController: UIViewController {
         }
     }
     
-    
     // MARK: - BINDERS
     private var cancellables = Set<AnyCancellable>()
     
