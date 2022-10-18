@@ -79,9 +79,9 @@ class SaveTargetViewModel {
         self.radius = Double(radius)!
     }
     
-    func setTopicId(topicId: String) {
+    func setTopicId(topicName: String) {
         //TODO: fix receive ID instead label string
-        if let id = topics.first(where: { $0.label == topicId } )?.id {
+        if let id = topics.first(where: { $0.label == topicName } )?.id {
             self.topicId = id
         }
     }
