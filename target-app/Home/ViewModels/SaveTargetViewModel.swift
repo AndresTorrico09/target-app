@@ -82,12 +82,8 @@ class SaveTargetViewModel {
     
     func setTopicId(topicId: String) {
         //TODO: fix receive ID instead label string
-        var id: Int = 0
-        self.topics.forEach { topic in
-            if topic.label == topicId {
-                id = topic.id
-            }
+        if let id = topics.first(where: { $0.label == topicId } )?.id {
+            self.topicId = id
         }
-        self.topicId = id
     }
 }
