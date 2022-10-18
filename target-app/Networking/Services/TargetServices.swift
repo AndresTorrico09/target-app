@@ -17,13 +17,13 @@ protocol TargetServicesProtocol {
         completion: @escaping (Result<Target, Error>) -> Void
     )
     
-    func getAll(
-        completion: @escaping (Result<[Target], Error>) -> Void
-    )
+    func getAll(completion: @escaping (Result<[Target], Error>) -> Void)
+    
+    func getTopics(completion: @escaping (Result<[Topic], Error>) -> Void)
 }
 
 final class TargetServices: TargetServicesProtocol {
-    
+
     let apiClient: APIClient
     
     init(apiClient: APIClient = BaseAPIClient.default) {
@@ -74,6 +74,23 @@ final class TargetServices: TargetServicesProtocol {
             case .success(let targetsResponse):
                 if let targetsResponse = targetsResponse {
                     completion(.success(targetsResponse.toDomain()))
+                } else {
+                    completion(.failure(ValidationError.nullResponse))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getTopics(completion: @escaping (Result<[Topic], Error>) -> Void) {
+        apiClient.request(
+            endpoint: TargetEndpoint.getTopics
+        ) { (result: Result<TopicsResponse?, Error>, responseHeaders) in
+            switch result {
+            case .success(let topicsResponse):
+                if let topicsResponse = topicsResponse {
+                    completion(.success(topicsResponse.toDomain()))
                 } else {
                     completion(.failure(ValidationError.nullResponse))
                 }

@@ -17,13 +17,17 @@ internal enum TargetEndpoint: RailsAPIEndpoint {
         topicId: Int
     )
     case get
+    case getTopics
     
     private static let targetsURL = "/targets/"
-    
+    private static let topicsURL = "/topics/"
+
     var path: String {
         switch self {
         case .save, .get:
             return TargetEndpoint.targetsURL
+        case .getTopics:
+            return TargetEndpoint.topicsURL
         }
     }
     
@@ -31,7 +35,7 @@ internal enum TargetEndpoint: RailsAPIEndpoint {
         switch self {
         case .save:
             return .post
-        case .get:
+        case .get, .getTopics:
             return .get
         }
     }
@@ -40,7 +44,7 @@ internal enum TargetEndpoint: RailsAPIEndpoint {
         switch self {
         case .save:
             return .jsonBody
-        case .get:
+        case .get, .getTopics:
             return .methodDependent
         }
     }
@@ -63,6 +67,8 @@ internal enum TargetEndpoint: RailsAPIEndpoint {
             ] as [String : Any]
             return ["target": parameters]
         case .get:
+            return [:]
+        case .getTopics:
             return [:]
         }
     }

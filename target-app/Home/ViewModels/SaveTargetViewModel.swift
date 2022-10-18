@@ -14,6 +14,7 @@ class SaveTargetViewModel {
 
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
+    @Published var topics: [Topic] = []
 
     // MARK: - Publishers
     var statePublisher: Published<AuthViewModelState>.Publisher { $state }
@@ -52,6 +53,20 @@ class SaveTargetViewModel {
         }
     }
     
+    func getTopics() {
+        state = .network(state: .loading)
+        targetServices.getTopics() { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let topics):
+                self.topics = topics
+            case .failure(let error):
+                self.state = .network(state: .error(error.localizedDescription))
+            }
+        }
+    }
+    
     func setTitle(title: String) {
         self.title = title
     }
@@ -66,20 +81,13 @@ class SaveTargetViewModel {
     }
     
     func setTopicId(topicId: String) {
-        //TODO: get topic values from API
-        let topic = {
-            switch topicId {
-            case "Football":
-                return 1
-            case "Pizza":
-                return 2
-            case "Dogs":
-                return 3
-            default:
-                return 0
+        //TODO: fix receive ID instead label string
+        var id: Int = 0
+        self.topics.forEach { topic in
+            if topic.label == topicId {
+                id = topic.id
             }
-        }()
-        
-        self.topicId = topic
+        }
+        self.topicId = id
     }
 }
