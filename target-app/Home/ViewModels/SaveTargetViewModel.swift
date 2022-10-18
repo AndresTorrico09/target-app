@@ -54,7 +54,6 @@ class SaveTargetViewModel {
     }
     
     func getTopics() {
-        state = .network(state: .loading)
         targetServices.getTopics() { [weak self] result in
             guard let self = self else { return }
             
