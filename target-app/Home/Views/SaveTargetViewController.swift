@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class SaveTargetViewController: UIViewController {
     
@@ -41,11 +42,7 @@ class SaveTargetViewController: UIViewController {
         placeholder: "home_topic_field_placeholder".localized,
         pickerView: picker
     )
-    //TODO: get topic values from API
-    private lazy var topics: [String] = {
-      let topics = ["Football", "Pizza", "Dogs"]
-        return topics
-    }()
+    private var topics: [Topic] = []
     
     private lazy var saveButton = UIButton(
         style: .primary(title: "home_save_button".localized),
@@ -63,6 +60,9 @@ class SaveTargetViewController: UIViewController {
         viewModel.setLocationSelected()
         applyBottomSheetUIConfigs()
         configureViews()
+        setupBinders()
+        
+        viewModel.getTopics()
     }
     
     init(viewModel: SaveTargetViewModel) {
@@ -92,13 +92,25 @@ class SaveTargetViewController: UIViewController {
         case titleField:
             viewModel.setTitle(title: newValue)
         case topicsField:
-            viewModel.setTopicId(topicId: newValue)
+            //TODO: fix send ID value instead label string
+            viewModel.setTopicId(topicName: newValue)
         default: break
         }
+    }
+    
+    // MARK: - BINDERS
+    private var cancellables = Set<AnyCancellable>()
+    
+    func setupBinders() {
+        viewModel.$topics
+            .sink{ [weak self] topics in
+                self?.topics = topics
+            }.store(in: &cancellables)
     }
 }
 
 extension SaveTargetViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
+    //TODO: refactor Topics picker view into a listview
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -108,11 +120,11 @@ extension SaveTargetViewController:  UIPickerViewDelegate, UIPickerViewDataSourc
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        topics[row]
+        topics[row].label
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        topicsField.text = topics[row]
+        topicsField.text = topics[row].label
         topicsField.resignFirstResponder()
     }
     
