@@ -93,7 +93,7 @@ class SaveTargetViewController: UIViewController {
             viewModel.setTitle(title: newValue)
         case topicsField:
             //TODO: fix send ID value instead label string
-            viewModel.setTopicId(topicId: newValue)
+            viewModel.setTopicId(topicName: newValue)
         default: break
         }
     }
