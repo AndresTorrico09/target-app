@@ -22,6 +22,12 @@ struct Target: Codable {
     }
 }
 
+extension Target: Equatable {}
+
+func ==(lhs: Target, rhs: Target) -> Bool {
+    lhs.id == rhs.id
+}
+
 // MARK: - MatchConversation
 struct MatchConversation: Codable {
     let id, topicID: Int
