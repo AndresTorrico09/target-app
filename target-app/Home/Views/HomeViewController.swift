@@ -71,23 +71,6 @@ class HomeViewController: UIViewController {
         if let coordinates = mapView.userLocation.location?.coordinate {
             mapView.setCenter(coordinates, animated: true)
         }
-        
-        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
-        mapView.addGestureRecognizer(longTapGesture)
-    }
-    
-    // MARK: - ACTIONS
-    
-    @objc func longTap(sender: UIGestureRecognizer){
-        if sender.state == .began {
-            let locationInView = sender.location(in: mapView)
-            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
-            let location = CLLocation(latitude: locationOnMap.latitude, longitude: locationOnMap.longitude)
-            
-            mapView.removeAnnotations([mapView.annotations].last!)
-            viewModel.setLocationTapped(withLocation: location)
-            createAnotation(withLocation: location)
-        }
     }
     
     func setupMapConstraints() {
@@ -157,7 +140,7 @@ extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
         let saveTargetViewController = SaveTargetViewController(
             viewModel: SaveTargetViewModel(
-                location: viewModel.locationTapped!,
+                location: locationManager.locationWasUpdated!,
                 targetServices: TargetServices()
             )
         )
