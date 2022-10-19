@@ -126,10 +126,17 @@ class HomeViewController: UIViewController {
             image: UIImage(named: "ic_home_chat"),
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(tapOnChatBarButton)
         )
         navigationItem.rightBarButtonItem = barRightButtonItem
         navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    // MARK: - Actions
+
+    @objc
+    func tapOnChatBarButton(_ sender: Any) {
+        AppNavigator.shared.navigate(to: HomeRoutes.chats, with: .changeRoot)
     }
     
 }
