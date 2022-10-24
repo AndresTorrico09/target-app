@@ -11,7 +11,10 @@ class ConversationTableViewCell: UITableViewCell {
     
     private let topicIconSpacing: CGFloat = 20
     private let stackViewSpacing: CGFloat = 10
+    private let unreadMessagesSpacing: CGFloat = 7
     private let avatarImageSize: CGFloat = 10
+    private let unreadMessagesLabelSize: CGFloat = 20
+    private let topicIconSize: CGFloat = 25
 
     private var avatarImage: UIImageView = {
         let imgView = UIImageView()
@@ -41,6 +44,15 @@ class ConversationTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private var unreadMessagesLabel: UILabel = {
+        let label = UILabel(style: .secondary(textColor: .white))
+        label.layer.cornerRadius = 20 / 2
+        label.layer.masksToBounds = true
+        label.backgroundColor = .systemYellow
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,7 +60,8 @@ class ConversationTableViewCell: UITableViewCell {
         contentView.addSubviews(subviews: [
             avatarImage,
             stackView,
-            topicIcon
+            topicIcon,
+            unreadMessagesLabel
         ])
         
         stackView.addArrangedSubview(subviews: [
@@ -66,18 +79,22 @@ class ConversationTableViewCell: UITableViewCell {
             stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewSpacing),
             stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewSpacing),
             topicIcon.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: topicIconSpacing),
-            topicIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -topicIconSpacing)
+            topicIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -topicIconSpacing),
+            unreadMessagesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -unreadMessagesSpacing)
         ])
 
         NSLayoutConstraint.activate([
-            topicIcon.topAnchor.constraint(equalTo: topAnchor),
-            topicIcon.bottomAnchor.constraint(equalTo: bottomAnchor),
-            topicIcon.heightAnchor.constraint(equalToConstant: 25),
-            topicIcon.widthAnchor.constraint(equalToConstant: 25),
             avatarImage.topAnchor.constraint(equalTo: topAnchor),
             avatarImage.bottomAnchor.constraint(equalTo: bottomAnchor),
             avatarImage.leftAnchor.constraint(equalTo: leftAnchor),
-            avatarImage.widthAnchor.constraint(equalTo: avatarImage.heightAnchor)
+            avatarImage.widthAnchor.constraint(equalTo: avatarImage.heightAnchor),
+            topicIcon.topAnchor.constraint(equalTo: topAnchor),
+            topicIcon.bottomAnchor.constraint(equalTo: bottomAnchor),
+            topicIcon.heightAnchor.constraint(equalToConstant: topicIconSize),
+            topicIcon.widthAnchor.constraint(equalToConstant: topicIconSize),
+            unreadMessagesLabel.heightAnchor.constraint(equalToConstant: unreadMessagesLabelSize),
+            unreadMessagesLabel.widthAnchor.constraint(equalToConstant: unreadMessagesLabelSize),
+            unreadMessagesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: unreadMessagesSpacing)
         ])
     }
     
@@ -86,6 +103,7 @@ class ConversationTableViewCell: UITableViewCell {
         topicIcon.image = UIImage(named: match.topicIcon)
         fullNameLabel.text = match.user.fullName
         lastMessageLabel.text = match.lastMessage
+        unreadMessagesLabel.text = String(match.unreadMessages)
     }
     
     required init?(coder: NSCoder) {
