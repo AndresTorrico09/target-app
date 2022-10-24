@@ -9,18 +9,19 @@ import UIKit
 
 class ConversationTableViewCell: UITableViewCell {
     
+    private let avatarImageSpacing: CGFloat = 20
     private let topicIconSpacing: CGFloat = 20
-    private let stackViewSpacing: CGFloat = 10
+    private let stackViewSpacing: CGFloat = 20
     private let unreadMessagesSpacing: CGFloat = 7
-    private let avatarImageSize: CGFloat = 10
+    private let avatarImageSize: CGFloat = 50
     private let unreadMessagesLabelSize: CGFloat = 20
     private let topicIconSize: CGFloat = 25
 
-    private var avatarImage: UIImageView = {
+    private lazy var avatarImage: UIImageView = {
         let imgView = UIImageView()
-        imgView.contentMode = .center
         imgView.layer.masksToBounds = true
-        imgView.layer.cornerRadius = imgView.bounds.width / 2
+        imgView.layer.cornerRadius = avatarImageSize / 2
+        imgView.backgroundColor = .systemYellow
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
@@ -74,8 +75,7 @@ class ConversationTableViewCell: UITableViewCell {
         stackView.centerVertically(with: contentView)
         
         NSLayoutConstraint.activate([
-            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 350),
-            avatarImage.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -350),
+            avatarImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: avatarImageSpacing),
             stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewSpacing),
             stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewSpacing),
             topicIcon.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: topicIconSpacing),
@@ -84,10 +84,8 @@ class ConversationTableViewCell: UITableViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            avatarImage.topAnchor.constraint(equalTo: topAnchor),
-            avatarImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            avatarImage.leftAnchor.constraint(equalTo: leftAnchor),
-            avatarImage.widthAnchor.constraint(equalTo: avatarImage.heightAnchor),
+            avatarImage.heightAnchor.constraint(equalToConstant: avatarImageSize),
+            avatarImage.widthAnchor.constraint(equalToConstant: avatarImageSize),
             topicIcon.topAnchor.constraint(equalTo: topAnchor),
             topicIcon.bottomAnchor.constraint(equalTo: bottomAnchor),
             topicIcon.heightAnchor.constraint(equalToConstant: topicIconSize),
