@@ -85,10 +85,10 @@ extension ChatsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConversationTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.reuseIdentifier, for: indexPath)
+        if let cell = cell as? ConversationTableViewCell {
             cell.updateData(match: data[indexPath.row])
-            return cell
         }
-        fatalError("could not dequeueReusableCell")
+        return cell
     }
 }
