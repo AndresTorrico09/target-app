@@ -9,12 +9,26 @@ import UIKit
 
 class ChatsViewController: UIViewController {
 
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.rowHeight = 80
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    //TODO: remove mock
+    var data: [Match] = [
+        Match(matchID: 0, topicIcon: "ic_topic_travel", lastMessage: "¡Hola! A dónde querés viajar?", unreadMessages: 0, user: User(id: 0 ,firstName: "name", lastName: "last", fullName: "José Gazzano", name: "name", username: "user", email: "email", gender: "gender", password: nil, passwordConfirmation: nil, avatar: User.Avatar(smallThumbUrl: "avatar_mock_1"))),
+        Match(matchID: 1, topicIcon: "ic_topic_movie", lastMessage: "¿Alguna película para recomendar?", unreadMessages: 1, user: User(id: 1 ,firstName: "name1", lastName: "last1", fullName: "Karen Bauer", name: "name 1", username: "user 1", email: "email1", gender: "gender1", password: nil, passwordConfirmation: nil, avatar: User.Avatar(smallThumbUrl: "avatar_mock_2")))
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         applyDefaultUIConfigs()
         setupNavigationBar()
-
+        setupTableView()
     }
     
     func setupNavigationBar() {
@@ -41,6 +55,19 @@ class ChatsViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
+    func setupTableView() {
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+                
+        tableView.dataSource = self
+    }
+    
     // MARK: - Actions
 
     @objc
@@ -48,4 +75,18 @@ class ChatsViewController: UIViewController {
         AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
     }
 
+}
+
+extension ChatsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ConversationTableViewCell {
+            cell.updateData(match: data[indexPath.row])
+            return cell
+        }
+        fatalError("could not dequeueReusableCell")
+    }
 }
