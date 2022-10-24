@@ -45,9 +45,9 @@ class ConversationTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private var unreadMessagesLabel: UILabel = {
+    private lazy var unreadMessagesLabel: UILabel = {
         let label = UILabel(style: .secondary(textColor: .white))
-        label.layer.cornerRadius = 20 / 2
+        label.layer.cornerRadius = unreadMessagesLabelSize / 2
         label.layer.masksToBounds = true
         label.backgroundColor = .systemYellow
         label.translatesAutoresizingMaskIntoConstraints = false
