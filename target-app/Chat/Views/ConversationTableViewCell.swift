@@ -9,6 +9,10 @@ import UIKit
 
 class ConversationTableViewCell: UITableViewCell {
     
+    private let topicIconSpacing: CGFloat = 20
+    private let stackViewSpacing: CGFloat = 10
+    private let avatarImageSize: CGFloat = 10
+
     private var avatarImage: UIImageView = {
         let imgView = UIImageView()
         imgView.contentMode = .center
@@ -59,15 +63,15 @@ class ConversationTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 350),
             avatarImage.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -350),
-            stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
-//            topicIcon.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
-//            topicIcon.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -20)
+            stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewSpacing),
+            stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewSpacing),
+            topicIcon.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: topicIconSpacing),
+            topicIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -topicIconSpacing)
         ])
 
         NSLayoutConstraint.activate([
             topicIcon.topAnchor.constraint(equalTo: topAnchor),
             topicIcon.bottomAnchor.constraint(equalTo: bottomAnchor),
-            topicIcon.rightAnchor.constraint(equalTo: rightAnchor),
             topicIcon.heightAnchor.constraint(equalToConstant: 25),
             topicIcon.widthAnchor.constraint(equalToConstant: 25),
             avatarImage.topAnchor.constraint(equalTo: topAnchor),
