@@ -9,10 +9,12 @@ import UIKit
 
 class ChatsViewController: UIViewController {
 
-    private var tableView: UITableView = {
+    private let tableViewRowHeight: CGFloat = 80
+
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = 80
+        tableView.rowHeight = tableViewRowHeight
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
