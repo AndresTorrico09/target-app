@@ -26,7 +26,7 @@ class ConversationTableViewCell: UITableViewCell {
     }()
     
     private var fullNameLabel = UILabel(style: .secondary())
-    private var lastMessageLabel = UILabel(style: .secondary())
+    private var lastMessageLabel = UILabel(style: .secondary(isBold: false))
     
     private var stackView: UIStackView = {
         let stackView = UIStackView()
