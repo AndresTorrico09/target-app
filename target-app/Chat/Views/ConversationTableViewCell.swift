@@ -11,7 +11,8 @@ class ConversationTableViewCell: UITableViewCell {
     
     private let avatarImageSpacing: CGFloat = 20
     private let topicIconSpacing: CGFloat = 20
-    private let stackViewSpacing: CGFloat = 20
+    private let stackViewHorizontalSpacing: CGFloat = 20
+    private let stackViewSpacing: CGFloat = 8
     private let unreadMessagesSpacing: CGFloat = 7
     private let avatarImageSize: CGFloat = 50
     private let unreadMessagesLabelSize: CGFloat = 20
@@ -36,11 +37,11 @@ class ConversationTableViewCell: UITableViewCell {
     private var fullNameLabel = UILabel(style: .secondary())
     private var lastMessageLabel = UILabel(style: .secondary(isBold: false))
     
-    private var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 8
+        stackView.spacing = stackViewSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -75,8 +76,8 @@ class ConversationTableViewCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             avatarImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: avatarImageSpacing),
-            stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewSpacing),
-            stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewSpacing),
+            stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewHorizontalSpacing),
+            stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewHorizontalSpacing),
             topicIcon.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: topicIconSpacing),
             topicIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -topicIconSpacing),
             unreadMessagesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -unreadMessagesSpacing),
