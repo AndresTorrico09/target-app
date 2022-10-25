@@ -23,7 +23,7 @@ enum OnboardingRoutes: Route {
     }
     
     private func buildSignInViewController() -> UIViewController {
-        let signIn = ChatsViewController()
+        let signIn = SignInViewController(viewModel: SignInViewModel())
         return signIn
     }
     
