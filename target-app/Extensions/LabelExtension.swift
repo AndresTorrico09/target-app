@@ -58,7 +58,7 @@ extension UILabel {
             self.numberOfLines = numberOfLines
             self.textAlignment = textAlignment
             let font: UIFont = {
-                if isBold == true {
+                if isBold {
                     return UIFont.boldSystemFont(ofSize: fontSize)
                 } else {
                     return self.font.withSize(fontSize)
