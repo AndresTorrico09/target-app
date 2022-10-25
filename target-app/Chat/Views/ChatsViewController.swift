@@ -27,34 +27,8 @@ class ChatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         applyDefaultUIConfigs()
-        setupNavigationBar()
-        setupTableView()
-    }
-    
-    func setupNavigationBar() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        navigationItem.titleView = UILabel(style: .secondary(text: "Chat"))
-        
-        let barLeftButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_home_profile"),
-            style: .plain,
-            target: self,
-            action: nil
-        )
-        navigationItem.leftBarButtonItem = barLeftButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = .black
-        
-        let barRightButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_chat_map"),
-            style: .plain,
-            target: self,
-            action: #selector(tapOnMapBarButton)
-        )
-        navigationItem.rightBarButtonItem = barRightButtonItem
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        configureViews()
     }
     
     func setupTableView() {
@@ -77,6 +51,32 @@ class ChatsViewController: UIViewController {
         AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
     }
 
+}
+
+extension ChatsViewController {
+    func configureViews() {
+        setupTableView()
+        
+        let leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_home_profile"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        
+        let rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_chat_map"),
+            style: .plain,
+            target: self,
+            action: #selector(tapOnMapBarButton)
+        )
+        
+        setupNavigationBar(
+            title: "chat_title".localized,
+            leftButton: leftBarButtonItem,
+            rightButton: rightBarButtonItem
+        )
+    }
 }
 
 extension ChatsViewController: UITableViewDataSource {

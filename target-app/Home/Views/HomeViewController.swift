@@ -53,15 +53,14 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Lifecycle Events
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
+
         applyDefaultUIConfigs()
-        setupMapConstraints()
+        configureViews()
+
         setupBinders()
-        
         viewModel.getTargets()
     }
     
@@ -108,30 +107,6 @@ class HomeViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    func setupNavigationBar() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        navigationItem.titleView = UILabel(style: .secondary(text: "home_title".localized))
-        
-        let barLeftButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_home_profile"),
-            style: .plain,
-            target: self,
-            action: nil
-        )
-        navigationItem.leftBarButtonItem = barLeftButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = .black
-        
-        let barRightButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_home_chat"),
-            style: .plain,
-            target: self,
-            action: #selector(tapOnChatBarButton)
-        )
-        navigationItem.rightBarButtonItem = barRightButtonItem
-        navigationItem.rightBarButtonItem?.tintColor = .black
-    }
-    
     // MARK: - Actions
 
     @objc
@@ -139,6 +114,32 @@ class HomeViewController: UIViewController {
         AppNavigator.shared.navigate(to: HomeRoutes.chats, with: .changeRoot)
     }
     
+}
+
+extension HomeViewController {
+    func configureViews() {
+        
+        let leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_home_profile"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        
+        let rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "ic_home_chat"),
+            style: .plain,
+            target: self,
+            action: #selector(tapOnChatBarButton)
+        )
+        
+        setupNavigationBar(
+            title: "home_title".localized,
+            leftButton: leftBarButtonItem,
+            rightButton: rightBarButtonItem
+        )
+        setupMapConstraints()
+    }
 }
 
 // MARK: BottomSheetPresenter
