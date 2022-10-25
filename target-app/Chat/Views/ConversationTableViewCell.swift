@@ -95,9 +95,9 @@ class ConversationTableViewCell: UITableViewCell {
     }
     
     func updateData(match: Match) {
-        avatarImage.image = UIImage(named: match.user.avatar.smallThumbUrl!)
+        avatarImage.image = UIImage(named: match.userImageURL)
         topicIcon.image = UIImage(named: match.topicIcon)
-        fullNameLabel.text = match.user.fullName
+        fullNameLabel.text = match.userFullName
         lastMessageLabel.text = match.lastMessage
         unreadMessagesLabel.text = String(match.unreadMessages)
     }

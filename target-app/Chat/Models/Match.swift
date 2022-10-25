@@ -21,4 +21,13 @@ struct Match: Codable {
         case unreadMessages = "unread_messages"
         case user
     }
+    
+    //TODO: add placeholder when set image URL
+    var userImageURL: String {
+      user.avatar.smallThumbUrl ?? ""
+    }
+    
+    var userFullName: String {
+      user.fullName
+    }
 }
