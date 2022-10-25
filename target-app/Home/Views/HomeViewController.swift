@@ -53,15 +53,14 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Lifecycle Events
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
+
         applyDefaultUIConfigs()
-        setupMapConstraints()
+        configureViews()
+
         setupBinders()
-        
         viewModel.getTargets()
     }
     
@@ -108,30 +107,39 @@ class HomeViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    func setupNavigationBar() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+    // MARK: - Actions
+
+    @objc
+    func tapOnChatBarButton(_ sender: Any) {
+        AppNavigator.shared.navigate(to: HomeRoutes.chats, with: .changeRoot)
+    }
+    
+}
+
+extension HomeViewController {
+    func configureViews() {
         
-        navigationItem.titleView = UILabel(style: .secondary(text: "home_title".localized))
-        
-        let barLeftButtonItem = UIBarButtonItem(
+        let leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "ic_home_profile"),
             style: .plain,
             target: self,
             action: nil
         )
-        navigationItem.leftBarButtonItem = barLeftButtonItem
-        navigationItem.leftBarButtonItem?.tintColor = .black
         
-        let barRightButtonItem = UIBarButtonItem(
+        let rightBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "ic_home_chat"),
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(tapOnChatBarButton)
         )
-        navigationItem.rightBarButtonItem = barRightButtonItem
-        navigationItem.rightBarButtonItem?.tintColor = .black
+        
+        setupNavigationBar(
+            title: "home_title".localized,
+            leftButton: leftBarButtonItem,
+            rightButton: rightBarButtonItem
+        )
+        setupMapConstraints()
     }
-    
 }
 
 // MARK: BottomSheetPresenter

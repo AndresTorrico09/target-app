@@ -10,6 +10,7 @@ import UIKit
 
 enum HomeRoutes: Route {
     case home
+    case chats
     
     var screen: UIViewController {
         switch self {
@@ -19,6 +20,8 @@ enum HomeRoutes: Route {
                 viewModel: HomeViewModel(targetServices: TargetServices())
             )
             return home
+        case .chats:
+            return ChatsViewController()
         }
     }
 }

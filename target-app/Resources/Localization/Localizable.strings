@@ -44,3 +44,6 @@
 "home_topic_label" = "SELECT A TOPIC";
 "home_topic_field_placeholder" = "What do you want to talk about?";
 "home_save_button" = "SAVE TARGET";
+
+// MARK: CHAT SCREEN
+"chat_title" = "Chat";

@@ -24,4 +24,21 @@ extension UIViewController {
         view.layer.shadowOpacity = 0.5
     }
     
+    func setupNavigationBar(
+      title: String,
+      leftButton: UIBarButtonItem? = nil,
+      rightButton: UIBarButtonItem? = nil,
+      tintColor: UIColor = .black
+    ) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        navigationItem.titleView = UILabel(style: .secondary(text: title))
+        
+        navigationItem.leftBarButtonItem = leftButton
+        navigationItem.leftBarButtonItem?.tintColor = tintColor
+        
+        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.rightBarButtonItem?.tintColor = tintColor
+    }
+    
 }
