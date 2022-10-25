@@ -13,7 +13,7 @@ struct Match: Codable {
     let lastMessage: String?
     let unreadMessages: Int
     let user: User
-
+    
     enum CodingKeys: String, CodingKey {
         case matchID = "match_id"
         case topicIcon = "topic_icon"
@@ -24,10 +24,10 @@ struct Match: Codable {
     
     //TODO: add placeholder when set image URL
     var userImageURL: String {
-      user.avatar.smallThumbUrl ?? ""
+        user.avatar.smallThumbUrl ?? ""
     }
     
     var userFullName: String {
-      user.fullName ?? ""
+        user.fullName ?? ""
     }
 }

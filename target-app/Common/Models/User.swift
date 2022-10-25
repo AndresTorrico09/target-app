@@ -9,13 +9,13 @@ import Foundation
 
 struct User: Codable {
     let id: Int?
-    let firstName: String
-    let lastName: String
+    let firstName: String?
+    let lastName: String?
     let fullName: String?
-    let name: String
-    let username: String
-    let email: String
-    let gender: String
+    let name: String?
+    let username: String?
+    let email: String?
+    let gender: String?
     let password: String?
     let passwordConfirmation: String?
     let avatar: Avatar
