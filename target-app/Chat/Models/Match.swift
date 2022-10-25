@@ -28,6 +28,6 @@ struct Match: Codable {
     }
     
     var userFullName: String {
-      user.fullName
+      user.fullName ?? ""
     }
 }
