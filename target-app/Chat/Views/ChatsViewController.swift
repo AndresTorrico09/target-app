@@ -13,7 +13,7 @@ class ChatsViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.reuseIdentifier)
         tableView.rowHeight = tableViewRowHeight
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -86,6 +86,7 @@ extension ChatsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.reuseIdentifier, for: indexPath)
+        
         if let cell = cell as? ConversationTableViewCell {
             cell.updateData(match: data[indexPath.row])
         }
