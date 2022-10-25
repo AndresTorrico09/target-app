@@ -72,17 +72,15 @@ class ConversationTableViewCell: UITableViewCell {
         avatarImage.centerVertically(with: contentView)
         topicIcon.centerVertically(with: contentView)
         stackView.centerVertically(with: contentView)
-        
+
         NSLayoutConstraint.activate([
             avatarImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: avatarImageSpacing),
             stackView.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: stackViewSpacing),
             stackView.trailingAnchor.constraint(equalTo: topicIcon.leadingAnchor, constant: stackViewSpacing),
             topicIcon.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: topicIconSpacing),
             topicIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -topicIconSpacing),
-            unreadMessagesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -unreadMessagesSpacing)
-        ])
-
-        NSLayoutConstraint.activate([
+            unreadMessagesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -unreadMessagesSpacing),
+            
             avatarImage.heightAnchor.constraint(equalToConstant: avatarImageSize),
             avatarImage.widthAnchor.constraint(equalToConstant: avatarImageSize),
             topicIcon.topAnchor.constraint(equalTo: topAnchor),
