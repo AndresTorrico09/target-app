@@ -21,7 +21,7 @@ enum HomeRoutes: Route {
             )
             return home
         case .chats:
-            return ChatsViewController()
+            return ChatsViewController(viewModel: ChatsViewModel(conversationsServices: ConversationsServices()))
         }
     }
 }

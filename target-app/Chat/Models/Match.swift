@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct Match: Codable {
+struct Match: Codable, Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(matchID)
+    }
+    
     let matchID: Int
     let topicIcon: String
     let lastMessage: String?
     let unreadMessages: Int
     let user: User
-
+    
     enum CodingKeys: String, CodingKey {
         case matchID = "match_id"
         case topicIcon = "topic_icon"
@@ -24,10 +28,16 @@ struct Match: Codable {
     
     //TODO: add placeholder when set image URL
     var userImageURL: String {
-      user.avatar.smallThumbUrl ?? ""
+        user.avatar.smallThumbUrl ?? ""
     }
     
     var userFullName: String {
-      user.fullName ?? ""
+        user.fullName ?? ""
+    }
+}
+
+extension Match: Equatable {
+    static func == (lhs: Match, rhs: Match) -> Bool {
+        lhs.matchID == rhs.matchID
     }
 }
