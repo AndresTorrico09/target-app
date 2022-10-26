@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Match: Codable {
+struct Match: Codable, Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(matchID)
+    }
+    
     let matchID: Int
     let topicIcon: String
     let lastMessage: String?
@@ -29,5 +33,11 @@ struct Match: Codable {
     
     var userFullName: String {
         user.fullName ?? ""
+    }
+}
+
+extension Match: Equatable {
+    static func == (lhs: Match, rhs: Match) -> Bool {
+        lhs.matchID == rhs.matchID
     }
 }
