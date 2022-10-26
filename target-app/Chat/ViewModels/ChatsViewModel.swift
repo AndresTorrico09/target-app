@@ -14,7 +14,7 @@ class ChatsViewModel {
     
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
-    @Published var matches: [Match] = []
+    @Published private(set) var matches: [Match] = []
     
     init(conversationsServices: ConversationsServicesProtocol) {
         self.conversationsServices = conversationsServices
