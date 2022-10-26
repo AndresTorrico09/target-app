@@ -14,6 +14,8 @@ final class ChatsViewController: UIViewController {
     
     private let viewModel: ChatsViewModel
     
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Outlets
     
     private let tableViewRowHeight: CGFloat = 80
@@ -73,7 +75,6 @@ final class ChatsViewController: UIViewController {
     }
     
     // MARK: - BINDERS
-    private var cancellables = Set<AnyCancellable>()
     
     func setupBinders() {
         viewModel.$matches
