@@ -54,11 +54,12 @@ class SaveTargetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .clear
+        
         self.picker.dataSource = self
         self.picker.delegate = self
         
         viewModel.setLocationSelected()
-        applyBottomSheetUIConfigs()
         configureViews()
         setupBinders()
         
@@ -109,6 +110,9 @@ class SaveTargetViewController: UIViewController {
     }
 }
 
+
+// MARK: - PICKER VIEW
+
 extension SaveTargetViewController:  UIPickerViewDelegate, UIPickerViewDataSource {
     //TODO: refactor Topics picker view into a listview
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -127,7 +131,11 @@ extension SaveTargetViewController:  UIPickerViewDelegate, UIPickerViewDataSourc
         topicsField.text = topics[row].label
         topicsField.resignFirstResponder()
     }
-    
+}
+
+// MARK: - CONFIGURE VIEWS
+
+extension SaveTargetViewController {
     func configureViews() {
         view.addSubviews(subviews: [
             areaLabel,

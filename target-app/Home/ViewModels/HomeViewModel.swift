@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
 class HomeViewModel {
     
@@ -16,7 +17,12 @@ class HomeViewModel {
     @Published private var state: AuthViewModelState = .network(state: .idle)
     @Published var targets: [Target] = []
     
-    init(targetServices: TargetServicesProtocol) {
+    let userMatched = PassthroughSubject<MatchedUser, Never>()
+    
+    let locationManager: LocationManager
+    
+    init(locationManager: LocationManager, targetServices: TargetServicesProtocol) {
+        self.locationManager = locationManager
         self.targetServices = targetServices
     }
     
@@ -32,5 +38,17 @@ class HomeViewModel {
                 self.state = .network(state: .error(error.localizedDescription))
             }
         }
+    }
+    
+    func createSaveTargetViewModel() -> SaveTargetViewModel {
+        let viewModel = SaveTargetViewModel(
+            location: locationManager.locationWasUpdated!,
+            targetServices: TargetServices(),
+            userMatched: { userMatched in
+                self.userMatched.send(userMatched)
+            }
+        )
+        
+        return viewModel
     }
 }

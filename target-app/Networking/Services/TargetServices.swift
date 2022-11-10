@@ -14,7 +14,7 @@ protocol TargetServicesProtocol {
         longitude: Double,
         radius: Double,
         topicId: Int,
-        completion: @escaping (Result<Target, Error>) -> Void
+        completion: @escaping (Result<TargetResponse, Error>) -> Void
     )
     
     func getAll(completion: @escaping (Result<[Target], Error>) -> Void)
@@ -40,7 +40,7 @@ final class TargetServices: TargetServicesProtocol {
         longitude: Double,
         radius: Double,
         topicId: Int,
-        completion: @escaping (Result<Target, Error>) -> Void
+        completion: @escaping (Result<TargetResponse, Error>) -> Void
     ) {
         apiClient.request(
             endpoint: TargetEndpoint.save(
@@ -53,8 +53,8 @@ final class TargetServices: TargetServicesProtocol {
         ) { (result: Result<TargetResponse?, Error>, responseHeaders) in
             switch result {
             case .success(let targetResponse):
-                if let target = targetResponse?.target {
-                    completion(.success(target))
+                if let response = targetResponse {
+                    completion(.success(response))
                 } else {
                     completion(.failure(ValidationError.nullResponse))
                 }

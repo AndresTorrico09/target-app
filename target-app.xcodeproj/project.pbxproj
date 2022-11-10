@@ -64,6 +64,8 @@
 		077DED7028D4D9AD0074DC24 /* SaveTargetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */; };
 		077DED7228D4DFE30074DC24 /* TargetEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */; };
 		077DED7428D4E65F0074DC24 /* TargetServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077DED7328D4E65F0074DC24 /* TargetServices.swift */; };
+		07B2CAC829195B670035B4B5 /* MatchPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2CAC729195B670035B4B5 /* MatchPopUpView.swift */; };
+		07B2CACA291C3B560035B4B5 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2CAC9291C3B560035B4B5 /* BottomSheet.swift */; };
 		07CC1E5A28E395AC00172EEA /* EncodingDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC1E5928E395AC00172EEA /* EncodingDestination.swift */; };
 		07CC1E5E28FDA42100172EEA /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC1E5D28FDA42100172EEA /* HomeViewModelTests.swift */; };
 		07CC1E6128FDA5D300172EEA /* TargetServicesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC1E6028FDA5D300172EEA /* TargetServicesMock.swift */; };
@@ -164,6 +166,8 @@
 		077DED6F28D4D9AD0074DC24 /* SaveTargetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTargetViewModel.swift; sourceTree = "<group>"; };
 		077DED7128D4DFE30074DC24 /* TargetEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetEndpoint.swift; sourceTree = "<group>"; };
 		077DED7328D4E65F0074DC24 /* TargetServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetServices.swift; sourceTree = "<group>"; };
+		07B2CAC729195B670035B4B5 /* MatchPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPopUpView.swift; sourceTree = "<group>"; };
+		07B2CAC9291C3B560035B4B5 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		07CC1E5928E395AC00172EEA /* EncodingDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingDestination.swift; sourceTree = "<group>"; };
 		07CC1E5D28FDA42100172EEA /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		07CC1E6028FDA5D300172EEA /* TargetServicesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetServicesMock.swift; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				076084E328C25A5A000A144B /* HomeViewController.swift */,
 				072DA04328CFC71000936C06 /* CreateTargetView.swift */,
 				077DED6C28D233D80074DC24 /* SaveTargetViewController.swift */,
+				07B2CAC729195B670035B4B5 /* MatchPopUpView.swift */,
+				07B2CAC9291C3B560035B4B5 /* BottomSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -844,6 +850,7 @@
 				0755415928E21BC200A4C4FF /* HomeViewModel.swift in Sources */,
 				076084D428BFD3B4000A144B /* RailsAPIHeadersProvider.swift in Sources */,
 				077DED7228D4DFE30074DC24 /* TargetEndpoint.swift in Sources */,
+				07B2CAC829195B670035B4B5 /* MatchPopUpView.swift in Sources */,
 				07E4E5A029008DBC0046CC87 /* Match.swift in Sources */,
 				076084A028BE6C42000A144B /* AuthViewModelStateDelegate.swift in Sources */,
 				0755414A28D5060100A4C4FF /* UserResponse.swift in Sources */,
@@ -855,6 +862,7 @@
 				072DA03E28CBCC7200936C06 /* LocationManager.swift in Sources */,
 				076084B928BFB8BB000A144B /* APIClient+Product.swift in Sources */,
 				0755415B28E25D7000A4C4FF /* TargetsResponse.swift in Sources */,
+				07B2CACA291C3B560035B4B5 /* BottomSheet.swift in Sources */,
 				0760847C28AD7F19000A144B /* ColorExtension.swift in Sources */,
 				076084B628BFA734000A144B /* RailsAPIEndpoint.swift in Sources */,
 				07D66A5228A4638400308FF5 /* ViewController.swift in Sources */,

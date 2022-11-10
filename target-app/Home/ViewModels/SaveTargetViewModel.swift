@@ -11,11 +11,12 @@ import CoreLocation
 class SaveTargetViewModel {
     
     private let targetServices: TargetServicesProtocol
-
+    
     // MARK: - Observed Properties
     @Published private var state: AuthViewModelState = .network(state: .idle)
     @Published var topics: [Topic] = []
-
+    @Published var targetResponse: TargetResponse?
+    
     // MARK: - Publishers
     var statePublisher: Published<AuthViewModelState>.Publisher { $state }
     
@@ -27,9 +28,16 @@ class SaveTargetViewModel {
     
     private var location: CLLocation
     
-    init(location: CLLocation, targetServices: TargetServicesProtocol) {
+    var userMatched: ((MatchedUser) -> Void)?
+
+    init(
+        location: CLLocation,
+        targetServices: TargetServicesProtocol,
+        userMatched: @escaping ((MatchedUser) -> Void )
+    ) {
         self.location = location
         self.targetServices = targetServices
+        self.userMatched = userMatched
     }
     
     func saveTarget() {
@@ -44,9 +52,17 @@ class SaveTargetViewModel {
             guard let self = self else { return }
             
             switch result {
-            case .success:
-                self.state = .loggedIn
-                AppNavigator.shared.navigate(to: HomeRoutes.home, with: .changeRoot)
+            case .success(let targetResponse):
+                self.targetResponse = targetResponse
+                //TODO: remove mock
+//                targetResponse.matchedUser.map{ _ in
+//                    self.userMatched?(
+//                        MatchedUser(id: 100, email: "email.com", firstName: "name", lastName: "last", fullName: "full", username: "user", gender: "gender", avatar: Avatar(originalURL: "nil", normalURL: "nil", smallThumbURL: "nil"))
+//                    )
+//                }
+                self.userMatched?(
+                    MatchedUser(id: 100, email: "email.com", firstName: "name", lastName: "last", name: "full", username: "user", gender: "gender", avatar: Avatar(originalURL: "nil", normalURL: "nil", smallThumbURL: "nil"))
+                )
             case .failure(let error):
                 self.state = .network(state: .error(error.localizedDescription))
             }
@@ -76,7 +92,9 @@ class SaveTargetViewModel {
     }
     
     func setArea(radius: String) {
-        self.radius = Double(radius)!
+        if let radius = Double(radius) {
+            self.radius = radius
+        }
     }
     
     func setTopicId(topicName: String) {

@@ -41,22 +41,20 @@ struct MatchConversation: Codable {
 // MARK: - MatchedUser
 struct MatchedUser: Codable {
     let id: Int
-    let email, firstName, lastName, fullName: String
-    let username, gender: String
+    let email, firstName, lastName, name, username, gender: String
     let avatar: Avatar
 
     private enum CodingKeys: String, CodingKey {
         case id, email
         case firstName = "first_name"
         case lastName = "last_name"
-        case fullName = "full_name"
-        case username, gender, avatar
+        case name, username, gender, avatar
     }
 }
 
 // MARK: - Avatar
 struct Avatar: Codable {
-    let originalURL, normalURL, smallThumbURL: String
+    let originalURL, normalURL, smallThumbURL: String?
 
     private enum CodingKeys: String, CodingKey {
         case originalURL = "original_url"

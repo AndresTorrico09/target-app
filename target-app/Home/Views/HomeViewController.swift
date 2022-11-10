@@ -13,6 +13,64 @@ protocol BottomSheetPresenter: AnyObject {
     func createTargetButtonTapped()
 }
 
+protocol BottomSheetManager {
+    var bottomSheet: BottomSheet { get }
+    
+    func presentBottomSheet()
+    func dismissBottomSheet()
+    func setControllerIntoBottomSheet(_ viewController: UIViewController)
+}
+
+extension BottomSheetManager where Self: UIViewController {
+    func presentBottomSheet() {
+        bottomSheet.present()
+    }
+    
+    func dismissBottomSheet() {
+        bottomSheet.dismiss()
+    }
+    
+    func setControllerIntoBottomSheet(_ viewController: UIViewController) {
+        view.addSubview(bottomSheet)
+        
+        bottomSheet.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            bottomSheet.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomSheet.leftAnchor.constraint(equalTo: view.leftAnchor),
+            bottomSheet.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        
+        addChild(viewController)
+        viewController.didMove(toParent: self)
+        bottomSheet.setView(viewController.view)
+    }
+}
+
+protocol MatchPopUpPresenter: AnyObject {
+    var matchPopUpView: MatchPopUpView { get }
+    
+    func startChattingButtonTapped()
+    func skipButtonTapped()
+    func displayPopUpMatch(match: MatchedUser)
+}
+
+extension MatchPopUpPresenter where Self: UIViewController {
+    func displayPopUpMatch(match: MatchedUser) {
+        view.addSubview(matchPopUpView)
+        view.bringSubviewToFront(matchPopUpView)
+    
+        matchPopUpView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            matchPopUpView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            matchPopUpView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            matchPopUpView.widthAnchor.constraint(equalToConstant: 250),
+            matchPopUpView.heightAnchor.constraint(equalToConstant: 450),
+        ])
+    }
+}
+
 class HomeViewController: UIViewController {
     
     // MARK: - VIEWMODELS
@@ -38,12 +96,13 @@ class HomeViewController: UIViewController {
         return target
     }()
     
-    private let locationManager: LocationManager
+    var matchPopUpView = MatchPopUpView()
+    
+    var bottomSheet = BottomSheet()
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(locationManager: LocationManager, viewModel: HomeViewModel) {
-        self.locationManager = locationManager
+    init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: .none, bundle: .none)
     }
@@ -91,7 +150,7 @@ class HomeViewController: UIViewController {
     // MARK: - BINDERS
     
     func setupBinders() {
-        locationManager
+        viewModel.locationManager
             .$locationWasUpdated
             .compactMap { $0 }
             .sink { [weak self] location in
@@ -104,6 +163,11 @@ class HomeViewController: UIViewController {
                     let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
                     self?.createAnotation(withLocation: location)
                 }
+            }.store(in: &cancellables)
+        
+        viewModel.userMatched
+            .sink { [weak self] userMatched in
+                self?.displayPopUpMatch(match: userMatched)
             }.store(in: &cancellables)
     }
     
@@ -146,21 +210,25 @@ extension HomeViewController {
 
 extension HomeViewController: BottomSheetPresenter {
     func createTargetButtonTapped() {
-        let saveTargetViewController = SaveTargetViewController(
-            viewModel: SaveTargetViewModel(
-                location: locationManager.locationWasUpdated!,
-                targetServices: TargetServices()
-            )
-        )
-        let navigationController = UINavigationController(rootViewController: saveTargetViewController)
-        navigationController.modalPresentationStyle = .pageSheet
         
-        if let sheet = navigationController.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        present(navigationController, animated: true, completion: nil)
+        let saveTargetViewController = SaveTargetViewController(viewModel: viewModel.createSaveTargetViewModel())
+        setControllerIntoBottomSheet(saveTargetViewController)
+        presentBottomSheet()
     }
 }
+
+extension HomeViewController: MatchPopUpPresenter {
+    
+    func startChattingButtonTapped() {
+        //TODO: add action
+    }
+    
+    func skipButtonTapped() {
+        //TODO: add action
+    }
+
+}
+
 
 extension HomeViewController: MKMapViewDelegate{
     
@@ -205,3 +273,7 @@ extension HomeViewController: MKMapViewDelegate{
         mapView.addAnnotation(annotation)
     }
 }
+
+extension HomeViewController: BottomSheetManager { }
+
+

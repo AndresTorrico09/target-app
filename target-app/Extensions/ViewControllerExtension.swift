@@ -41,4 +41,16 @@ extension UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = tintColor
     }
     
+    func embed(_ child: UIViewController) {
+        addChild(child)
+        child.view.loadInto(containerView: view)
+        child.didMove(toParent: self)
+    }
+    
+    func removeFromParentController() {
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
+    
 }

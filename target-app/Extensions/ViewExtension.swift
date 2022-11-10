@@ -64,6 +64,17 @@ extension UIView {
         constant: offset
       ).isActive = true
     }
+    
+    func loadInto(containerView: UIView) {
+        containerView.addSubview(self)
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalTo: containerView.heightAnchor),
+            widthAnchor.constraint(equalTo: containerView.widthAnchor),
+            centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+    }
 }
 
 extension UIStackView {
